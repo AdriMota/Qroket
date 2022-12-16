@@ -1,0 +1,7 @@
+{
+  "name": "Qroket",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
