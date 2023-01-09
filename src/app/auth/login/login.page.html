@@ -45,14 +45,17 @@
   
     <div class="ion-padding">
       <!-- Submit button -->
-      <ion-button type="submit" expand="block" [disabled]="loginForm.invalid"
-        >Se connecter</ion-button
-      >
+      <ion-button type="submit" expand="block" [disabled]="loginForm.invalid">
+        Se connecter</ion-button>
   
       <!-- Error message displayed if the login failed -->
-      <ion-text color="danger" *ngIf="loginError"
-        >Email or password is invalid.</ion-text
-      >
+      <ion-text color="danger" *ngIf="loginError">
+        Email or password is invalid.</ion-text>
     </div>
   </form>
+  <div id="inscription">
+    <p>Pas encore inscrit ?</p>
+    <a href="">Rejoins-nous !</a>
+    <app-form></app-form>
+  </div>
 </ion-content>
