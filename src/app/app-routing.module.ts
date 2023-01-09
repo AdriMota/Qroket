@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LayoutPage } from './layout/layout.page';
+import { AuthGuard } from "./auth/auth.guard";
 
 const routes: Routes = [
   {
     // Default route
     path: "",
+    // Add the guard to the canActivate array of this route
+    canActivate: [AuthGuard],
     loadChildren: () => import("./layout/layout.module").then(m => m.LayoutPageModule)
   },
   {
