@@ -1,3 +1,44 @@
-<p>
-  form works!
-</p>
+<form>
+  <ion-item fill="solid">
+    <ion-label position="stacked">Prénom</ion-label>
+    <ion-input [clearOnEdit]="true" placeholder="Prénom"></ion-input>
+    <ion-note slot="error">Prénom invalide</ion-note>
+  </ion-item>
+
+  <ion-item fill="solid">
+    <ion-label position="stacked">Nom</ion-label>
+    <ion-input [clearOnEdit]="true" placeholder="Nom"></ion-input>
+    <ion-note slot="error">Nom invalide</ion-note>
+  </ion-item>
+
+  <ion-item fill="solid">
+    <ion-label position="stacked">Numéro de téléphone</ion-label>
+    <ion-input [clearOnEdit]="true" type="tel" placeholder="078 765 43 21"></ion-input>
+    <ion-note slot="error">Numéro de téléphone invalide</ion-note>
+  </ion-item>
+
+  <ion-item fill="solid">
+    <ion-label position="stacked">Adresse mail</ion-label>
+    <ion-input [clearOnEdit]="true" type="email" placeholder="exemple@email.com"></ion-input>
+    <ion-note slot="error">Mail invalide</ion-note>
+  </ion-item>
+
+  <ion-item fill="solid">
+    <ion-label position="stacked">Mot de passe</ion-label>
+    <ion-input type="password" value="password"></ion-input>
+    <ion-note slot="error">Mot de passe invalide</ion-note>
+  </ion-item>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Localité</ion-label>
+      <ion-select interface="popover" placeholder="Nom de ville">
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="oranges">Oranges</ion-select-option>
+        <ion-select-option value="bananas">Bananas</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-button fill="solid">Créer un compte</ion-button>
+</form>
