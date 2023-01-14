@@ -13,6 +13,7 @@ import { AuthRequest } from "../../models/auth-request";
 })
 export class LoginPage {
   /**
+   * 
    * This authentication request object will be updated when the user
    * edits the login form. It will then be sent to the API.
    */
@@ -23,6 +24,9 @@ export class LoginPage {
    * (probably because the name or password is incorrect).
    */
   loginError: boolean;
+
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
 
   constructor(private auth: AuthService, private router: Router) {
     this.authRequest = {
@@ -52,4 +56,10 @@ export class LoginPage {
       },
     });
   }
+
+  hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+  }
+
 }

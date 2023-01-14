@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ErrorHandlingService } from '../services/error-handling.service';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
@@ -13,7 +16,6 @@ import { environment } from 'src/environments/environment';
 
 export class FormComponent implements OnInit {
 
-  //initalisation des variables à récupérer du formulaire
   firstname: string = '';
   lastname: string = '';
   phone: number = null;
@@ -22,28 +24,46 @@ export class FormComponent implements OnInit {
   // picture: any = '';
   // location: number = null;
 
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
+
+  messageErrors: any = null;
+
   user: object = {};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public errorHandlingService: ErrorHandlingService) { }
 
-  //fonction à appeler lors d'un click sur BTN pour créer un nouvel utilisateur
+r
   createUser(user) {
 
-    //construction de l'objet à envoyer à l'API, en récupérant les données entrées par l'utilisateur
     const data = {
-        firstname: this.firstname,
-        lastname: this.lastname,
-        phone: this.phone,
-        email: this.email,
-        password: this.password  
+      firstname: this.firstname,
+      lastname: this.lastname,
+      phone: this.phone,
+      email: this.email,
+      password: this.password
     }
 
-    //envoie des données dans l'API, recevoir et afficher la réponse de la requête
-    this.http.post(environment.apiUrl +'users', data).subscribe(response=>{
-      console.log(response)
+    this.http.post(environment.apiUrl + 'users', data).pipe(
+      catchError((error: any) => {
+        this.handleError(error, data);
+        return throwError(error);
+      })
+    ).subscribe(response => {
+      // console.log(response)
     });
   }
 
-  ngOnInit() {}
+  hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+  }
+
+  handleError(error: any, data: any) {
+    if (error.error.indexOf("is required.") !== -1) {
+      this.messageErrors = this.errorHandlingService.validateForm(data);
+    }
+  }
+  ngOnInit() { }
 
 }

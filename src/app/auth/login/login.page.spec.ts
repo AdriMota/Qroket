@@ -3,6 +3,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { LoginPage } from './login.page';
 
+//Exemple de test unitaire pour une page de connexion. N'est pas nécessaire.
 describe('LoginPage', () => {
   let component: LoginPage;
   let fixture: ComponentFixture<LoginPage>;
