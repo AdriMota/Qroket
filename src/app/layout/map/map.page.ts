@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 import * as Leaflet from 'leaflet';
+import { environment } from 'src/environments/environment'; 
 
 @Component({
   selector: 'app-map',
@@ -40,6 +41,21 @@ export class MapPage {
           this.leafletMap();
         })
         .catch(err => console.error(err));
+      
+      // Récupérer la lat et la long lors d'un clic sur la map
+      this.map.on('click', function(e) {
+        const lat = e.latlng.lat;
+        const long = e.latlng.lng;
+        console.log("Lat : " + lat + ", Long : " + long);
+
+        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${environment.tokenLocation}&types=place,postcode&limit=2`)
+          .then(response => response.json())
+          .then(data => {
+            const city = data //.find(feature => feature.place_type[0] === "place").text;
+            const postcode = data //.find(feature => feature.place_type[0] === "postcode").text;
+            console.log(data);
+          });
+      });
   }
 
   leafletMap() {
