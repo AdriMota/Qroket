@@ -46,15 +46,22 @@ export class MapPage {
       this.map.on('click', function(e) {
         const lat = e.latlng.lat;
         const long = e.latlng.lng;
-        console.log("Lat : " + lat + ", Long : " + long);
 
-        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${environment.tokenLocation}&types=place,postcode&limit=2`)
+        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${environment.tokenLocation}&types=place,postcode`)
           .then(response => response.json())
           .then(data => {
-            const city = data //.find(feature => feature.place_type[0] === "place").text;
-            const postcode = data //.find(feature => feature.place_type[0] === "postcode").text;
-            console.log(data);
+
+            let postcode = "";
+            let city = "";
+
+            data.features.forEach(function(feature) {
+              console.log(feature)
+                if (feature.place_type.includes('postcode')) postcode = feature.text;
+                if (feature.place_type.includes('place')) city = feature.text;
+            });
+            console.log(postcode, city);
           });
+
       });
   }
 
