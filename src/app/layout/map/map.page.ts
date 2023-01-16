@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Geolocation } from '@capacitor/geolocation';
 import * as Leaflet from 'leaflet';
 
 @Component({
@@ -11,34 +12,51 @@ export class MapPage {
   map: Leaflet.Map;
   propertyList = [];
 
-  constructor() { }
+  constructor() {}
 
-  ionViewDidEnter() {
-    this.map = new Leaflet.Map('map').setView([42.35663, -71.1109], 16);
+  async ionViewDidEnter() {
+    const coordinates = await Geolocation.getCurrentPosition();
 
-    Leaflet.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-    }).addTo(this.map);
+    const lat = coordinates.coords.latitude;
+    const long = coordinates.coords.longitude;
 
-    fetch('../assets/data.json')
-      .then(res => res.json())
-      .then(data => {
-        this.propertyList = data.properties;
-        this.leafletMap();
-      })
-      .catch(err => console.error(err));
+    this.map = Leaflet.map('map').setView([lat, long], 17);
+
+      Leaflet.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+      }).addTo(this.map); 
+
+      const myPositionMarker = Leaflet.icon({
+        iconUrl: '../assets/markers/Marker-blue.png',
+        iconSize: [60, 60]
+      });
+
+      const marker = Leaflet.marker([lat, long], {icon: myPositionMarker}).addTo(this.map).bindPopup("Tu es là !");
+
+      fetch('../assets/data.json')
+        .then(res => res.json())
+        .then(data => {
+          this.propertyList = data.properties;
+          this.leafletMap();
+        })
+        .catch(err => console.error(err));
   }
 
   leafletMap() {
     for (const property of this.propertyList) {
-      Leaflet.marker([property.lat, property.long]).addTo(this.map)
-        //.bindPopup(property.city)
-        .openPopup();
+      const animalMarker = Leaflet.icon({
+        iconUrl: '../assets/markers/Marker-yellow.png',
+        iconSize: [60, 60]
+      });
+
+      Leaflet.marker([property.long, property.lat], {icon: animalMarker})
+        .addTo(this.map)
+        .bindPopup(property.name)
+        //.openPopup();
     }
   }
 
   ionViewWillLeave() {
     this.map.remove();
   }
-
 }

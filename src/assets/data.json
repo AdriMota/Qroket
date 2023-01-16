@@ -1,27 +1,24 @@
 {
     "properties": [
         {
-            "city": "Cambridge",
-            "state": "MA",
-            "long": -71.10858,
-            "lat": 42.35963
+            "name": "Chien de taille moyenne",
+            "long": 46.780625,
+            "lat": 6.648895
         },
         {
-            "city": "Cambridge",
-            "state": "MA",
-            "long": -71.10869,
-            "lat": 42.359103
+            "name": "Chat de petite taille",
+            "long": 46.781664,
+            "lat": 6.648063
         },
         {
-            "city": "Boston",
-            "state": "MA",
-            "long": -71.110061,
-            "lat": 42.360686
+            "name": "Chat de taille moyenne",
+            "long": 46.780662,
+            "lat": 6.646298
         },
         {
-            "city": "Cambridge",
-            "long": -71.110448,
-            "lat": 42.360642
+            "name": "Chien de petite taille",
+            "long": 46.781404,
+            "lat": 6.649142
         }
     ]
 }
