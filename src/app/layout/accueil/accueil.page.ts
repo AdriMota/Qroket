@@ -10,19 +10,22 @@ import { AuthService } from "src/app/auth/auth.service";
 export class AccueilPage implements OnInit {
 
   constructor(
-    // Inject the authentication provider.
+
     private auth: AuthService,
-    // Inject the router
     private router: Router
   ) {}
 
   ngOnInit() {
   }
 
-  // Add a method to log out.
   logOut() {
     console.log("logging out...");
     this.auth.logOut();
     this.router.navigateByUrl("/login");
   }
+
+  handleClick(data : any){
+    console.log(data, "Do something in parent event")
+  }
+
 }

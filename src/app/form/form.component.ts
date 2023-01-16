@@ -33,7 +33,7 @@ export class FormComponent implements OnInit {
 
   constructor(private http: HttpClient, public errorHandlingService: ErrorHandlingService) { }
 
-r
+
   createUser(user) {
 
     const data = {

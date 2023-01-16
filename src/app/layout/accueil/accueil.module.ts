@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
 import { AccueilPageRoutingModule } from './accueil-routing.module';
-
 import { AccueilPage } from './accueil.page';
+import { CustomButtonComponent } from '../../custom-button/custom-button.component';
 
 @NgModule({
   imports: [
@@ -15,6 +13,9 @@ import { AccueilPage } from './accueil.page';
     IonicModule,
     AccueilPageRoutingModule
   ],
-  declarations: [AccueilPage]
+  declarations: [
+    AccueilPage,
+    CustomButtonComponent
+  ]
 })
 export class AccueilPageModule {}
