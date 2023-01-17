@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComptePage implements OnInit {
 
+  profileImage: string; 
+
   constructor() { }
 
   ngOnInit() {
+    this.profileImage = "../../../assets/images/profile/Baltazar.png"
   }
 
 }

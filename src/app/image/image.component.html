@@ -1,0 +1,7 @@
+<img [src]="src">
+<!-- Champ de sélection de fichiers caché -->
+<input type="file" #fileInput style="display: none" (change)="onFileSelected($event)" accept="image/*">
+
+<!-- Bouton pour sélectionner une image -->
+<button (click)="onFileSelected($event)">Éditer</button>
+<!--<button (click)="selectImage()">Sélectionner une image</button>-->
