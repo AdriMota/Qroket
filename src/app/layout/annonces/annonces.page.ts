@@ -24,12 +24,12 @@ export class AnnoncesPage implements ViewWillEnter {
 
   ionViewWillEnter(): void {
     // Make an HTTP request to retrieve the animals.
-    this.http.get(`${environment.apiUrl}/animals`).subscribe((animals) => {
+    this.http.get(`${environment.apiUrl}animals`).subscribe((animals) => {
       console.log(`Animals loaded`, animals);
     });
   }
 
   ngOnInit() {
-    this.animal.getAnimals$().subscribe({});
+    //this.animal.getAnimals$().subscribe({});
   }
 }

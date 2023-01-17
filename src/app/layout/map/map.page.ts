@@ -55,11 +55,11 @@ export class MapPage {
             let city = "";
 
             data.features.forEach(function(feature) {
-              console.log(feature)
+              //console.log(feature)
                 if (feature.place_type.includes('postcode')) postcode = feature.text;
                 if (feature.place_type.includes('place')) city = feature.text;
             });
-            console.log(postcode, city);
+            //console.log(postcode, city);
           });
 
       });

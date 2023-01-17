@@ -4,8 +4,7 @@ import { Storage } from "@ionic/storage";
 import { Animal } from "../models/animal";
 import { Observable } from 'rxjs';
 import { AnimalResponse } from '../models/animals-response';
-
-const API_URL = "https://qroket-api.onrender.com/";
+import { environment } from '../../environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
@@ -15,7 +14,7 @@ export class AnimalsService {
   constructor(private http: HttpClient, private storage: Storage) {}
 
   getAnimals$(): Observable<Animal[]> {
-    const animalsUrl = `${API_URL}/animals`;
+    const animalsUrl = `${environment.apiUrl}animals`;
     return this.http.get<AnimalResponse[]>(animalsUrl);
   }
 }
