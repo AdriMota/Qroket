@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/auth/auth.service";
+import { AddAnimalsComponent } from 'src/app/add-animals/add-animals.component';
+
 
 @Component({
   selector: 'app-accueil',
@@ -9,7 +11,7 @@ import { AuthService } from "src/app/auth/auth.service";
 })
 export class AccueilPage implements OnInit {
 
-
+  
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -26,7 +28,6 @@ export class AccueilPage implements OnInit {
 
   handleClick(data : any){
     console.log(data, "Do something in parent event");
+    this.router.navigateByUrl("/annonces");
   }
-
-
 }
