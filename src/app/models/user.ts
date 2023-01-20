@@ -1,4 +1,5 @@
 import { EmailValidator } from "@angular/forms";
+import { Buffer } from "Buffer";
 
 export type User = {
     id: string;
