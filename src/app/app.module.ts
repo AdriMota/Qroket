@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { IonicStorageModule } from "@ionic/storage-angular";
 import { AuthInterceptorService } from "./auth/auth-interceptor.service";
+import { BrowserAnimationsModule,NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { AuthInterceptorService } from "./auth/auth-interceptor.service";
     HttpClientModule,
     // Add the ionic storage module into the app's module.
     IonicStorageModule.forRoot(),
+    BrowserAnimationsModule,
+    NoopAnimationsModule
   ],
   providers: [{
     provide: RouteReuseStrategy,

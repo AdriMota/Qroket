@@ -9,9 +9,10 @@ import { AuthService } from "src/app/auth/auth.service";
 })
 export class AccueilPage implements OnInit {
 
+
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -24,7 +25,8 @@ export class AccueilPage implements OnInit {
   }
 
   handleClick(data : any){
-    console.log(data, "Do something in parent event")
+    console.log(data, "Do something in parent event");
   }
+
 
 }
