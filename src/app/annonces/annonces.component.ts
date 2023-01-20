@@ -21,13 +21,12 @@ export class AnnoncesComponent implements OnInit {
     this.http.get( environment.apiUrl + 'animals').subscribe(
       (response) => {
         this.animals = response;
+        this.animals.sort((a, b) => a.date.localeCompare(b.date));
       },
       (error) => {
         console.log(error);
       }
     );
   }
-
     ngOnInit() { }
-
   }
