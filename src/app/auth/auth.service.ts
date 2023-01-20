@@ -57,7 +57,13 @@ export class AuthService {
     console.log("User logged out");
   }
 
-  private saveAuth$(auth: AuthResponse): Observable<void> {
+  getUserId$(auth: AuthResponse): Observable<string> {
     return from(this.storage.set('auth', auth));
   }
+
+  private saveAuth$(auth: AuthResponse): Observable<void> {
+    return from(this.storage.set('auth', auth));
+    return from(this.storage.set('userId', auth.userId));
+  }
+    
 }
