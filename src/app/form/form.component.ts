@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonSelect } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { ErrorHandlingService } from '../services/error-handling.service';
 import { catchError } from 'rxjs/operators';
@@ -16,6 +17,8 @@ import { Geolocation } from '@capacitor/geolocation';
 })
 
 export class FormComponent implements OnInit {
+
+  @ViewChild('mySelect', { static: true }) mySelect: IonSelect;
 
   firstname: string = '';
   lastname: string = '';
@@ -36,6 +39,7 @@ export class FormComponent implements OnInit {
   lat: number;
   long: number;
 
+  selectedOption: string = "";
 
   user: object = {};
 
@@ -77,18 +81,21 @@ export class FormComponent implements OnInit {
       let proprety = "place_name";
       this.cities = result.features.slice(0, 3).map(item => item[proprety]);
     })
+    if(this.cities?.length){
+      console.log("changement sa daronne")
+      console.log(this.mySelect)
+    }
+   
   }
 
-  onSelect(city: String) {
-    console.log("changement de ville choisie", city)
+  onSelect() {
+    console.log("changement de ville choisie")
   }
 
   async ngOnInit() {
     const coordinates = await Geolocation.getCurrentPosition();
     this.lat = coordinates.coords.latitude;
     this.long = coordinates.coords.longitude
-
-    console.log(this.cities)
   }
 
 }

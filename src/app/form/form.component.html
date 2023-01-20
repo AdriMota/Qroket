@@ -35,9 +35,9 @@
   <ion-list>
     <ion-item>
       <ion-label position="stacked">Localité(*)</ion-label>
-      <ion-input [(ngModel)]="postcode" (ngModelChange)="onNpaChange()" name="postcode" type="text" placeholder="1400 Yverdon-les-Bains"></ion-input>  
-        <ion-select *ngIf="cities?.length" interface="popover" name="location">
-        <ion-select-option *ngFor="let city of cities" (ionSelect)="onSelect(city)" [value]="city" >{{ city }}</ion-select-option>
+      <ion-input (click)="onSelect()" [(ngModel)]="postcode" (ngModelChange)="onNpaChange()" name="postcode" type="text" placeholder="1400 Yverdon-les-Bains">{{ selectedOption }}</ion-input>  
+        <ion-select *ngIf="cities?.length" interface="popover" name="location"  [(ngModel)]="selectedOption">
+        <ion-select-option *ngFor="let city of cities" [value]="city" #mySelect>{{ city }}</ion-select-option>
       </ion-select>
       <ion-note *ngIf="messageErrors?.formErrors.location" [innerHTML]="messageErrors?.formErrors.location"></ion-note>
     </ion-item>

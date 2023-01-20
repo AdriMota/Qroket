@@ -10,7 +10,6 @@ import { AuthService } from "src/app/auth/auth.service";
 export class AccueilPage implements OnInit {
 
   constructor(
-
     private auth: AuthService,
     private router: Router
   ) {}

@@ -19,8 +19,10 @@
   </div>
   <div>
     <h3>J'ai été trouvé</h3>
+    <app-annonces [showLost]="false" [showFind]="true"></app-annonces>
   </div>
   <div>
     <h3>J'ai été perdu</h3>
+    <app-annonces [showLost]="true" [showFind]="false"></app-annonces>
   </div>
 </ion-content>

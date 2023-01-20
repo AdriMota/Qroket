@@ -1,0 +1,4 @@
+<div *ngFor="let animal of animals">
+  <div *ngIf="showLost && animal.type == 'lost'"> {{ animal.name }} </div>
+  <div *ngIf="showFind && animal.type == 'find'"> {{ animal.name }} </div>
+</div>

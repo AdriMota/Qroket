@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { AccueilPageRoutingModule } from './accueil-routing.module';
 import { AccueilPage } from './accueil.page';
 import { CustomButtonComponent } from '../../custom-button/custom-button.component';
+import { AnnoncesComponent } from '../../annonces/annonces.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { CustomButtonComponent } from '../../custom-button/custom-button.compone
   ],
   declarations: [
     AccueilPage,
-    CustomButtonComponent
+    CustomButtonComponent,
+    AnnoncesComponent
   ]
 })
 export class AccueilPageModule {}
