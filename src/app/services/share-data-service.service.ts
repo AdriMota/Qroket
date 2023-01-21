@@ -9,15 +9,14 @@ export class ShareDataServiceService {
   private answerApiFromSource = new BehaviorSubject<boolean>(false);
   answerApi$ = this.answerApiFromSource.asObservable();
 
+
   constructor() {}
 
-  toggleAddAnimalsForm(value: boolean) {
-    this.addAnimalsFormSource.next(value);
-  }
   addAnnonce() {
     this.addAnimalsFormSource.next(!this.addAnimalsFormSource.getValue());
   }
   showAnswer(){
     this.answerApiFromSource.next(!this.answerApiFromSource.getValue())
   }
+
 }

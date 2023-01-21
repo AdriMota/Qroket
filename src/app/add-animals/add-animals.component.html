@@ -1,37 +1,64 @@
 <ion-header *ngIf="!showAnswerApi">
+  <ion-icon name="arrow-back" (click)="goAcc()"></ion-icon>
   <p>Créer une annonce</p>
 </ion-header>
 <div *ngIf="!showAnswerApi">
   <h1>Quelques informations</h1>
+  <p>(*)Obligatoire</p>
 
   <ion-item fill="solid">
     <ion-label position="stacked">Nom(*)</ion-label>
-    <ion-input [clearOnEdit]="true" name="lastname" placeholder="Nom ou nom descriptif"></ion-input>
-    <!-- <ion-note *ngIf="messageErrors?.formErrors.lastname" [innerHTML]="messageErrors?.formErrors.lastname"></ion-note> -->
+    <ion-input [clearOnEdit]="true" [(ngModel)]="name" name="name" placeholder="Nom ou nom descriptif"></ion-input>
+  </ion-item>
+
+  <ion-item fill="solid">
+    <ion-label position="stacked">Âge</ion-label>
+    <ion-input [clearOnEdit]="true" [(ngModel)]="age" name="age" placeholder="Âge approximatif"></ion-input>
+  </ion-item>
+
+  <ion-item fill="solid">
+    <ion-label position="stacked">Pelage</ion-label>
+    <ion-input [clearOnEdit]="true" [(ngModel)]="fur" name="fur" placeholder="Description de son pelage"></ion-input>
   </ion-item>
 
   <ion-list>
     <ion-item>
       <ion-label position="stacked">Localité(*)</ion-label>
-      <ion-input name="postcode" type="text" placeholder="1400 Yverdon-les-Bains"></ion-input>  
+      <ion-input name="postcode" [(ngModel)]="location" type="text" placeholder="1400 Yverdon-les-Bains"></ion-input>
     </ion-item>
   </ion-list>
 
   <ion-item fill="solid">
     <ion-label position="stacked">Description(*)</ion-label>
-    <ion-input [clearOnEdit]="true" name="lastname" placeholder="Petite description de l'animal"></ion-input>
+    <ion-input [clearOnEdit]="true" [(ngModel)]="description" name="lastname"
+      placeholder="Petite description de l'animal"></ion-input>
   </ion-item>
 
   <form>
     <input type="file">
   </form>
 
-  <ion-button fill="solid" (click)="submitAnnonce($event)" >Créer l'annonce</ion-button>
-</div>
-  <div *ngIf="showAnswerApi">
-    <h1>C'est enregistré</h1>
-    <p>Ton annonce a bien été enregistrée, merci. Tu devrais recevoir des nouvelles dans les prochains jours, alors reste connecté !</p>
-    <ion-button fill="solid" (click)="goHome($event)" >Retour à l'accueil</ion-button>
+  <ion-item>
+    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="date"></ion-datetime>
+  </ion-item>
+
+  <div>
+    <ion-radio-group name="type" [(ngModel)]="type">
+      <ion-label>Animal:</ion-label>
+      <ion-radio value="lost"></ion-radio>
+      <ion-label>Perdu</ion-label>
+      <ion-radio value="find"></ion-radio>
+      <ion-label>Trouvé</ion-label>
+    </ion-radio-group>
   </div>
- 
-  
+  <div>
+    <ion-button fill="solid" (click)="submitAnnonce()">Créer l'annonce</ion-button>
+  </div>
+
+</div>
+<div *ngIf="showAnswerApi">
+  <h1>C'est enregistré</h1>
+  <p>Ton annonce a bien été enregistrée, merci. Tu devrais recevoir des nouvelles dans les prochains jours, alors reste
+    connecté !</p>
+  <ion-button fill="solid" (click)="goHome($event)">Retour à l'accueil</ion-button>
+</div>
