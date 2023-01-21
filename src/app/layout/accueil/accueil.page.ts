@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/auth/auth.service";
-import { AddAnimalsComponent } from 'src/app/add-animals/add-animals.component';
-
+import { ShareDataServiceService } from 'src/app/services/share-data-service.service';
 
 @Component({
   selector: 'app-accueil',
@@ -11,13 +10,18 @@ import { AddAnimalsComponent } from 'src/app/add-animals/add-animals.component';
 })
 export class AccueilPage implements OnInit {
 
-  
+  showForm: boolean;
+
   constructor(
     private auth: AuthService,
     private router: Router,
-  ) {}
+    private sharedData: ShareDataServiceService
+  ) { }
 
   ngOnInit() {
+    this.sharedData.addAnimalsForm$.subscribe(val => {
+      this.showForm = val;
+    });
   }
 
   logOut() {
@@ -26,8 +30,8 @@ export class AccueilPage implements OnInit {
     this.router.navigateByUrl("/login");
   }
 
-  handleClick(data : any){
-    console.log(data, "Do something in parent event");
-    this.router.navigateByUrl("/annonces");
+  handleClick(data: any) {
+    // console.log(data, "Do something in parent event");
+    this.sharedData.changeVisibility();
   }
 }

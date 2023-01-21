@@ -6,6 +6,7 @@ import { AccueilPageRoutingModule } from './accueil-routing.module';
 import { AccueilPage } from './accueil.page';
 import { CustomButtonComponent } from '../../custom-button/custom-button.component';
 import { AnnoncesComponent } from '../../annonces/annonces.component';
+import { AddAnimalsComponent } from 'src/app/add-animals/add-animals.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { AnnoncesComponent } from '../../annonces/annonces.component';
   declarations: [
     AccueilPage,
     CustomButtonComponent,
-    AnnoncesComponent
+    AnnoncesComponent,
+    AddAnimalsComponent
   ]
 })
 export class AccueilPageModule {}

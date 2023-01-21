@@ -1,7 +1,6 @@
-<ion-header>
+<ion-header *ngIf="!showForm">
   <ion-toolbar>
     <ion-title>accueil</ion-title>
-    <!-- Logout button -->
     <ion-buttons slot="end">
       <ion-button (click)="logOut()">
         <ion-icon name="log-out"></ion-icon>
@@ -10,18 +9,26 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div>
-    <h2>Un animal perdu ou trouvé ?</h2>
-    <p>Si tu as perdu ton meilleur ami ou trouvé un animal perdu, ajoute-le sur Qroket pour qu’il puisse retrouver sa
-      famille. Nous faisons de notre mieux pour que les personnes l’ayant aperçu entrent en contact avec toi !</p>
-        <app-custom-button [paragraph]="'Créer une annonce'" [showIcon]="true" (handleClick)="handleClick($event)"></app-custom-button>
+  <div *ngIf="!showForm">
+    <div>
+      <h2>Un animal perdu ou trouvé ?</h2>
+      <p>Si tu as perdu ton meilleur ami ou trouvé un animal perdu, ajoute-le sur Qroket pour qu’il puisse retrouver sa
+        famille. Nous faisons de notre mieux pour que les personnes l’ayant aperçu entrent en contact avec toi !</p>
+      <app-custom-button [paragraph]="'Créer une annonce'" [showIcon]="true"
+        (handleClick)="handleClick($event)"></app-custom-button>
+    </div>
+    <div>
+      <h3>J'ai été trouvé</h3>
+      <app-annonces [showLost]="false" [showFind]="true"></app-annonces>
+    </div>
+    <div>
+      <h3>J'ai été perdu</h3>
+      <app-annonces [showLost]="true" [showFind]="false"></app-annonces>
+    </div>
   </div>
-  <div>
-    <h3>J'ai été trouvé</h3>
-    <app-annonces [showLost]="false" [showFind]="true"></app-annonces>
-  </div>
-  <div>
-    <h3>J'ai été perdu</h3>
-    <app-annonces [showLost]="true" [showFind]="false"></app-annonces>
+  <div *ngIf="showForm">
+    <app-add-animals></app-add-animals>
+    <app-custom-button [paragraph]="'Créer l\'annonce'" [showIcon]="true"
+      (handleClick)="handleClick($event)"></app-custom-button>
   </div>
 </ion-content>
