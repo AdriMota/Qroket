@@ -32,6 +32,6 @@ export class AccueilPage implements OnInit {
 
   handleClick(data: any) {
     // console.log(data, "Do something in parent event");
-    this.sharedData.changeVisibility();
+    this.sharedData.addAnnonce();
   }
 }
