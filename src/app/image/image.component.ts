@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, OnInit } from '@angular/core';
 import { ImageService } from '../services/image.service';
 import { AuthService } from '../auth/auth.service';
 
@@ -11,22 +11,25 @@ import { AuthService } from '../auth/auth.service';
 export class ImageComponent {
   
   @Input() src: string;
+  @ViewChild('fileInput') fileInput;
   private imageFile: File;
 
   constructor(private imageService: ImageService, private authService: AuthService) { }
 
   onFileSelected(event: Event) {
-    const input = document.createElement('input');
+    const input = event.target as HTMLInputElement;
+    /* this.imageFile = input.files[0];
+    this.readImage(); */
+
+
+    //const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
     input.click();
-    input.onchange = (e) => {
-      this.imageFile = (e.target as HTMLInputElement).files[0];
+    //input.onchange = (e) => {
+      this.imageFile = input.files[0];
       this.readImage();
-      this.authService.getUser$().subscribe(user => {
-        this.uploadImage(user.id);
-      });
-    }
+    //}
   }
 
   readImage() {
@@ -38,13 +41,15 @@ export class ImageComponent {
     reader.readAsDataURL(this.imageFile);
   }
 
-  uploadImage(userId: string) {
-    const formData = new FormData();
-    formData.append('picture', this.imageFile);
-
-    this.imageService.uploadImage(formData, userId).subscribe({
-      next: response => console.log('Image uploaded successfully!'),
-      error: error => console.log('Error uploading image:', error)
+  onUploadClick() {
+    this.fileInput.nativeElement.click();
+    this.authService.getUser$().subscribe(user => {
+        const formData = new FormData();
+        formData.append('picture', this.imageFile);
+        this.imageService.uploadImage(formData, user.id).subscribe({
+          next: response => console.log('Image uploaded successfully!'),
+          error: error => console.log('Error uploading image:', error)
+        });
     });
   }
 }

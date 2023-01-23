@@ -14,4 +14,8 @@ export class ImageService {
   uploadImage(formData: FormData, userId: string) {
     return this.http.patch(`${this.apiUrl}${userId}/picture`, formData);
   }
+
+  getImage(userId: string) {
+    return this.http.get(`${this.apiUrl}${userId}/picture`, {responseType: 'blob'});
+}
 }
