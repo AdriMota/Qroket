@@ -16,6 +16,8 @@ export class ImageService {
   }
 
   getImage(userId: string) {
-    return this.http.get(`${this.apiUrl}${userId}/picture`, {responseType: 'blob'});
-}
+    let picture = this.http.get<any>(`${this.apiUrl}${userId}/picture`);
+    console.log(picture)
+    return picture;
+  }
 }
