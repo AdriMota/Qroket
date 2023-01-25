@@ -15,6 +15,7 @@ export class ShareDataServiceService {
   addAnnonce() {
     this.addAnimalsFormSource.next(!this.addAnimalsFormSource.getValue());
   }
+  
   showAnswer(){
     this.answerApiFromSource.next(!this.answerApiFromSource.getValue())
   }

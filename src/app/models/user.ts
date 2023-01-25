@@ -1,6 +1,3 @@
-import { EmailValidator } from "@angular/forms";
-import { Buffer } from "Buffer";
-
 export type User = {
     id: string;
     firstname: string;
@@ -8,7 +5,7 @@ export type User = {
     phone: number;
     email: string;
     password: string;
-    picture: Buffer;
+    picture: any;
     role: string;
     location: number;
 };

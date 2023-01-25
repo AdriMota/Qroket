@@ -1,4 +1,5 @@
 export type Animal = {
+    id: string;
     name: string;
     age: number;
     description: string;
@@ -6,6 +7,6 @@ export type Animal = {
     date: Date;
     type: string;
     picture: any;
-    user: number;
-    location: number;
+    user: string;
+    location: string;
 };
