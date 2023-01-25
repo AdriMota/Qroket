@@ -1,7 +1,11 @@
 import { Animal } from "./animal";
 
+/* export type AnimalResponse = {
+    animal: Animal;
+}; */
+
 export type AnimalResponse = {
-    _id: string;
+    id: string;
     name: string;
     age: number;
     description: string;
@@ -9,6 +13,6 @@ export type AnimalResponse = {
     date: Date;
     type: string;
     picture: any;
-    user: number;
-    location: number;
+    user: string;
+    location: string;
 };
