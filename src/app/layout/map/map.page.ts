@@ -106,17 +106,22 @@ export class MapPage {
       for (const key in animals) {
         if (animals.hasOwnProperty(key)) {
           const animal = animals[key];
-          let location = animal.location;
+          let locationId = animal.location;
+          let animalId = animal._id;
 
-          this.foundLatLong(location);
+          this.animalsLocation(locationId, animalId);
         }
       }
-
-      for (const locationAnimal of this.locationsAnimals) {
-        //console.log(locationAnimal);
-      }
-      console.log(this.locationsAnimals);
     });
+
+    /* this.locationsAnimals.forEach(location => {
+      console.log(location);
+    }); */
+    
+    console.log(this.locationsAnimals);
+    for (const location of this.locationsAnimals) {
+      console.log(location);
+    }
 
     fetch('../assets/data.json')
       .then(res => res.json())
@@ -127,8 +132,8 @@ export class MapPage {
       .catch(err => console.error(err));
   }
 
-  foundLatLong(locationAnimal) {
-    //console.log(locationAnimal)
+  animalsLocation(locationId, animalId) {
+    //console.log(locationId)
 
     // Make an HTTP request to retrieve the animals.
     this.http.get(`${environment.apiUrl}locations`).subscribe((locations) => {
@@ -136,15 +141,16 @@ export class MapPage {
       for (const key in locations) {
         if (locations.hasOwnProperty(key)) {
           const location = locations[key];
-          /* console.log("location id ", location._id)
-          console.log("locationAnimal ", locationAnimal) */
-          if (locationAnimal === location._id) {
+          //console.log(location)
+          if(location._id == locationId) {
             const lat = location.location.coordinates[0];
             const long = location.location.coordinates[1];
-            this.locationsAnimals.push([lat, long]);
+          
+            this.locationsAnimals.push({lat: lat, long: long});
           }
         }
       }
+      //console.log(this.locationsAnimals)
     });
   }
 
