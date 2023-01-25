@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-annonces',
+  selector: 'app-annonces-component',
   templateUrl: './annonces.component.html',
   styleUrls: ['./annonces.component.scss'],
 })

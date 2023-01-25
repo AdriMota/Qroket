@@ -4,22 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AccueilPageRoutingModule } from './accueil-routing.module';
 import { AccueilPage } from './accueil.page';
-import { CustomButtonComponent } from '../../custom-button/custom-button.component';
-import { AnnoncesComponent } from '../../annonces/annonces.component';
-import { AddAnimalsComponent } from 'src/app/add-animals/add-animals.component';
+import { SharingModule } from 'src/app/sharing/sharing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AccueilPageRoutingModule
+    AccueilPageRoutingModule,
+    SharingModule
   ],
   declarations: [
     AccueilPage,
-    CustomButtonComponent,
-    AnnoncesComponent,
-    AddAnimalsComponent
   ]
 })
 export class AccueilPageModule {}

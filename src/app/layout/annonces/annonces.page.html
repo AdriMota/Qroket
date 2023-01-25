@@ -1,9 +1,19 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>annonces</ion-title>
+    <ion-title>Animaux perdus ou trouvés</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  Annonces!
+  <div *ngIf="!showForm">
+    <app-custom-button [paragraph]="'Créer une annonce'"  (handleClick)="handleClick($event)" [showIcon]="true"></app-custom-button>
+    <h1>Mes annonces d'animaux perdus</h1>
+    <app-annonces-component [showLost]="true" [showFind]="false"></app-annonces-component>
+    <h1>Mes annonces d'animaux trouvés</h1>
+    <app-annonces-component [showLost]="false" [showFind]="true"></app-annonces-component>
+  </div>
+  <div *ngIf="showForm">
+    <app-add-animals></app-add-animals>
+  </div>
+
 </ion-content>

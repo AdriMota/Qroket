@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-// Import Angular's HTTP client.
 import { HttpClient } from "@angular/common/http";
 import { ViewWillEnter } from "@ionic/angular";
 import { AuthService } from "src/app/auth/auth.service";
 import { AnimalsService } from "../../services/animals.service";
 import { environment } from "../../../environments/environment";
+import { ShareDataServiceService } from 'src/app/services/share-data-service.service';
 
 @Component({
   selector: 'app-annonces',
@@ -13,23 +13,29 @@ import { environment } from "../../../environments/environment";
 })
 
 export class AnnoncesPage implements ViewWillEnter {
+
+  showForm: boolean;
+
   constructor(
-    // Inject the AuthService
     private auth: AuthService,
-    // Inject the HTTP client
     public http: HttpClient,
-    // Inject the AnimalsService
     private animal: AnimalsService,
+    private sharedData: ShareDataServiceService
   ) {}
 
   ionViewWillEnter(): void {
-    // Make an HTTP request to retrieve the animals.
     this.http.get(`${environment.apiUrl}animals`).subscribe((animals) => {
       console.log(`Animals loaded`, animals);
     });
   }
 
   ngOnInit() {
-    //this.animal.getAnimals$().subscribe({});
+    this.sharedData.addAnimalsForm$.subscribe(val => {
+      this.showForm = val;
+    });
+  }
+
+  handleClick(data: any) {
+    this.sharedData.addAnnonce();
   }
 }
