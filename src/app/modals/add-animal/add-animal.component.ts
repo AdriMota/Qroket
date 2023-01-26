@@ -13,6 +13,7 @@ export class AddAnimalComponent implements OnInit {
 
   @ViewChild(IonModal) modal: IonModal;
   isModalOpen = false;
+  tabModals: Array<String>;
 
   constructor(
     public modalCtrl : ModalController
@@ -33,7 +34,9 @@ export class AddAnimalComponent implements OnInit {
     return await modalAddAnimal.present();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.tabModals = ["bite", "sneck", "homar", "si"]
+  }
 
   closeModal() {
     this.modalCtrl.dismiss();
