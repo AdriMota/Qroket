@@ -16,7 +16,6 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class MapPage {
 
   map: Leaflet.Map;
-  propertyList = [];
   animals: AnimalResponse[];
   locationsAnimals = [];
 
@@ -102,37 +101,59 @@ export class MapPage {
     Leaflet.marker([lat, long], { icon: myPositionMarker }).addTo(this.map).bindPopup("Tu es là !");
 
     // Make an HTTP request to retrieve the animals.
-    this.http.get(`${environment.apiUrl}animals`).subscribe((animals) => {
-      for (const key in animals) {
-        if (animals.hasOwnProperty(key)) {
-          const animal = animals[key];
-          let locationId = animal.location;
-          let animalId = animal._id;
+    this.http.get(`${environment.apiUrl}animals`).subscribe((animals) => {      
+      //console.log(animals);
+      Object.keys(animals).forEach(key => {
+        let nameAnimal = animals[key].name;
+        let idAnimal = animals[key]._id;
+        let locationIdAnimal = animals[key].location;
 
-          this.animalsLocation(locationId, animalId);
-        }
-      }
+        // Make an HTTP request to retrieve the locations.
+        this.http.get(`${environment.apiUrl}locations/${locationIdAnimal}`).subscribe((location) => {
+          if(locationIdAnimal == location["_id"]) {
+            lat = location["location"].coordinates[0];
+            long = location["location"].coordinates[1]
+
+            const animalMarker = Leaflet.icon({
+              iconUrl: '../assets/markers/Marker-yellow.png',
+              iconSize: [60, 60]
+            });
+        
+            Leaflet.marker([lat, long], { icon: animalMarker }).addTo(this.map).bindPopup(nameAnimal);
+
+            this.locationsAnimals.push([idAnimal, nameAnimal, locationIdAnimal, lat, long])
+          }
+        });
+      });
     });
-
-    /* this.locationsAnimals.forEach(location => {
-      console.log(location);
-    }); */
     
-    console.log(this.locationsAnimals);
-    for (const location of this.locationsAnimals) {
-      console.log(location);
+    /* console.log(this.locationsAnimals)
+
+    for (const infoAnimal of this.locationsAnimals) {
+      console.log(infoAnimal)
     }
 
-    fetch('../assets/data.json')
+    console.log(this.locationsAnimals[0]) */
+
+
+    
+
+    /* console.log(this.locationsAnimals.length)
+
+    for (let i = 0; i < this.locationsAnimals.length; i++) {
+      console.log(this.locationsAnimals[i]);
+    } */
+
+    /* fetch('../assets/data.json')
       .then(res => res.json())
       .then(data => {
         this.propertyList = data.properties;
         this.leafletMap();
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error(err)); */
   }
 
-  animalsLocation(locationId, animalId) {
+  animalsLocation(locationId) {
     //console.log(locationId)
 
     // Make an HTTP request to retrieve the animals.
@@ -142,12 +163,12 @@ export class MapPage {
         if (locations.hasOwnProperty(key)) {
           const location = locations[key];
           //console.log(location)
-          if(location._id == locationId) {
+          //if(location._id == locationId) {
             const lat = location.location.coordinates[0];
             const long = location.location.coordinates[1];
           
             this.locationsAnimals.push({lat: lat, long: long});
-          }
+          //}
         }
       }
       //console.log(this.locationsAnimals)
@@ -172,7 +193,7 @@ export class MapPage {
     //.openPopup();
     //}
 
-    for (const property of this.propertyList) {
+    /* for (const property of this.propertyList) {
       const animalMarker = Leaflet.icon({
         iconUrl: '../assets/markers/Marker-yellow.png',
         iconSize: [60, 60]
@@ -182,7 +203,7 @@ export class MapPage {
         .addTo(this.map)
         .bindPopup(property.name)
       //.openPopup();
-    }
+    } */
   }
 
   ionViewWillLeave() {
