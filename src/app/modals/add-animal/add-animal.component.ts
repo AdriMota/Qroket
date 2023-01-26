@@ -12,6 +12,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
 export class AddAnimalComponent implements OnInit {
 
   @ViewChild(IonModal) modal: IonModal;
+  isModalOpen = false;
 
   constructor(
     public modalCtrl : ModalController
@@ -25,13 +26,8 @@ export class AddAnimalComponent implements OnInit {
   userMail: string = "baltazar.motano@outlook.ch";
   userPhone: number = 41787654321;
 
-
-  //création de l'instance de la modal. Contient les infos nécessaires pour afficher et gérer la modale
   async setModal() {
-    //stocker la référence de la modal
     const modalAddAnimal = await this.modalCtrl.create({
-      //nom de la classe qui est utilisé pour créer la modale. Importer ce composant dans ce fichier et déclarer dans les dépendances du module de l'app
-      //propriété de l'objet de configuration. Permet de spécifier le composant modal à utiliser pour créer la modale
       component: AddAnimalComponent
     });
     return await modalAddAnimal.present();
@@ -47,11 +43,11 @@ export class AddAnimalComponent implements OnInit {
   //   this.modalCtrl.dismiss({ animal: this.animal });
   // }
   cancel() {
-    this.modal.dismiss(null, 'cancel');
+    this.modalCtrl.dismiss(null, 'cancel');
   }
   
   confirm() {
-    this.modal.dismiss(this.name, 'confirm');
+    this.modalCtrl.dismiss(this.name, 'confirm');
   }
 
   onWillDismiss(event: Event) {
@@ -60,5 +56,8 @@ export class AddAnimalComponent implements OnInit {
       this.message = `Hello, ${ev.detail.data}!`;
     }
   }
-
+  clickouech(){
+    this.modalCtrl.dismiss();
+    console.log("ouech")
+  }
 }
