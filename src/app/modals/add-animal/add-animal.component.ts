@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
 
 @Component({
   selector: 'app-add-animal',
@@ -9,10 +11,19 @@ import { ModalController } from '@ionic/angular';
 
 export class AddAnimalComponent implements OnInit {
 
+  @ViewChild(IonModal) modal: IonModal;
+
   constructor(
-    public data: any,
     public modalCtrl : ModalController
   ) { } 
+
+  message: String = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+  photo: Array<string>;
+  name: string = "Dyron";
+  description: string = "Bonnie est une petite chienne de 8 ans et demi. Elle a des poils mi-longs blancs, gris et noirs. Elle a une mèche blanche entre les yeux. Bonnie répond à l\’appel de son prénom. Elle est docile mais un peu peureuse. Elle a été perdue à La Chaux-de-Fonds, au quartier des Forges.";
+  user: string = "Baltazar Motano";
+  userMail: string = "baltazar.motano@outlook.ch";
+  userPhone: number = 41787654321;
 
 
   //création de l'instance de la modal. Contient les infos nécessaires pour afficher et gérer la modale
@@ -32,8 +43,22 @@ export class AddAnimalComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  submitData() {
-    this.modalCtrl.dismiss({ data: this.data });
+  // submitData() {
+  //   this.modalCtrl.dismiss({ animal: this.animal });
+  // }
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+  
+  confirm() {
+    this.modal.dismiss(this.name, 'confirm');
+  }
+
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm') {
+      this.message = `Hello, ${ev.detail.data}!`;
+    }
   }
 
 }

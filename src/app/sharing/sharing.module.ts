@@ -5,12 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { AddAnimalsComponent } from '../add-animals/add-animals.component';
 import { AnnoncesComponent } from '../annonces/annonces.component';
 import { CustomButtonComponent } from '../custom-button/custom-button.component';
+import { AddAnimalComponent } from '../modals/add-animal/add-animal.component';
 
 @NgModule({
   declarations: [
     AddAnimalsComponent,
     CustomButtonComponent,
-    AnnoncesComponent
+    AnnoncesComponent,
+    AddAnimalComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { CustomButtonComponent } from '../custom-button/custom-button.component'
   exports: [
     AddAnimalsComponent,
     CustomButtonComponent,
-    AnnoncesComponent
+    AnnoncesComponent,
+    AddAnimalComponent
   ]
 })
 export class SharingModule { }

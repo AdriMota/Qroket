@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 import { filter } from 'rxjs/operators';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-annonces-component',
@@ -21,7 +22,7 @@ export class AnnoncesComponent implements OnInit {
   @Input() showAll: boolean;
 
 
-  constructor(private http: HttpClient, private authService: AuthService,) { 
+  constructor(private http: HttpClient, private authService: AuthService, modalCtrl: ModalController) { 
     this.getAnimals();
   }
  
@@ -47,6 +48,10 @@ export class AnnoncesComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  showAnimal(event : any){
+    let idAnimal = event.explicitOriginalTarget.attributes[1].value;
   }
 
   }
