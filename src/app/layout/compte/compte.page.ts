@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { ImageService } from '../../services/image.service';
 import { filter } from 'rxjs/operators';
+import { HttpClient } from "@angular/common/http";
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-compte',
@@ -11,12 +14,22 @@ import { filter } from 'rxjs/operators';
 export class ComptePage implements OnInit {
 
   profileImage: string; 
+  firstname: string;
+  lastname: string;
+  locationId: string;
+  city: string;
 
-  constructor(private authService: AuthService, private imageService: ImageService) { }
+  constructor(private authService: AuthService, private imageService: ImageService, public http: HttpClient) { }
 
   ngOnInit() {
+    // Récupérer les informations de l'user connecté
     this.authService.getUser$().pipe(filter(user => user != null),).subscribe(user => {
-      //console.log(user.id)
+
+      this.firstname = user.firstname;
+      this.lastname = user.lastname;
+      this.locationId = user.location;
+      //console.log(user);
+
       this.imageService.getImage(user.id).subscribe(response => {
         //console.log(response);
         const blob = new Blob([response.data.data], { type: 'image/jpeg' });
@@ -24,6 +37,11 @@ export class ComptePage implements OnInit {
         // this.convertBlobToUrl(blob);
       });
     });
+
+    this.convertLocation();
+
+    this.showData();
+
   }
     /* this.authService.getUser$().subscribe(user => {
       console.log(user.id)
@@ -35,7 +53,22 @@ export class ComptePage implements OnInit {
 
     //this.profileImage = "../../../assets/images/profile/Baltazar.png"
   } */
+
+  convertLocation() {
+    this.http.get(`${environment.apiUrl}locations/${this.locationId}`).subscribe((location) => {
+      this.city = location["city"];
+      
+    });
+  }
   
+  showData() {
+    //console.log(this.firstname, this.lastname, this.locationId)
+  }
+
+  navigate(event: any) {
+    console.log(event)
+  }
+
   convertBlobToUrl(blob: Blob) {
     
     const reader = new FileReader();

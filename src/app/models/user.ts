@@ -7,5 +7,5 @@ export type User = {
     password: string;
     picture: any;
     role: string;
-    location: number;
+    location: string;
 };

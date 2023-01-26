@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { ComptePageRoutingModule } from './compte-routing.module';
 import { ComptePage } from './compte.page';
 import { ImageComponent } from '../../image/image.component';
+import { SharingModule } from 'src/app/sharing/sharing.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { ImageComponent } from '../../image/image.component';
     CommonModule,
     FormsModule,
     IonicModule,
-    ComptePageRoutingModule
+    ComptePageRoutingModule,
+    SharingModule
   ],
   declarations: [
     ComptePage,

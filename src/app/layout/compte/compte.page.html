@@ -6,4 +6,24 @@
 
 <ion-content>
   <app-image [src]="profileImage"></app-image>
+
+  <div id="name">
+    <p>{{ firstname }} {{ lastname }}</p>
+  </div>
+
+  <div id="location">
+    <img src="../../../assets/icon/location.png"/>
+    <p>{{ city }}</p>
+  </div>
+
+  <p class="bold">Informations de base</p>
+  <app-custom-button [paragraph]="'Adresse mail'" [showIcon]="true" (click)="navigate($event)"></app-custom-button>
+  <app-custom-button [paragraph]="'Téléphone'" [showIcon]="true" (click)="navigate($event)"></app-custom-button>
+  <app-custom-button [paragraph]="'Mot de passe'" [showIcon]="true" (click)="navigate($event)"></app-custom-button>
+  <app-custom-button [paragraph]="'Localisation'" [showIcon]="true" (click)="navigate($event)"></app-custom-button>
+  <app-custom-button [paragraph]="'Supprimer le compte'" [showIcon]="true" (click)="navigate($event)"></app-custom-button>
+
+  <p class="bold">Mes annonces</p>
+  <app-custom-button [paragraph]="'Animaux perdus et/ou trouvés'" [showIcon]="true" (click)="navigate($event)"></app-custom-button>
+
 </ion-content>
