@@ -17,7 +17,7 @@ export class MapPage {
 
   map: Leaflet.Map;
   animals: AnimalResponse[];
-  locationsAnimals: Array<string>
+  // locationsAnimals: Array<string>;
 
   constructor(
     private animalsService: AnimalsService,
