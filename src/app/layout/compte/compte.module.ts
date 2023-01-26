@@ -14,7 +14,8 @@ import { SharingModule } from 'src/app/sharing/sharing.module';
     FormsModule,
     IonicModule,
     ComptePageRoutingModule,
-    SharingModule
+    SharingModule,
+    
   ],
   declarations: [
     ComptePage,

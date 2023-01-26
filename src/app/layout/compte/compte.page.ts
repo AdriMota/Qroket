@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { ImageService } from '../../services/image.service';
-import { filter } from 'rxjs/operators';
+import { filter } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import { ModalController } from '@ionic/angular';
+import { InfosComponent } from 'src/app/infos/infos.component';
 
 
 @Component({
@@ -19,7 +21,9 @@ export class ComptePage implements OnInit {
   locationId: string;
   city: string;
 
-  constructor(private authService: AuthService, private imageService: ImageService, public http: HttpClient) { }
+  public isModalOpen: boolean = false;
+
+  constructor(private authService: AuthService, private imageService: ImageService, public http: HttpClient, private modalController: ModalController) { }
 
   ngOnInit() {
     // Récupérer les informations de l'user connecté
@@ -65,8 +69,11 @@ export class ComptePage implements OnInit {
     //console.log(this.firstname, this.lastname, this.locationId)
   }
 
-  navigate(event: any) {
-    console.log(event)
+  async openModal($event) {
+    const modal = await this.modalController.create({
+      component: InfosComponent
+    });
+    return await modal.present();
   }
 
   convertBlobToUrl(blob: Blob) {
