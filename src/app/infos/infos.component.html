@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+      <ion-icon color="medium" name="arrow-back" (click)="cancel()"></ion-icon>
+      <!-- <ion-button color="medium" (click)="cancel()">Cancel</ion-button> -->
     </ion-buttons>
-    <ion-title>Modification des informations</ion-title>
+    <ion-title>{{ buttonValue }}</ion-title>
     <ion-buttons slot="end">
       <!-- <ion-button (click)="confirm()">Confirm</ion-button> -->
     </ion-buttons>
@@ -12,8 +13,9 @@
 <ion-content class="ion-padding">
   <ion-item>
     <ion-label position="stacked">{{ buttonValue }}</ion-label>
-    <ion-input [(ngModel)]="typeButton" [type]="inputType" placeholder="{{ typeButton }}"></ion-input>
-    <!-- <p>{{ message }}</p> -->
+    <ion-input *ngIf="!showIcon" [(ngModel)]="typeButton" (ngModelChange)="updateInput()" [type]="inputType" placeholder="{{ typeButton }}"></ion-input>
+    <ion-input *ngIf="showIcon" [(ngModel)]="typeButton" (ngModelChange)="updateInput()" [type]="passwordType" placeholder="{{ typeButton }}"></ion-input>
+    <ion-icon *ngIf="showIcon" [name]="passwordIcon" (click)="hideShowPassword()"></ion-icon>
   </ion-item>
-  <app-custom-button expand="block" [paragraph]="'Enregistrer'" [showIcon]="false" (click)="confirm()"></app-custom-button>
+  <app-custom-button *ngIf="!disableButton" expand="block" [paragraph]="'Enregistrer'" [showIcon]="false" (click)="confirm()"></app-custom-button>
 </ion-content>
