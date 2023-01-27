@@ -13,7 +13,7 @@ import { filter } from 'rxjs';
 })
 export class InfosComponent {
   buttonValue: string;
-  typeButton: string = "default";
+  typeButton: any;
   inputType: string = 'text';
 
   mail: string = "baltazar.motano@outlook.ch";
@@ -37,14 +37,10 @@ export class InfosComponent {
       switch (this.buttonValue) {
         case ' Adresse mail ':
           this.typeButton = this.mail;
-          this.inputType = 'text';
+          this.inputType = 'email';
           break;
         case ' Téléphone ':
-          console.log("1", typeof(this.typeButton))
-          console.log("2", typeof(this.phone))
-          parseInt(this.typeButton);
-          console.log("3", typeof(this.typeButton))
-          //this.typeButton = this.phone;
+          this.typeButton = this.phone;
           this.inputType = 'number';
           break;
         case ' Mot de passe ':
@@ -65,9 +61,7 @@ export class InfosComponent {
     this.auth.getUser$().pipe(filter(user => user != null),).subscribe(user => {
 
       this.mail = user.email;
-      console.log(typeof(user.phone))
       this.phone = user.phone;
-
       this.password = "************";
       this.location = user.location;
 
