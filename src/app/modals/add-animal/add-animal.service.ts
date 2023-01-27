@@ -1,4 +1,4 @@
-import { Injectable, ViewContainerRef } from "@angular/core";
+import { Injectable, ViewContainerRef, EventEmitter } from "@angular/core";
 import { AddAnimalComponent } from "./add-animal.component";
 
 @Injectable({
@@ -8,7 +8,8 @@ import { AddAnimalComponent } from "./add-animal.component";
 export class ModalService {
     //peut contenir des vues hôtes.
     private rootViewContainer: ViewContainerRef;
-    constructor(private viewContainerRef: ViewContainerRef) {
+
+    constructor(private viewContainerRef: ViewContainerRef) {   
     }
 
     setRootViewContainerRef(viewContainerRef: any) {
@@ -16,7 +17,10 @@ export class ModalService {
     }
 
     //ajouter un composant. Reçoit les paramètres à afficher
-    addDynamicComponent(modalTitle: string, modalText: string, modalLocation: string, modalAnimalId: number) {
+    async addDynamicComponent(modalTitle: string, modalText: string, modalLocation: string, modalAnimalId: number) {
+
+        console.log("go 2")
+
         const component = this.viewContainerRef.createComponent(AddAnimalComponent);
 
         component.instance.name = modalTitle;
@@ -24,19 +28,21 @@ export class ModalService {
         component.instance.location = modalLocation;
         component.instance.id = modalAnimalId;
 
-        component.instance.closeModal();
+        //écouter le click, pour pouvoir supprimer le composant
+        component.instance.modalClose.subscribe(() => this.removeDynamicComponent(component))
+
         if (component.hostView && !component.hostView.destroyed) {
             this.rootViewContainer.insert(component.hostView);
+        //     console.log("dans la boucle cheloue")
         }
 
-        // this.rootViewContainer.insert(component.hostView);
-        // this.removeDynamicComponent(component);
+    }
+
+    onWillDismiss(event: any) {
+        console.log("Cancel dans le parent");
     }
 
     removeDynamicComponent(component) {
-        // component.destroy();
-        // this.rootViewContainer.clear();
-        // console.log("dans le remove component", component)
-        // console.log(this.rootViewContainer)
+        component.destroy();
     }
 }
