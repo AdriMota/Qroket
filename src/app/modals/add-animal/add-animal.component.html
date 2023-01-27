@@ -1,36 +1,18 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Inline Modal</ion-title>
-  </ion-toolbar>
-</ion-header> -->
 <ion-content class="ion-padding">
-  <ion-button expand="block" id="bite">Ce bouton ne doit pas exister</ion-button>
-  <ion-button expand="block" id="sneck">Ce bouton ne doit pas exister</ion-button>
-  <ion-button expand="block" id="homar">Ce bouton ne doit pas exister</ion-button>
-  
-  <!-- <p id="open-modal">{{ name }}</p> -->
-  <p>Adriana</p>
-  <div *ngFor="let modal of tabModals">
-  <ion-modal trigger="modal" (willDismiss)="onWillDismiss($event)">
+  <ion-modal [trigger]="id" (willDismiss)="onWillDismiss($event)">
     <ng-template>
       <div>
         <div>
           <ion-buttons slot="start">
-            <!-- <ion-button (click)="cancel()">Cancel</ion-button> -->
+            <ion-button (click)="cancel()">Cancel</ion-button>
           </ion-buttons>
           <ion-img src="https://docs-demo.ionic.io/assets/madison.jpg" alt="The Wisconsin State Capitol building in Madison, WI at night"></ion-img>
-          <ion-buttons slot="end">
-            <!-- <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button> -->
-          </ion-buttons>
         </div>
       </div>
       <ion-content class="ion-padding">
-        <ion-item>
-          <ion-label position="stacked">Enter your name</ion-label>
-          <ion-input type="text" placeholder="Your name" [(ngModel)]="name"></ion-input>
-        </ion-item>
+        <h1>{{ name }}</h1>
+        <p>{{ description }}</p>
       </ion-content>
     </ng-template>
   </ion-modal>
-  </div>
 </ion-content>
