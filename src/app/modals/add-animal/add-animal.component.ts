@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angu
 import { ModalController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-animal',
@@ -17,6 +18,7 @@ export class AddAnimalComponent implements OnInit {
   @Input() animalId : number;
 
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
+  @Output() modalClose: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild(IonModal) modal: IonModal;
 
@@ -41,13 +43,19 @@ export class AddAnimalComponent implements OnInit {
     return await modalAddAnimal.present();
   }
 
-  ngOnInit() {
+  ngOnInit(
+    
+  ) {
   }
 
-  //le nom est peu indicatif....
+  //le nom est peu indicatif....Correspond à l'ouverture de la modal
   closeModal() {
     this.close.emit(event);
   }
+  
+  ngOnDestroy() {
+    this.modal;
+  } 
 
   cancel() {
     this.modalCtrl.dismiss();
@@ -58,7 +66,8 @@ export class AddAnimalComponent implements OnInit {
   }
 
   onWillDismiss(event: Event) {
-    //lorsque cet événement se déclenche, il faudrait que la modal se supprime de la liste des modals
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    //émet l'événement
+    this.modalClose.emit();
   }
 }

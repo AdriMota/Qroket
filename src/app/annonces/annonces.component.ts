@@ -56,9 +56,10 @@ export class AnnoncesComponent implements OnInit {
 
   showAnimal(event: any, modalTitle: any, modalText: any, modalLocation: any, animalId: any){
     // let idAnimal = event.explicitOriginalTarget.attributes[1].value;
+    console.log("go 1")
     event.preventDefault();
     this.modalService.setRootViewContainerRef(this.viewContainerRef);
-    this.modalService.addDynamicComponent(modalTitle, modalText, modalLocation, animalId);
+    this.modalService.addDynamicComponent(modalTitle, modalText, modalLocation, animalId); 
   }
 
   }
