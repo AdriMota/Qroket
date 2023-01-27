@@ -5,6 +5,7 @@ import { AuthService } from '../auth/auth.service';
 import { filter } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 import { ModalService } from '../modals/add-animal/add-animal.service';
+import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
 @Component({
   selector: 'app-annonces-component',
@@ -42,7 +43,8 @@ export class AnnoncesComponent implements OnInit {
         if(!this.showAll){
           this.animalFilter = response
           this.animals = this.animalFilter.filter(a => a.user == this.user)
-        }
+          this.animals.sort((a, b) => a.date.localeCompare(b.date));
+        }console.log(this.animals)
         if(this.showAll){
           this.animals = response;
           this.animals.sort((a, b) => a.date.localeCompare(b.date));
@@ -54,12 +56,11 @@ export class AnnoncesComponent implements OnInit {
     );
   }
 
-  showAnimal(event: any, modalTitle: any, modalText: any, modalLocation: any, animalId: any){
+  showAnimal(event: any, modalTitle: any, modalText: any, modalLocation: any, animalId: any, animalUser: any){
     // let idAnimal = event.explicitOriginalTarget.attributes[1].value;
-    console.log("go 1")
     event.preventDefault();
     this.modalService.setRootViewContainerRef(this.viewContainerRef);
-    this.modalService.addDynamicComponent(modalTitle, modalText, modalLocation, animalId); 
+    this.modalService.addDynamicComponent(modalTitle, modalText, modalLocation, animalId, animalUser); 
   }
 
   }
