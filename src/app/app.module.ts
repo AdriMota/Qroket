@@ -8,7 +8,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { IonicStorageModule } from "@ionic/storage-angular";
 import { AuthInterceptorService } from "./auth/auth-interceptor.service";
 import { BrowserAnimationsModule,NoopAnimationsModule } from '@angular/platform-browser/animations';
-
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,6 +19,7 @@ import { BrowserAnimationsModule,NoopAnimationsModule } from '@angular/platform-
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
+    FormsModule,
     AppRoutingModule,  
     HttpClientModule,
     // Add the ionic storage module into the app's module.

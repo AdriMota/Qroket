@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <app-image [src]="profileImage"></app-image>
 
   <div id="name">
@@ -17,14 +17,14 @@
   </div>
 
   <p class="bold">Informations de base</p>
-  <app-custom-button [paragraph]="'Adresse mail'" [showIcon]="true" (click)="isModalOpen=true"></app-custom-button>
-  <!-- <app-custom-button [paragraph]="'Adresse mail'" [showIcon]="true" (click)="openModal($event)"></app-custom-button> -->
-  <app-custom-button [paragraph]="'Téléphone'" [showIcon]="true" (click)="openModal($event)"></app-custom-button>
-  <app-custom-button [paragraph]="'Mot de passe'" [showIcon]="true" (click)="openModal($event)"></app-custom-button>
-  <app-custom-button [paragraph]="'Localisation'" [showIcon]="true" (click)="openModal($event)"></app-custom-button>
-  <app-custom-button [paragraph]="'Supprimer le compte'" [showIcon]="true" (click)="openModal($event)"></app-custom-button>
+  <app-custom-button expand="block" [paragraph]="'Adresse mail'" [showIcon]="true" (click)="openModal($event)"></app-custom-button>
+  <app-custom-button expand="block" [paragraph]="'Téléphone'" [showIcon]="true" (click)="openModal($event)"></app-custom-button>
+  <app-custom-button expand="block" [paragraph]="'Mot de passe'" [showIcon]="true" (click)="openModal($event)"></app-custom-button>
+  <app-custom-button expand="block" [paragraph]="'Localisation'" [showIcon]="true" (click)="openModal($event)"></app-custom-button>
+  <app-custom-button expand="block" [paragraph]="'Supprimer le compte'" [showIcon]="true" (click)="openModal($event)"></app-custom-button>
+  <!-- <p>{{ message }}</p> -->
 
   <p class="bold">Mes annonces</p>
-  <app-custom-button [paragraph]="'Animaux perdus et/ou trouvés'" [showIcon]="true" (click)="openModal($event)"></app-custom-button>
-
+  <!-- <app-custom-button [paragraph]="'Animaux perdus et/ou trouvés'" [showIcon]="true" (click)="openModal($event)"></app-custom-button>
+ -->
 </ion-content>

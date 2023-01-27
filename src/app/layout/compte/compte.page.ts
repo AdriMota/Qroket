@@ -11,7 +11,7 @@ import { InfosComponent } from 'src/app/infos/infos.component';
 @Component({
   selector: 'app-compte',
   templateUrl: './compte.page.html',
-  styleUrls: ['./compte.page.scss'],
+  //styleUrls: ['./compte.page.scss'],
 })
 export class ComptePage implements OnInit {
 
@@ -21,7 +21,7 @@ export class ComptePage implements OnInit {
   locationId: string;
   city: string;
 
-  public isModalOpen: boolean = false;
+  //public isModalOpen: boolean = false;
 
   constructor(private authService: AuthService, private imageService: ImageService, public http: HttpClient, private modalController: ModalController) { }
 
@@ -69,11 +69,25 @@ export class ComptePage implements OnInit {
     //console.log(this.firstname, this.lastname, this.locationId)
   }
 
-  async openModal($event) {
+  async openModal(event) {
+    let button = event.srcElement.childNodes[0].data;
+    //console.log(button)
     const modal = await this.modalController.create({
-      component: InfosComponent
+      component: InfosComponent,
+      componentProps: {
+        buttonValue: button
+      }
     });
-    return await modal.present();
+
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if(role === 'confirm') {
+      // PUSH DANS LA DB
+      //this.message = `Hello, ${data}`;
+    }
+    //return await modal.present();
   }
 
   convertBlobToUrl(blob: Blob) {
