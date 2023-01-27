@@ -1,8 +1,29 @@
 <div *ngFor="let animal of animals">
-  <div (click)="showAnimal($event, animal.name, animal.description, animal.location, animal._id)" [id]='animal._id'
-    *ngIf="showLost && animal.type == 'lost'"> {{
-    animal.name }}</div>
-  <div (click)="showAnimal($event, animal.name, animal.description, animal.location, animal._id)"
-    *ngIf="showFind && animal.type == 'find'" [id]="animal._id" > {{
-    animal.name }} </div>
+  <div (click)="showAnimal($event, animal.name, animal.description, animal.location, animal._id, animal.user)"
+    [id]='animal._id' *ngIf="showLost && animal.type == 'lost'">
+    <div>
+      <div>
+        <img
+          src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
+          alt="A dog lost">
+      </div>
+      <div>
+        {{ animal.name }}
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngFor="let animal of animals">
+  <div (click)="showAnimal($event, animal.name, animal.description, animal.location, animal._id, animal.user)"
+    *ngIf="showFind && animal.type == 'find'" [id]="animal._id">
+    <div>
+      <div>
+        <img
+          src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
+          alt="A dog lost">
+      </div>
+      <div>
+        {{animal.name }} </div>
+    </div>
+  </div>
 </div>
