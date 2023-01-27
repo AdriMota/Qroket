@@ -1,4 +1,8 @@
 <div *ngFor="let animal of animals">
-  <div (click)="showAnimal($event)" ng-Click="openModal()" *ngIf="showLost && animal.type == 'lost'" [attr.animalId]="animal._id"> {{ animal.name }}</div>
-  <div (click)="showAnimal($event)" *ngIf="showFind && animal.type == 'find'" [attr.animalId]="animal._id"> {{ animal.name }} </div>
+  <div (click)="showAnimal($event, animal.name, animal.description, animal.location, animal._id)" [id]='animal._id'
+    *ngIf="showLost && animal.type == 'lost'"> {{
+    animal.name }}</div>
+  <div (click)="showAnimal($event, animal.name, animal.description, animal.location, animal._id)"
+    *ngIf="showFind && animal.type == 'find'" [id]="animal._id"> {{
+    animal.name }} </div>
 </div>

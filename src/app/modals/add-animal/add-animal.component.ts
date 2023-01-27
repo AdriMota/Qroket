@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
@@ -11,21 +11,28 @@ import { OverlayEventDetail } from '@ionic/core/components';
 
 export class AddAnimalComponent implements OnInit {
 
+  @Input() modalTitle: string;
+  @Input() modalText: string;
+  @Input() modalLocation: string;
+  @Input() animalId : number;
+
+  @Output() close: EventEmitter<any> = new EventEmitter<any>();
+
   @ViewChild(IonModal) modal: IonModal;
-  isModalOpen = false;
-  tabModals: Array<String>;
 
   constructor(
     public modalCtrl : ModalController
   ) { } 
 
-  message: String = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+  message: String;
   photo: Array<string>;
-  name: string = "Dyron";
-  description: string = "Bonnie est une petite chienne de 8 ans et demi. Elle a des poils mi-longs blancs, gris et noirs. Elle a une mèche blanche entre les yeux. Bonnie répond à l\’appel de son prénom. Elle est docile mais un peu peureuse. Elle a été perdue à La Chaux-de-Fonds, au quartier des Forges.";
-  user: string = "Baltazar Motano";
-  userMail: string = "baltazar.motano@outlook.ch";
-  userPhone: number = 41787654321;
+  name: string;
+  description: string;
+  user: string;
+  userMail: string;
+  userPhone: number;
+  location: string; 
+  id: number;
 
   async setModal() {
     const modalAddAnimal = await this.modalCtrl.create({
@@ -35,18 +42,15 @@ export class AddAnimalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tabModals = ["bite", "sneck", "homar", "si"]
   }
 
+  //le nom est peu indicatif....
   closeModal() {
-    this.modalCtrl.dismiss();
+    this.close.emit(event);
   }
 
-  // submitData() {
-  //   this.modalCtrl.dismiss({ animal: this.animal });
-  // }
   cancel() {
-    this.modalCtrl.dismiss(null, 'cancel');
+    this.modalCtrl.dismiss();
   }
   
   confirm() {
@@ -54,13 +58,7 @@ export class AddAnimalComponent implements OnInit {
   }
 
   onWillDismiss(event: Event) {
+    //lorsque cet événement se déclenche, il faudrait que la modal se supprime de la liste des modals
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-      this.message = `Hello, ${ev.detail.data}!`;
-    }
-  }
-  clickouech(){
-    this.modalCtrl.dismiss();
-    console.log("ouech")
   }
 }
