@@ -13,9 +13,10 @@
 <ion-content class="ion-padding">
   <ion-item>
     <ion-label position="stacked">{{ buttonValue }}</ion-label>
-    <ion-input *ngIf="!showIcon" [(ngModel)]="typeButton" (ngModelChange)="updateInput()" [type]="inputType" placeholder="{{ typeButton }}"></ion-input>
+    <ion-input *ngIf="!showIcon && !onlyLoca" [(ngModel)]="typeButton" (ngModelChange)="updateInput()" [type]="inputType" placeholder="{{ typeButton }}"></ion-input>
     <ion-input *ngIf="showIcon" [(ngModel)]="typeButton" (ngModelChange)="updateInput()" [type]="passwordType" placeholder="{{ typeButton }}"></ion-input>
     <ion-icon *ngIf="showIcon" [name]="passwordIcon" (click)="hideShowPassword()"></ion-icon>
+    <app-location *ngIf="onlyLoca" (valueChange)="newValue($event)" [placeholder]= locationId></app-location>
   </ion-item>
   <app-custom-button *ngIf="!disableButton" expand="block" [paragraph]="'Enregistrer'" [showIcon]="false" (click)="confirm()"></app-custom-button>
 </ion-content>

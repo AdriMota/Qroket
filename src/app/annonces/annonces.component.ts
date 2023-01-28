@@ -21,6 +21,9 @@ export class AnnoncesComponent implements OnInit {
   animal: any;
   animalFilter: any;
 
+  animalLost: any;
+  animalFind: any;
+
   @Input() showLost: boolean;
   @Input() showFind: boolean;
   @Input() showAll: boolean;
@@ -47,12 +50,16 @@ export class AnnoncesComponent implements OnInit {
       (response) => {
         if (!this.showAll) {
           this.animalFilter = response
-          this.animals = this.animalFilter.filter(a => a.user == this.user)
-          this.animals.sort((a, b) => a.date.localeCompare(b.date));
-        }
+          this.animalLost = this.animalFilter.filter(a => a.user == this.user && a.type == "lost")
+          this.animalFind = this.animalFilter.filter(a => a.user == this.user && a.type == "find")
+          // this.animals.sort((a, b) => a.date.localeCompare(b.date));
+          console.log("ici", this.animalLost, this.animalFind)
+        }console.log(this.animals)
         if (this.showAll) {
-          this.animals = response;
-          this.animals.sort((a, b) => a.date.localeCompare(b.date));
+          this.animalFilter = response
+          this.animalLost = this.animalFilter.filter(a => a.type == "lost")
+          this.animalFind = this.animalFilter.filter(a => a.type == "find")
+          // this.animals.sort((a, b) => a.date.localeCompare(b.date));
         }
       },
       (error) => {
@@ -68,7 +75,7 @@ export class AnnoncesComponent implements OnInit {
       this.modalService.addDynamicComponent(modalTitle, modalText, modalLocation, animalId, animalUser, this.viewContainerRef);
     }
 
-    if (this.update) {
+    if (this.update) {  
       this.modalServiceUpdate.addDynamicComponent(modalTitle, modalText, modalLocation, animalId, animalUser, this.view);
     }
   }

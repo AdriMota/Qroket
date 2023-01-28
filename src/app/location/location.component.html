@@ -1,5 +1,4 @@
-<ion-label position="stacked">Localité(*)</ion-label>
-<input [(ngModel)]="cityUser" list="codes" type="text" placeholder="Yverdon-les-Bains" (ngModelChange)="searchCity($event)"/>
+<input [(ngModel)]="cityUser" list="codes" type="text" placeholder={{placeholder}} (ngModelChange)="searchCity($event)" [value]="placeholder"/>
 <datalist id="codes">
   <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
 </datalist>

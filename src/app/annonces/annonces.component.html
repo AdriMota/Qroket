@@ -1,6 +1,6 @@
-<div *ngFor="let animal of animals">
+<div *ngFor="let animal of animalLost">
   <div (click)="showAnimal($event, animal.name, animal.description, animal.location, animal._id, animal.user)"
-    [id]='animal._id' *ngIf="showLost && animal.type == 'lost'">
+    [id]='animal._id' *ngIf="showLost">
     <div>
       <div>
         <img
@@ -13,9 +13,9 @@
     </div>
   </div>
 </div>
-<div *ngFor="let animal of animals">
+<div *ngFor="let animal of animalFind">
   <div (click)="showAnimal($event, animal.name, animal.description, animal.location, animal._id, animal.user)"
-    *ngIf="showFind && animal.type == 'find'" [id]="animal._id">
+    *ngIf="showFind" [id]="animal._id">
     <div>
       <div>
         <img
@@ -23,7 +23,7 @@
           alt="A dog lost">
       </div>
       <div>
-        {{animal.name }} </div>
+        {{animal.name}} </div>
     </div>
   </div>
 </div>              

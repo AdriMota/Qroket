@@ -6,7 +6,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { filter, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-
 @Component({
   selector: 'app-infos',
   templateUrl: './infos.component.html',
@@ -26,7 +25,7 @@ export class InfosComponent {
   mail: string = "baltazar.motano@outlook.ch";
   phone: number = 0;
   password: string = "Hdslap!$$00ddia_";
-  location: string = "1400 Yverdon-les-Bains";
+  locationId: string;
   locationUser: string;
 
   passwordType: string = 'password';
@@ -36,6 +35,11 @@ export class InfosComponent {
   disableButton: boolean = true;
   newData: any;
   property: string;
+
+  newLoca: string;
+  onlyLoca: boolean = false;
+
+  localisation: any;
 
 
   constructor(private modalController: ModalController,
@@ -49,6 +53,8 @@ export class InfosComponent {
     this.getUser();
 
     this.buttonValue = this.navParams.get('buttonValue');
+    this.onlyLoca = this.buttonValue == " Localisation " ? true : false;
+    this.locationId = typeof (this.locationId) == "undefined" ? "Insérer une location" : this.locationId
 
     switch (this.buttonValue) {
       case ' Adresse mail ':
@@ -64,13 +70,16 @@ export class InfosComponent {
         this.showIcon = true;
         break;
       case ' Localisation ':
-        this.http.get(`${environment.apiUrl}locations/${this.location}`).subscribe((location) => {
-          let npa = location["npa"];
-          let city = location["city"];
-          this.locationUser = npa + " " + city;
-    
-          this.typeButton = this.locationUser;
-          this.inputType = 'text';
+        this.http.get(`${environment.apiUrl}locations/${this.locationId}`).subscribe((location) => {
+          // let npa = location["npa"];
+          // let city = location["city"];
+          // this.locationUser = npa + " " + city;
+          // this.typeButton = this.locationUser;
+          // this.inputType = 'text';
+
+          this.locationId = location["city"]
+          this.localisation = location["city"]
+
         });
         break;
       default:
@@ -86,7 +95,7 @@ export class InfosComponent {
       this.mail = user.email;
       this.phone = user.phone;
       this.password = "Hdslap!$$00ddia_";
-      this.location = user.location;
+      this.locationId = user.location;
 
     });
   }
@@ -97,7 +106,6 @@ export class InfosComponent {
   }
 
   updateInput() {
-
     // Afficher le bouton
     if (this.typeButton) {
       this.disableButton = false;
@@ -117,7 +125,7 @@ export class InfosComponent {
         break;
       case ' Mot de passe ':
         this.property = "password"
-        this.newData = this.typeButton;
+        this.newData = this.newLoca;
         break;
       case ' Localisation ':
         this.property = "location"
@@ -134,19 +142,28 @@ export class InfosComponent {
     const body = JSON.stringify({ [this.property]: this.newData });
     console.log(body)
     console.log(`${environment.apiUrl}users/${this.userId}`)
-    this.http.patch(`${environment.apiUrl}users/${this.userId}`, body, this.httpOptions)
-    .subscribe(
-      (response) => {
-        console.log('Successful PATCH request: ', response);
-      },
-      (error) => {
-        console.error('Error with PATCH request: ', error);
-      }
-    );
-
+    // this.http.patch(`${environment.apiUrl}users/${this.userId}`, body, this.httpOptions)
+    //   .subscribe(
+    //     (response) => {
+    //       console.log('Successful PATCH request: ', response);
+    //     },
+    //     (error) => {
+    //       console.error('Error with PATCH request: ', error);
+    //     }
+    //   );
+      
+      console.log("oué")
     // DEMANDER DE SE RECONNECTER
 
     return this.modalController.dismiss(this.typeButton, 'confirm');
   }
 
+  newValue(value) {
+    this.disableButton = false ? true : false;
+    this.newLoca = value
+  }
 }
+
+
+
+//01 - Aller chercher l'ID de la localisation dans la BDD
