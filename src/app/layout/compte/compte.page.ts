@@ -81,13 +81,7 @@ export class ComptePage implements OnInit {
 
     modal.present();
 
-    const { data, role } = await modal.onWillDismiss();
-
-    if(role === 'confirm') {
-      // PUSH DANS LA DB
-      //this.message = `Hello, ${data}`;
-    }
-    //return await modal.present();
+    await modal.onWillDismiss();
   }
 
   convertBlobToUrl(blob: Blob) {
