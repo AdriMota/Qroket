@@ -36,6 +36,6 @@ export class AnnoncesPage implements ViewWillEnter {
   }
 
   handleClick(data: any) {
-    this.sharedData.addAnnonce();
+    this.sharedData.addAnnonce(); 
   }
 }

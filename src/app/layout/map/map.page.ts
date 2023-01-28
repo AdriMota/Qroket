@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 @Component({
   selector: 'app-map',
   templateUrl: './map.page.html',
-  styleUrls: ['./map.page.scss'],
+  styleUrls: ['./map.page.scss']
 })
 export class MapPage {
 
@@ -92,6 +92,7 @@ export class MapPage {
    * ADD MARKERS TO MAP
    ***************************************************/
   addMarkers(lat, long) {
+
     const myPositionMarker = Leaflet.icon({
       iconUrl: '../assets/markers/Marker-blue.png',
       iconSize: [60, 60]
@@ -100,29 +101,31 @@ export class MapPage {
     Leaflet.marker([lat, long], { icon: myPositionMarker }).addTo(this.map).bindPopup("Tu es là !");
 
     // Make an HTTP request to retrieve the animals.
-    this.http.get(`${environment.apiUrl}animals`).subscribe((animals) => {      
+    this.http.get(`${environment.apiUrl}animals`).subscribe((animals) => {
 
       Object.keys(animals).forEach(key => {
         let nameAnimal = animals[key].name;
-        // let idAnimal = animals[key]._id;
+        let descriptionAnimal = animals[key].description;
+        let idAnimal = animals[key]._id;
         let locationIdAnimal = animals[key].location;
+        let userAnimal = animals[key].user;
 
         // Make an HTTP request to retrieve the locations.
         this.http.get(`${environment.apiUrl}locations/`).subscribe((locations) => {
           Object.keys(locations).forEach(key => {
             let location = locations[key];
 
-            if(locationIdAnimal == location["_id"]) {
+            if (locationIdAnimal == location["_id"]) {
               lat = location["location"].coordinates[0];
               long = location["location"].coordinates[1]
-  
+
               const animalMarker = Leaflet.icon({
                 iconUrl: '../assets/markers/Marker-yellow.png',
                 iconSize: [60, 60]
               });
-          
-              Leaflet.marker([lat, long], { icon: animalMarker }).addTo(this.map).bindPopup(nameAnimal);
-  
+
+              Leaflet.marker([lat, long], { icon: animalMarker }).addTo(this.map).bindPopup(nameAnimal)
+
               //this.locationsAnimals.push([idAnimal, nameAnimal, locationIdAnimal, lat, long])
             }
           })
@@ -140,4 +143,5 @@ export class MapPage {
   ionViewWillLeave() {
     this.map.remove();
   }
+
 }

@@ -1,25 +1,25 @@
 import { Injectable, ViewContainerRef, EventEmitter } from "@angular/core";
-import { AddAnimalComponent } from "./add-animal.component";
+import { UpdateAnimalComponent } from "./update-animal.component";
 
 @Injectable({
     providedIn:'root'
 })
 
-export class ModalService {
-    private rootViewContainer: ViewContainerRef;
+export class ModalServiceUpdate {
+    private rootView: ViewContainerRef;
 
-    constructor(private viewContainerRef: ViewContainerRef) {   
+    constructor(private viewContainerRef: ViewContainerRef) {  
+       
     }
 
     setRootViewContainerRef(viewContainerRef: any) {
-        this.rootViewContainer = viewContainerRef;
+        this.rootView = viewContainerRef;
     }
     
     //lorsque le premier component s'ajoute dans un viewhote, il ne se passe rien. Pourquoi ? 
     async addDynamicComponent(modalTitle: string, modalText: string, modalLocation: string, modalAnimalId: number, animalUser: number, viewContainerRef: any) {
         await this.setRootViewContainerRef(viewContainerRef);
-
-        const component = this.rootViewContainer.createComponent(AddAnimalComponent);
+        const component = this.rootView.createComponent(UpdateAnimalComponent);
 
         component.instance.name = modalTitle;
         component.instance.description = modalText;
@@ -29,11 +29,8 @@ export class ModalService {
 
         component.instance.modalClose.subscribe(() => this.removeDynamicComponent(component))
 
-        console.log(component.hostView)
-        console.log(this.rootViewContainer)
-
         if (component.hostView && !component.hostView.destroyed) {
-            this.rootViewContainer.insert(component.hostView);
+            this.rootView.insert(component.hostView);
         }
     }
 

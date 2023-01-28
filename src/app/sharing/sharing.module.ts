@@ -7,6 +7,7 @@ import { AnnoncesComponent } from '../annonces/annonces.component';
 import { CustomButtonComponent } from '../custom-button/custom-button.component';
 import { AddAnimalComponent } from '../modals/add-animal/add-animal.component';
 import { InfosComponent } from '../infos/infos.component';
+import { UpdateAnimalComponent } from '../modals/update-animal/update-animal.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { InfosComponent } from '../infos/infos.component';
     CustomButtonComponent,
     AnnoncesComponent,
     AddAnimalComponent,
-    InfosComponent
+    InfosComponent,
+    UpdateAnimalComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { InfosComponent } from '../infos/infos.component';
     CustomButtonComponent,
     AnnoncesComponent,
     AddAnimalComponent,
-    InfosComponent
+    InfosComponent,
+    UpdateAnimalComponent
   ]
 })
 export class SharingModule { }

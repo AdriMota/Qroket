@@ -19,11 +19,11 @@
     </div>
     <div>
       <h2>J'ai été trouvé</h2>
-      <app-annonces-component [showLost]="false" [showFind]="true" [showAll]="true" class="animal-container"></app-annonces-component>
+      <app-annonces-component [showLost]="false" [showFind]="true" [showAll]="true" [update]="false" class="animal-container"></app-annonces-component>
     </div>
     <div>
       <h2>J'ai été perdu</h2>
-      <app-annonces-component [showLost]="true" [showFind]="false" [showAll]="true" class="animal-container"></app-annonces-component>
+      <app-annonces-component [showLost]="true" [showFind]="false" [showAll]="true" [update]="false" class="animal-container"></app-annonces-component>
     </div>
   </div>
   <div *ngIf="showForm">

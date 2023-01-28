@@ -6,20 +6,23 @@
 
 <ion-content>
   <div *ngIf="!showForm">
-    <app-custom-button [paragraph]="'Créer une annonce'" (handleClick)="handleClick($event)" [showIcon]="true"></app-custom-button>
+    <app-custom-button [paragraph]="'Créer une annonce'" (handleClick)="handleClick($event)"
+      [showIcon]="true"></app-custom-button>
   </div>
   <div>
     <div>
       <h1>Mes annonces d'animaux perdus</h1>
-      <app-annonces-component [showLost]="true" [showFind]="false" [showAll]="false" class="animal-container"></app-annonces-component>
+      <app-annonces-component [showLost]="true" [showFind]="false" [showAll]="false" [update]="true"
+        class="animal-container"></app-annonces-component>
     </div>
     <div>
       <h1>Mes annonces d'animaux trouvés</h1>
-      <app-annonces-component [showLost]="false" [showFind]="true" [showAll]="false" class="animal-container"></app-annonces-component>
+      <app-annonces-component [showLost]="false" [showFind]="true" [showAll]="false" [update]="true"
+        class="animal-container"></app-annonces-component>
     </div>
   </div>
-  <!-- <div *ngIf="showForm">
+  <div *ngIf="showForm">
     <app-add-animals></app-add-animals>
-  </div> -->
+  </div>
 
 </ion-content>

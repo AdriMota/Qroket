@@ -38,8 +38,7 @@ export class AddAnimalComponent implements OnInit {
   userName: string;
   userLastName: string;
   userEmail: string;
-  userPhone: string;
-
+  userPhone: string;  
 
   async setModal() {
     const modalAddAnimal = await this.modalCtrl.create({
