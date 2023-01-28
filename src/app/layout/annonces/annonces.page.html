@@ -12,13 +12,15 @@
   <div>
     <div>
       <h1>Mes annonces d'animaux perdus</h1>
-      <app-annonces-component [showLost]="true" [showFind]="false" [showAll]="false" [update]="true"
-        class="animal-container"></app-annonces-component>
+      <div id="div-find"></div>
+      <!-- <app-annonces-component [showLost]="true" [showFind]="false" [showAll]="false" [update]="true"
+        class="animal-container"></app-annonces-component> -->
     </div>
     <div>
       <h1>Mes annonces d'animaux trouvés</h1>
-      <app-annonces-component [showLost]="false" [showFind]="true" [showAll]="false" [update]="true"
-        class="animal-container"></app-annonces-component>
+      <div id="div-lost"></div>
+      <!-- <app-annonces-component [showLost]="false" [showFind]="true" [showAll]="false" [update]="true"
+        class="animal-container"></app-annonces-component> -->
     </div>
   </div>
   <div *ngIf="showForm">

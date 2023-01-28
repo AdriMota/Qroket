@@ -13,7 +13,7 @@ import { AnimalMapComponent } from 'src/app/animal-map/animal-map.component';
   templateUrl: './accueil.page.html',
   styleUrls: ['./accueil.page.scss'],
 })
-export class AccueilPage implements OnInit {
+export class AccueilPage {
 
   showForm: boolean;
 
@@ -30,7 +30,7 @@ export class AccueilPage implements OnInit {
     private modalController: ModalController
   ) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.sharedData.addAnimalsForm$.subscribe(val => {
       this.showForm = val;
     });
