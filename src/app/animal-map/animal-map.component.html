@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ nameAnimal }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <img src="../../assets/images/animals/Dog.jpg"/>
+  <h1>{{ nameAnimal }}</h1>
+  <p>{{ descriptionAnimal }}</p>
+  <p>Pelage: {{ furAnimal }}</p>
+
+  <h2>Personne de contact</h2>
+  <img src="../../assets/images/profile/Baltazar.png"/>
+  <p>{{ firstnameUser }} {{ lastnameUser }}</p>
+  <p>{{ emailUser }}</p>
+  <p>{{ phoneUser }}</p>
+</ion-content>

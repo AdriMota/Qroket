@@ -7,6 +7,8 @@ import { AnimalsService } from 'src/app/services/animals.service';
 import { AnimalResponse } from 'src/app/models/animals-response';
 import { HttpClient } from "@angular/common/http";
 import { AuthService } from 'src/app/auth/auth.service';
+import { ModalController } from '@ionic/angular';
+import { AnimalMapComponent } from 'src/app/animal-map/animal-map.component';
 
 @Component({
   selector: 'app-map',
@@ -24,7 +26,8 @@ export class MapPage {
     // Inject the AuthService
     private auth: AuthService,
     // Inject the HTTP client
-    public http: HttpClient
+    public http: HttpClient,
+    private modalController: ModalController
   ) { }
 
   async ionViewDidEnter() {
@@ -124,7 +127,9 @@ export class MapPage {
                 iconSize: [60, 60]
               });
 
-              Leaflet.marker([lat, long], { icon: animalMarker }).addTo(this.map).bindPopup(nameAnimal)
+              Leaflet.marker([lat, long], { icon: animalMarker }).addTo(this.map).on('click', () => {
+                this.openModal(idAnimal);
+              });
 
               //this.locationsAnimals.push([idAnimal, nameAnimal, locationIdAnimal, lat, long])
             }
@@ -139,6 +144,20 @@ export class MapPage {
       console.log(infoAnimal)
     } */
   }
+
+  async openModal(idAnimal) {
+    const modal = await this.modalController.create({
+      component: AnimalMapComponent,
+      componentProps: {
+        idAnimal: idAnimal
+      }
+    });
+
+    modal.present();
+
+    await modal.onWillDismiss();
+  }
+
 
   ionViewWillLeave() {
     this.map.remove();

@@ -9,7 +9,7 @@ import { AddAnimalComponent } from '../modals/add-animal/add-animal.component';
 import { InfosComponent } from '../infos/infos.component';
 import { LocationComponent } from '../location/location.component';
 import { UpdateAnimalComponent } from '../modals/update-animal/update-animal.component';
-
+import { AnimalMapComponent } from '../animal-map/animal-map.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { UpdateAnimalComponent } from '../modals/update-animal/update-animal.com
     AddAnimalComponent,
     InfosComponent,
     LocationComponent,
-    UpdateAnimalComponent
+    UpdateAnimalComponent,
+    AnimalMapComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +34,8 @@ import { UpdateAnimalComponent } from '../modals/update-animal/update-animal.com
     AddAnimalComponent,
     InfosComponent,
     LocationComponent,
-    UpdateAnimalComponent
+    UpdateAnimalComponent,
+    AnimalMapComponent
   ]
 })
 export class SharingModule { }
