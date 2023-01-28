@@ -15,11 +15,10 @@ import { SharingModule } from 'src/app/sharing/sharing.module';
     IonicModule,
     ComptePageRoutingModule,
     SharingModule,
-    
   ],
   declarations: [
     ComptePage,
-    ImageComponent
+    ImageComponent,
   ]
 })
 export class ComptePageModule {}
