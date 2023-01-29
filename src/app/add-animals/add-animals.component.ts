@@ -64,6 +64,7 @@ export class AddAnimalsComponent implements OnInit {
     this.sharedData.addAnnonce();
     this.sharedData.showAnswer();
   }
+  
   goAcc() {
     this.sharedData.addAnnonce();
   }

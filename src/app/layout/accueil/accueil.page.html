@@ -17,26 +17,24 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <div *ngIf="!showForm">
-    <div>
-      <h1>Un animal perdu ou trouvé ?</h1>
-      <p>Si tu as perdu ton meilleur ami ou trouvé un animal perdu, ajoute-le sur Qroket pour qu’il puisse retrouver sa
-        famille. Nous faisons de notre mieux pour que les personnes l’ayant aperçu entrent en contact avec toi !</p>
-      <app-custom-button [paragraph]="'Créer une annonce'" [showIcon]="true"
-        (handleClick)="handleClick($event)"></app-custom-button>
-    </div>
-    <div>
-      <h1>J'ai été trouvé</h1>
-      <div id="div-find"></div>
-      <!-- <app-annonces-component [showLost]="false" [showFind]="true" [showAll]="true" [update]="false" class="animal-container"></app-annonces-component> -->
-    </div>
-    <div>
-      <h1>Je suis perdu...</h1>
-      <div id="div-lost"></div>
-      <!-- <app-annonces-component [showLost]="true" [showFind]="false" [showAll]="true" [update]="false" class="animal-container"></app-annonces-component> -->
-    </div>
+  <div class="ion-padding">
+    <h1>Un animal perdu ou trouvé ?</h1>
+    <p>Si tu as perdu ton meilleur ami ou trouvé un animal perdu, ajoute-le sur Qroket pour qu’il puisse retrouver sa
+      famille. Nous faisons de notre mieux pour que les personnes l’ayant aperçu entrent en contact avec toi !</p>
+    
+    <app-custom-button expand="block" [paragraph]="'Créer une annonce'" [showIcon]="true" (click)="openFormAnnonceModal()"></app-custom-button>
+      <!-- <app-custom-button [paragraph]="'Créer une annonce'" [showIcon]="true"
+      (handleClick)="handleClick($event)"></app-custom-button> -->
   </div>
-  <div *ngIf="showForm">
-    <app-add-animals></app-add-animals>
+  <div class="ion-padding">
+    <h1>J'ai été trouvé</h1>
+    <div id="div-find"></div>
+    <!-- <app-annonces-component [showLost]="false" [showFind]="true" [showAll]="true" [update]="false" class="animal-container"></app-annonces-component> -->
   </div>
+  <div class="ion-padding">
+    <h1>Je suis perdu...</h1>
+    <div id="div-lost"></div>
+    <!-- <app-annonces-component [showLost]="true" [showFind]="false" [showAll]="true" [update]="false" class="animal-container"></app-annonces-component> -->
+  </div>
+  <!-- <app-add-animals (click)="openFormAnnonceModal()"></app-add-animals> -->
 </ion-content>

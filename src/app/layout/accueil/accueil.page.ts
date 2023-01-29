@@ -7,6 +7,7 @@ import { HttpClient } from "@angular/common/http";
 import { ModalController } from '@ionic/angular';
 import { AnimalMapComponent } from 'src/app/animal-map/animal-map.component';
 import { PictureService } from 'src/app/picture/picture.service';
+import { FormAnnonceComponent } from 'src/app/form-annonce/form-annonce.component';
 
 
 @Component({
@@ -55,31 +56,37 @@ export class AccueilPage {
 
   showAnimals(animalId) {
     if(this.typeAnimal == "find") {
-      let newDiv = document.createElement("div");
+      let newDiv = document.createElement("ion-card");
       newDiv.setAttribute("class", "animal");
+      newDiv.setAttribute("style", "box-shadow: none !important; margin-inline: 0px;");
       newDiv.addEventListener("click", () => this.onAnimalsClick(animalId));
       document.getElementById("div-find").appendChild(newDiv);
 
       let newImg = document.createElement("img");
+      newImg.setAttribute("style", "border-radius: 10px;");
       // newImg.setAttribute("src", this.picturesAnimal);
       newImg.setAttribute("src", "../../../assets/images/animals/Dog.jpg");
       newDiv.appendChild(newImg);
 
-      let newP = document.createElement("p");
+      let newP = document.createElement("ion-card-title");
+      newP.setAttribute("style", "font-size: large; font-weight: normal;");
       newP.innerHTML = this.nameAnimal;
       newDiv.appendChild(newP);  
     } else if(this.typeAnimal == "lost") {
-      let newDiv = document.createElement("div");
+      let newDiv = document.createElement("ion-card");
       newDiv.setAttribute("class", "animal");
+      newDiv.setAttribute("style", "box-shadow: none !important; margin-inline: 0px;");
       newDiv.addEventListener("click",  () => this.onAnimalsClick(animalId));
       document.getElementById("div-lost").appendChild(newDiv);
 
       let newImg = document.createElement("img");
       // newImg.setAttribute("src", this.picturesAnimal);
+      newImg.setAttribute("style", "border-radius: 10px;");
       newImg.setAttribute("src", "../../../assets/images/animals/Dog.jpg");
       newDiv.appendChild(newImg); 
 
-      let newP = document.createElement("p");
+      let newP = document.createElement("ion-card-title");
+      newP.setAttribute("style", "font-size: large; font-weight: normal;");
       newP.innerHTML = this.nameAnimal;
       newDiv.appendChild(newP); 
     }
@@ -100,6 +107,13 @@ export class AccueilPage {
     modal.present();
 
     await modal.onWillDismiss();
+  }
+
+  async openFormAnnonceModal() {
+    const modal = await this.modalController.create({
+      component: FormAnnonceComponent
+    });
+    return await modal.present();
   }
 
   takePicture() {
