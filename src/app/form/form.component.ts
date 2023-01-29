@@ -7,6 +7,7 @@ import { throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Geolocation } from '@capacitor/geolocation';
 import { Router } from '@angular/router';
+import { PictureService } from 'src/app/picture/picture.service';
 
 // import { NgForm } from '@angular/forms';
 // import { Location } from '@angular/common';
@@ -52,8 +53,10 @@ export class FormComponent implements OnInit {
 
   newCity: string = "";
 
+  picture: string;
 
-  constructor(private http: HttpClient, public errorHandlingService: ErrorHandlingService, private router: Router) {
+
+  constructor(private http: HttpClient, public errorHandlingService: ErrorHandlingService, private router: Router, private pictureService: PictureService,) {
   }
 
   async ngOnInit() {
@@ -76,7 +79,8 @@ export class FormComponent implements OnInit {
       phone: this.phone,
       email: this.email,
       password: this.password,
-      location: this.location
+      location: this.location,
+      picture: this.picture
     }
 
     this.http.post(environment.apiUrl + 'users', data).pipe(
@@ -101,7 +105,7 @@ export class FormComponent implements OnInit {
     if (error.error.indexOf("is required.") !== -1) {
       this.messageErrors = this.errorHandlingService.validateForm(data);
     }
-    if(error.error.indexOf("E11000 duplicate key error collection: test.users index: email_1 dup key") !== -1){
+    if (error.error.indexOf("E11000 duplicate key error collection: test.users index: email_1 dup key") !== -1) {
       this.messageErrors = this.errorHandlingService.validateDoubleKey(data);
     }
   }
@@ -115,7 +119,21 @@ export class FormComponent implements OnInit {
         this.cities = data.features.slice(0, 5).map(item => item[proprety]);
       });
 
-      this.newCity = inputCity;
+    this.newCity = inputCity;
+  }
+
+  /**
+  * Gestion de l'upload et l'affichage d'une image
+  *
+  * L'utilisateur ne peut ajouter qu'une seule photo
+  * L'image est stockée sur une API spécialement conçue
+  * 
+*/
+  uploadPicture() {
+    this.pictureService.takeAndUploadPicture().subscribe(picture => {
+      this.picture = picture.url;
+    });
+    console.log(this.picture)
   }
 
 }

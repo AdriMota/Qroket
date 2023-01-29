@@ -43,6 +43,9 @@
     </datalist>
     <ion-note *ngIf="messageErrors?.formErrors.location" [innerHTML]="messageErrors?.formErrors.location"></ion-note>
   </ion-item>
+  
+  <ion-button (click)="uploadPicture()">Ajouter une photo de profil</ion-button>
+  <img src={{picture}}/>
 
   <ion-button fill="solid" (click)="createUser(user)">Créer un compte</ion-button>
 </form>

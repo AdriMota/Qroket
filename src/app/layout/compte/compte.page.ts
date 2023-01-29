@@ -45,7 +45,6 @@ export class ComptePage implements OnInit {
       if(!this.pictureUser){
         this.pictureUser = "../../../assets/images/profile/Baltazar.png"
       }
-  
 
       //this.takePicture();
 
@@ -58,6 +57,7 @@ export class ComptePage implements OnInit {
         this.profileImage = URL.createObjectURL(blob);
         // this.convertBlobToUrl(blob);
       }); */
+      
     });
   }
 
