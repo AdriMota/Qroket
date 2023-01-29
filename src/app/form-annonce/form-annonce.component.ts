@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
@@ -16,8 +16,7 @@ export class FormAnnonceComponent implements OnInit {
   showAnswerApi: boolean = false;
 
   name: string = '';
-  age: string = '';
-  //age: number = '';
+  age: number = null;
   description: string = '';
   fur: string = '';
   date: string = '';
@@ -43,8 +42,6 @@ export class FormAnnonceComponent implements OnInit {
   }
 
   submitAnnonce() {
-    // this.sharedData.showAnswer();
-
     this.showForm = false;
     this.showAnswerApi = true;
 
