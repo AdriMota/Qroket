@@ -93,7 +93,10 @@ export class AnimalMapComponent implements OnInit {
 
   cancel() {
     this.yourAnnouncement = false;
+    // this.showAnswerApi = false;
+
     return this.modalCtrl.dismiss(null, 'cancel');
+
   }
   
   confirm() {
@@ -123,7 +126,6 @@ export class AnimalMapComponent implements OnInit {
       res => {
         this.showAnswerApi = true;
         this.isDelete = true;
-        this.yourAnnouncement = false; 
       },
       err => {
         console.error('Erreur lors de la suppression de l\'animal :', err);
