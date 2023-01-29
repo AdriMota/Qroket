@@ -73,7 +73,6 @@ export class AnimalMapComponent implements OnInit {
       this.userAnimal = animal["user"];
       this.locationAnimal = animal["location"];
       this.picturesAnimal = animal["pictures"];
-      console.log(this.picturesAnimal)
 
       // Make an HTTP request to retrieve the user.
       this.http.get(`${environment.apiUrl}users/${this.userAnimal}`).subscribe((user) => {
@@ -81,7 +80,7 @@ export class AnimalMapComponent implements OnInit {
         this.lastnameUser = user["lastname"];
         this.emailUser = user["email"];
         this.phoneUser = user["fuphoner"];
-        this.pictureUser = user["pictures"];
+        this.pictureUser = user["picture"];
 
         if(this.userAnimal == this.idUserAuth) {
           this.yourAnnouncement = true;
@@ -118,9 +117,6 @@ export class AnimalMapComponent implements OnInit {
   }
 
   deleteAnnouncement() {
-    console.log("Annonce supprimée", this.idAnimal)
-    console.log(`${environment.apiUrl}animals/${this.idAnimal}`)
-
     // Make an HTTP request to delete the animal.
     this.http.delete(`${environment.apiUrl}animals/${this.idAnimal}`).subscribe(
       res => {
