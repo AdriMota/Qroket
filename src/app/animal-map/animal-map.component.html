@@ -27,9 +27,11 @@
   <!----------------------------------------------------------------- Message pour confirmer la modification de l'animal ---------------------------------------------------------------------->
 
   <div *ngIf="showAnswerApi">
-    <h1>C'est enregistré</h1>
-    <p>Tes changements ont bien été enregistrée, merci beaucoup !<br>Raffraîchis la page</p>
-    <app-custom-button expand="block" [paragraph]="'Retour à l\'accueil'" [showIcon]="false" (click)="cancel()"></app-custom-button>
+    <h1 *ngIf="!isDelete">C'est enregistré</h1>
+    <p *ngIf="!isDelete">Tes changements ont bien été enregistrée, merci beaucoup !<br>Raffraîchis la page.</p>
+    <h1 *ngIf="isDelete">C'est supprimé</h1>
+    <p *ngIf="isDelete">Ton annonce a bien été supprimée. Nous espérons que Qroket a pu t'aider !<br>Raffraîchis la page.</p>
+    <app-custom-button expand="block" [paragraph]="'Fermer'" [showIcon]="false" (click)="cancel()"></app-custom-button>
   </div>
 
 

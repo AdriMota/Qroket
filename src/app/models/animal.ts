@@ -6,7 +6,7 @@ export type Animal = {
     fur: string;
     date: Date;
     type: string;
-    picture: any;
+    picture: string;
     user: string;
     location: string;
 };
