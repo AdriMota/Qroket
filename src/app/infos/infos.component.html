@@ -11,6 +11,12 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
+  <div *ngIf="isDelete">
+    <p>Es-tu vraiment sûr·e de vouloir supprimer définitivement ton compte ?
+      Si oui, saisis ton mot de passe pour valider.
+    </p><p>Saisissez votre <b>mot de passe</b> pour procéder à la manipulation</p>
+    <p>*Ceci est une manipulation irréversible.*</p>
+  </div>
   <ion-item>
     <ion-label position="stacked">{{ buttonValue }}</ion-label>
     <ion-input *ngIf="!showIcon && !onlyLoca" [(ngModel)]="typeButton" (ngModelChange)="updateInput()" [type]="inputType" placeholder="{{ typeButton }}"></ion-input>
@@ -18,5 +24,8 @@
     <ion-icon *ngIf="showIcon" [name]="passwordIcon" (click)="hideShowPassword()"></ion-icon>
     <app-location *ngIf="onlyLoca" (valueChange)="newValue($event)" [city]="location"></app-location>
   </ion-item>
-  <app-custom-button *ngIf="!disableButton" expand="block" [paragraph]="'Enregistrer'" [showIcon]="false" (click)="confirm()"></app-custom-button>
+  <app-custom-button *ngIf="(!disableButton && !isDelete)" expand="block" [paragraph]="'Enregistrer'" [showIcon]="false"
+    (click)="confirm()"></app-custom-button>
+    <app-custom-button *ngIf="(!disableButton && isDelete)" expand="block" [paragraph]="'Supprimer le compte'" [showIcon]="false"
+    (click)="deleteAccount()"></app-custom-button>
 </ion-content>
