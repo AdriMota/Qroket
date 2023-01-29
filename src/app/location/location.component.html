@@ -1,4 +1,5 @@
 <input [(ngModel)]="cityUser" list="codes" type="text" placeholder={{city}} (ngModelChange)="searchCity($event)" [value]="city"/>
 <datalist id="codes">
+  <!-- C'est ici que doit se mettre en noir la localisation courante de l'utilisateur -->
   <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
 </datalist>
