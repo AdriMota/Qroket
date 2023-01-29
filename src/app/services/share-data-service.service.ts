@@ -9,6 +9,9 @@ export class ShareDataServiceService {
   private answerApiFromSource = new BehaviorSubject<boolean>(false);
   answerApi$ = this.answerApiFromSource.asObservable();
 
+  private postcode = new BehaviorSubject<number>(0);
+  postcode$ = this.postcode.asObservable();
+
 
   constructor() {}
 
@@ -17,7 +20,11 @@ export class ShareDataServiceService {
   }
   
   showAnswer(){
-    this.answerApiFromSource.next(!this.answerApiFromSource.getValue())
+    this.answerApiFromSource.next(!this.answerApiFromSource.getValue());
+  }
+
+  getPostcode() {
+    this.postcode.next(this.postcode.getValue());
   }
 
 }
