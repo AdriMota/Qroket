@@ -7,16 +7,42 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <!-- <img alt="Photo de l'animal" [src]="picturesAnimal"/> -->
-  <img src="../../assets/images/animals/Dog.jpg"/>
-  <h1>{{ nameAnimal }}</h1>
-  <p>{{ descriptionAnimal }}</p>
-  <p>Pelage: {{ furAnimal }}</p>
+  <div *ngIf="yourAnnouncement">
+    <!-- <img alt="Photo de l'animal" [src]="picturesAnimal"/> -->
+    <img src="../../assets/images/animals/Dog.jpg"/>
+    <h1>Changer les informations</h1>
 
-  <h2>Personne de contact</h2>
-  <!-- <img alt="Photo de l'animal" [src]="picturesAnimal"/> -->
-  <img src="../../assets/images/profile/Baltazar.png"/>
-  <p>{{ firstnameUser }} {{ lastnameUser }}</p>
-  <p>{{ emailUser }}</p>
-  <p>{{ phoneUser }}</p>
+    <ion-item fill="solid">
+      <ion-label position="stacked">Nom</ion-label>
+      <ion-input [(ngModel)]="nameAnimal" name="nameAnimal" placeholder="Nom ou nom descriptif"></ion-input>
+    </ion-item>
+
+    <ion-item fill="solid">
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea [autoGrow]="true" [(ngModel)]="descriptionAnimal" name="descriptionAnimal"
+        placeholder="Petite description de l'animal"></ion-textarea>
+    </ion-item>
+
+    <ion-item fill="solid">
+      <ion-label position="stacked">Pelage</ion-label>
+      <ion-input [(ngModel)]="furAnimal" name="furAnimal" placeholder="Description de son pelage"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" color="primary"(click)="confirm()">Enregistrer les changements</ion-button>
+    <app-custom-button expand="block" [paragraph]="'Supprimer cette annonce'" [showIcon]="false" (click)="deleteAnnouncement()"></app-custom-button>
+  </div>
+  <div *ngIf="!yourAnnouncement">
+    <!-- <img alt="Photo de l'animal" [src]="picturesAnimal"/> -->
+    <img src="../../assets/images/animals/Dog.jpg"/>
+    <h1>{{ nameAnimal }}</h1>
+    <p>{{ descriptionAnimal }}</p>
+    <p>Pelage: {{ furAnimal }}</p>
+
+    <h2>Personne de contact</h2>
+    <!-- <img alt="Photo de l'animal" [src]="picturesAnimal"/> -->
+    <img src="../../assets/images/profile/Baltazar.png"/>
+    <p>{{ firstnameUser }} {{ lastnameUser }}</p>
+    <p>{{ emailUser }}</p>
+    <p>{{ phoneUser }}</p>
+  </div>
 </ion-content>

@@ -1,6 +1,8 @@
-<img [src]="src">
-<!-- Champ de sélection de fichiers caché -->
-<input type="file" #fileInput style="display: none" (change)="onFileSelected($event)" accept="image/*">
-
-<!-- Bouton pour sélectionner une image -->
-<button (click)="onUploadClick()">Éditer</button>
+<div style="text-align: center;">
+    <img style="width: 200px; height: auto" [src]="src">
+    <!-- Champ de sélection de fichiers caché -->
+    <input type="file" #fileInput style="display: none" (change)="onFileSelected($event)" accept="image/*">
+    <br />
+    <!-- Bouton pour sélectionner une image -->
+    <button (click)="onUploadClick()">Éditer</button>
+</div>
