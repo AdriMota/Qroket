@@ -1,12 +1,4 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>{{ nameAnimal }}</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="cancel()">Close</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-<ion-content class="ion-padding">
+<ion-content>
   <div *ngIf="(yourAnnouncement && !showAnswerApi)">
     <!-- <img alt="Photo de l'animal" [src]="picturesAnimal"/> -->
     <img src="../../assets/images/animals/Dog.jpg"/>
@@ -32,7 +24,7 @@
     <app-custom-button expand="block" [paragraph]="'Supprimer cette annonce'" [showIcon]="false" (click)="deleteAnnouncement()"></app-custom-button>
   </div>
 
-  <!----------------------------------------------------------------- Message pour confirmer l'ajout de l'animal ---------------------------------------------------------------------->
+  <!----------------------------------------------------------------- Message pour confirmer la modification de l'animal ---------------------------------------------------------------------->
 
   <div *ngIf="showAnswerApi">
     <h1>C'est enregistré</h1>
@@ -42,17 +34,37 @@
 
 
   <div *ngIf="!yourAnnouncement">
+    <ion-buttons style="position: absolute; margin: 5%;">
+      <ion-button (click)="cancel()">
+        <ion-icon  size="large" name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <!-- <img alt="Photo de l'animal" [src]="picturesAnimal"/> -->
     <img src="../../assets/images/animals/Dog.jpg"/>
-    <h1>{{ nameAnimal }}</h1>
+    <div class="InfoAnimal" class="ion-padding">
+    <h1 style="font-weight: bolder;">{{ nameAnimal }}</h1>
     <p>{{ descriptionAnimal }}</p>
-    <p>Pelage: {{ furAnimal }}</p>
-
-    <h2>Personne de contact</h2>
-    <!-- <img alt="Photo de l'animal" [src]="picturesAnimal"/> -->
-    <img src="../../assets/images/profile/Baltazar.png"/>
-    <p>{{ firstnameUser }} {{ lastnameUser }}</p>
-    <p>{{ emailUser }}</p>
-    <p>{{ phoneUser }}</p>
+    <h3>Pelage</h3>
+    <ion-chip>{{ furAnimal }}</ion-chip>
+    </div>
+    
+    <div class="InfoProprietaire" class="ion-padding">
+      <h2>Personne de contact</h2>
+      <!-- <img alt="Photo de l'animal" [src]="picturesAnimal"/> -->
+      <ion-grid>
+        <ion-row>
+          <ion-col size="auto">
+            <ion-avatar>
+              <img  src="../../assets/images/profile/Baltazar.png"/>
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="6">
+            <p style="margin-top: 0; margin-bottom: 5px; font-weight: bolder;">{{ firstnameUser }} {{ lastnameUser }}</p>
+            <p style="margin-top: 0; margin-bottom: 5px;">{{ emailUser }}</p>
+            <p style="margin-top: 0;">{{ phoneUser }}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </div>
 </ion-content>
