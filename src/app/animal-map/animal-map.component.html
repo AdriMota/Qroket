@@ -35,7 +35,7 @@
   </div>
 
 
-  <div *ngIf="!yourAnnouncement">
+  <div *ngIf="!yourAnnouncement && !showAnswerApi ">
     <ion-buttons style="position: absolute; margin: 5%;">
       <ion-button (click)="cancel()">
         <ion-icon  size="large" name="close-circle"></ion-icon>

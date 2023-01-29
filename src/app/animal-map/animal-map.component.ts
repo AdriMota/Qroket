@@ -103,6 +103,7 @@ export class AnimalMapComponent implements OnInit {
         (response) => {
           this.showAnswerApi = true;
           this.isDelete = false;
+          this.yourAnnouncement = false
         },
         (error) => {
           console.error('Error with PATCH request: ', error);
@@ -122,6 +123,7 @@ export class AnimalMapComponent implements OnInit {
       res => {
         this.showAnswerApi = true;
         this.isDelete = true;
+        this.yourAnnouncement = false; 
       },
       err => {
         console.error('Erreur lors de la suppression de l\'animal :', err);
