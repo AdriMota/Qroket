@@ -2,6 +2,8 @@
 export const environment = {
     production: false,
     apiUrl: "https://qroket-api.onrender.com/",
+    qimgUrl: "https://qimg.onrender.com/api",
+    qimgSecret: "<change-with-your-token>",
 };
 
 

@@ -18,7 +18,7 @@ export class ComptePage implements OnInit {
   profileImage: string; 
   firstname: string;
   lastname: string;
-  locationId: string;
+  location: string;
   city: string;
 
   //public isModalOpen: boolean = false;
@@ -31,22 +31,23 @@ export class ComptePage implements OnInit {
 
       this.firstname = user.firstname;
       this.lastname = user.lastname;
-      this.locationId = user.location;
-      //console.log(user);
+      this.location = user.location;
 
-      this.imageService.getImage(user.id).subscribe(response => {
+      /* ---------------------------------------
+          * IMAGE
+        --------------------------------------- */
+      /* this.imageService.getImage(user.id).subscribe(response => {
         //console.log(response);
         const blob = new Blob([response.data.data], { type: 'image/jpeg' });
         this.profileImage = URL.createObjectURL(blob);
         // this.convertBlobToUrl(blob);
-      });
+      }); */
     });
-
-    this.convertLocation();
-
-    this.showData();
-
   }
+
+    /* ---------------------------------------
+      * IMAGE
+    --------------------------------------- */
     /* this.authService.getUser$().subscribe(user => {
       console.log(user.id)
       this.imageService.getImage(user.id).subscribe(response => {
@@ -57,17 +58,6 @@ export class ComptePage implements OnInit {
 
     //this.profileImage = "../../../assets/images/profile/Baltazar.png"
   } */
-
-  convertLocation() {
-    this.http.get(`${environment.apiUrl}locations/${this.locationId}`).subscribe((location) => {
-      this.city = location["city"];
-      
-    });
-  }
-  
-  showData() {
-    //console.log(this.firstname, this.lastname, this.locationId)
-  }
 
   async openModal(event) {
     let button = event.srcElement.childNodes[0].data;
@@ -84,13 +74,16 @@ export class ComptePage implements OnInit {
     await modal.onWillDismiss();
   }
 
-  convertBlobToUrl(blob: Blob) {
+  /* ---------------------------------------
+    * IMAGE
+  --------------------------------------- */
+  /* convertBlobToUrl(blob: Blob) {
     
     const reader = new FileReader();
     reader.addEventListener("loadend", () => {
        this.profileImage = reader.result as string;
     });
     reader.readAsDataURL(blob);
-  }
+  } */
 
 }
