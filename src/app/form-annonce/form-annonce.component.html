@@ -10,15 +10,20 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
+<!----------------------------------------------------------------- Formulaire pour ajouter un nouvel utilisateur ---------------------------------------------------------------------->
+
 <ion-content class="ion-padding">
   <div *ngIf="!showAnswerApi">
     <h1>Quelques informations</h1>
     <p>(*)Obligatoire</p>
 
     <form #FormAnnonces action="post">
+
       <ion-item fill="solid">
         <ion-label position="stacked">Nom</ion-label>
         <ion-input [clearOnEdit]="true" [(ngModel)]="name" name="name" placeholder="Nom ou nom descriptif" [ngModelOptions]="{standalone: true}"></ion-input>
+        <ion-note *ngIf="messageErrors?.formErrors.name" [innerHTML]="messageErrors?.formErrors.name"></ion-note>
       </ion-item>
 
       <ion-item fill="solid">
@@ -28,13 +33,14 @@
 
       <ion-item fill="solid">
         <ion-label position="stacked">Description(*)</ion-label>
-        <ion-input [clearOnEdit]="true" [(ngModel)]="description" name="lastname"
-          placeholder="Petite description de l'animal" [ngModelOptions]="{standalone: true}" required="true"></ion-input>
+        <ion-textarea [clearOnEdit]="true" [(ngModel)]="description" [autoGrow]="true" name="description" placeholder="Petite description de l'animal" [ngModelOptions]="{standalone: true}" required="true"></ion-textarea>
+        <ion-note *ngIf="messageErrors?.formErrors.description" [innerHTML]="messageErrors?.formErrors.description"></ion-note>
       </ion-item>
 
       <ion-item fill="solid">
         <ion-label position="stacked">Pelage(*)</ion-label>
         <ion-input [clearOnEdit]="true" [(ngModel)]="fur" name="fur" placeholder="Description de son pelage" [ngModelOptions]="{standalone: true}" required="true"></ion-input>
+        <ion-note *ngIf="messageErrors?.formErrors.fur" [innerHTML]="messageErrors?.formErrors.fur"></ion-note>
       </ion-item>
 
       <ion-list>
@@ -44,14 +50,13 @@
         </ion-item>
       </ion-list>
 
-      <form>
-        <ion-label position="stacked">Ajouter des images de l'animal</ion-label>
+      <ion-label position="stacked">Ajouter des images de l'animal</ion-label>
         <input type="file">
-      </form>
 
       <ion-item>
         <ion-label position="stacked">Quand a-t-il été trouvé/perdu ?(*)</ion-label>
         <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="date" [ngModelOptions]="{standalone: true}" required="true"></ion-datetime>
+        <ion-note *ngIf="messageErrors?.formErrors.date" [innerHTML]="messageErrors?.formErrors.date"></ion-note>
       </ion-item>
 
       <div>
@@ -62,26 +67,31 @@
               <ion-label>Perdu</ion-label>
               <ion-radio slot="end" value="lost"></ion-radio>
             </ion-item>
-        
+
             <ion-item>
               <ion-label>Trouvé</ion-label>
               <ion-radio slot="end" value="find"></ion-radio>
             </ion-item>
           </ion-radio-group>
         </ion-list>
+        <ion-note *ngIf="messageErrors?.formErrors.type" [innerHTML]="messageErrors?.formErrors.type"></ion-note>
       </div>
-      <div>
-        <ion-button type="submit" expand="block" [disabled]="FormAnnonces['invalid']" (click)="submitAnnonce()">Ajouter l'annonce</ion-button>
-      </div>
-      <div>
+
+      <ion-button type="submit" expand="block" [disabled]="FormAnnonces['invalid']" (click)="submitAnnonce()">Ajouter l'annonce</ion-button>
+  
+      <!-- <div>
         <app-custom-button expand="block" [paragraph]="'Créer une annonce'" [showIcon]="false" (click)="submitAnnonce()"></app-custom-button>
-      </div>
+      </div> -->
     </form>
   </div>
+
+<!----------------------------------------------------------------- Message pour confirmer l'ajout de l'animal ---------------------------------------------------------------------->
+
   <div *ngIf="showAnswerApi">
     <h1>C'est enregistré</h1>
-    <p>Ton annonce a bien été enregistrée, merci. Tu devrais recevoir des nouvelles dans les prochains jours, alors reste connecté !</p>
+    <p>Ton annonce a bien été enregistrée, merci. Tu devrais recevoir des nouvelles dans les prochains jours, alors
+      reste connecté !</p>
     <app-custom-button expand="block" [paragraph]="'Accueil'" [showIcon]="false" (click)="cancel()"></app-custom-button>
-<!--     <ion-button fill="solid" (click)="cancel()">Retour à l'accueil</ion-button>
- -->  </div>
+    <!--     <ion-button fill="solid" (click)="cancel()">Retour à l'accueil</ion-button> -->
+  </div>
 </ion-content>

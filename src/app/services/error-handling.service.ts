@@ -11,6 +11,14 @@ export class ErrorHandlingService {
         console.error(error);
     }
 
+ /**
+   * Gestion d'erreurs pour la création d'un nouvel utilisateur
+   *
+   * Retourne un bolean pour indiquer si les datas sont valides
+   * ainsi qu'un tableau avec les messages à afficher pour l'utilisateur
+   * 
+*/
+
     validateForm(formData: any) {
         let isFormValid = true;
         const formErrors = {};
@@ -75,6 +83,69 @@ export class ErrorHandlingService {
         formErrors['email'] = 'Oops! Cet adresse mail est déjà utilisée !';
 
         return { isFormValid, formErrors };
+    }
 
+ /**
+   * Gestion d'erreurs pour la création d'un nouvel animal
+   *
+   * Retourne un bolean pour indiquer si les datas sont valides
+   * ainsi qu'un tableau avec les messages à afficher pour l'utilisateur
+   * 
+*/
+    validateFormAnimal(formData: any) {
+        let isFormValid = true;
+        const formErrors = {};
+
+        if (!formData.name) {
+            isFormValid = false;
+            formErrors['name'] = 'Oops! Le nom est requis';
+        } else if (formData.name.length < 3) {
+            isFormValid = false;
+            formErrors['name'] = 'Le nom doit contenir au moins 3 caractères';
+        }
+
+        if (!formData.description) {
+            isFormValid = false;
+            formErrors['description'] = 'Oops! La description est requise';
+        } else if (formData.description.length < 10) {
+            isFormValid = false;
+            formErrors['description'] = 'La description est trop courte. Minimum 10 caractères!';
+        } else if (formData.description.length > 400) {
+            isFormValid = false;
+            formErrors['description'] = 'La description est trop longue. Maximum 400 caractères!';
+        }
+
+        if (!formData.fur) {
+            isFormValid = false;
+            formErrors['fur'] = 'Oops! Le pelage est requis';
+        } else if (formData.fur.length < 3) {
+            isFormValid = false;
+            formErrors['fur'] = 'La description du pelage est trop courte. Minimum 3 caractères!';
+        } else if (formData.fur.length > 50) {
+            isFormValid = false;
+            formErrors['fur'] = 'La description du pelage est trop longue. Maximum 50 caractères!';
+        }
+
+        if (!formData.date) {
+            isFormValid = false;
+            formErrors['date'] = 'Oops! La date est requise';
+        } 
+
+        if (!formData.type) {
+            isFormValid = false;
+            formErrors['type'] = 'Oops! Le type est requis';
+        } 
+
+        return { isFormValid, formErrors };
+    }
+
+    validateDate(formData: any){
+        let isFormValid = true;
+        const formErrors = {};
+
+        isFormValid = false;
+        formErrors['date'] = 'Oops! La date ne peut pas être dans le futur !';
+
+        return { isFormValid, formErrors };
     }
 }
