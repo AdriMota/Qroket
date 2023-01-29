@@ -43,12 +43,13 @@
         <ion-note *ngIf="messageErrors?.formErrors.fur" [innerHTML]="messageErrors?.formErrors.fur"></ion-note>
       </ion-item>
 
-      <ion-list>
-        <ion-item>
-          <ion-label position="stacked">Localité(*)</ion-label>
-          <ion-input name="postcode" [(ngModel)]="location" type="text" placeholder="1400 Yverdon-les-Bains" [ngModelOptions]="{standalone: true}"></ion-input>
-        </ion-item>
-      </ion-list>
+      <ion-item>
+        <ion-label position="stacked">Localité(*)</ion-label>
+        <div id="map-container">
+          <div id="map" style="width: 100%; height: 100%"></div>
+        </div>
+        <ion-input name="postcode" [(ngModel)]="location" type="text" placeholder="1400 Yverdon-les-Bains" [ngModelOptions]="{standalone: true}"></ion-input>
+      </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Ajouter des images de l'animal</ion-label>

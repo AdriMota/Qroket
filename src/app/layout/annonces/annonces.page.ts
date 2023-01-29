@@ -61,31 +61,37 @@ export class AnnoncesPage {
 
   showAnimals(animalId) {
     if(this.typeAnimal == "find") {
-      let newDiv = document.createElement("div");
+      let newDiv = document.createElement("ion-card");
       newDiv.setAttribute("class", "animal");
+      newDiv.setAttribute("style", "box-shadow: none !important; margin-inline: 0px;");
       newDiv.addEventListener("click", () => this.onAnimalsClick(animalId));
       document.getElementById("div-find").appendChild(newDiv);
 
       let newImg = document.createElement("img");
+      newImg.setAttribute("style", "border-radius: 10px;");
       newImg.setAttribute("src", this.picturesAnimal);
       // newImg.setAttribute("src", "../../../assets/images/animals/Dog.jpg");
       newDiv.appendChild(newImg);
 
-      let newP = document.createElement("p");
+      let newP = document.createElement("ion-card-title");
+      newP.setAttribute("style", "font-size: large; font-weight: normal;");
       newP.innerHTML = this.nameAnimal;
       newDiv.appendChild(newP);  
     } else if(this.typeAnimal == "lost") {
-      let newDiv = document.createElement("div");
+      let newDiv = document.createElement("ion-card");
       newDiv.setAttribute("class", "animal");
+      newDiv.setAttribute("style", "box-shadow: none !important; margin-inline: 0px;");
       newDiv.addEventListener("click",  () => this.onAnimalsClick(animalId));
       document.getElementById("div-lost").appendChild(newDiv);
 
       let newImg = document.createElement("img");
       newImg.setAttribute("src", this.picturesAnimal);
+      newImg.setAttribute("style", "border-radius: 10px;");
       // newImg.setAttribute("src", "../../../assets/images/animals/Dog.jpg");
       newDiv.appendChild(newImg); 
 
-      let newP = document.createElement("p");
+      let newP = document.createElement("ion-card-title");
+      newP.setAttribute("style", "font-size: large; font-weight: normal;");
       newP.innerHTML = this.nameAnimal;
       newDiv.appendChild(newP); 
     }
