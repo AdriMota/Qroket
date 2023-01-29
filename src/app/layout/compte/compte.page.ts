@@ -6,7 +6,6 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { ModalController } from '@ionic/angular';
 import { InfosComponent } from 'src/app/infos/infos.component';
-import { PictureService } from 'src/app/picture/picture.service';
 import { Router } from "@angular/router";
 
 
@@ -17,7 +16,7 @@ import { Router } from "@angular/router";
 })
 export class ComptePage implements OnInit {
 
-  profileImage: string; 
+  profileImage: string;
   firstname: string;
   lastname: string;
   location: string;
@@ -27,13 +26,12 @@ export class ComptePage implements OnInit {
   //public isModalOpen: boolean = false;
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     //private imageService: ImageService, 
-    public http: HttpClient, 
+    public http: HttpClient,
     private modalController: ModalController,
-    private pictureService: PictureService,
     private router: Router,
-    ) { }
+  ) { }
 
   ngOnInit() {
     // Récupérer les informations de l'user connecté
@@ -43,7 +41,11 @@ export class ComptePage implements OnInit {
       this.lastname = user.lastname;
       this.location = user.location;
       this.pictureUser = user.picture;
-      this.profileImage = "../../../assets/images/profile/Baltazar.png"
+
+      if(!this.pictureUser){
+        this.pictureUser = "../../../assets/images/profile/Baltazar.png"
+      }
+  
 
       //this.takePicture();
 
@@ -59,17 +61,17 @@ export class ComptePage implements OnInit {
     });
   }
 
-    /* ---------------------------------------
-      * IMAGE
-    --------------------------------------- */
-    /* this.authService.getUser$().subscribe(user => {
-      console.log(user.id)
-      this.imageService.getImage(user.id).subscribe(response => {
-        const blob = new Blob([response], { type: 'image/jpeg' });
-        this.convertBlobToUrl(blob);
-      });
+  /* ---------------------------------------
+    * IMAGE
+  --------------------------------------- */
+  /* this.authService.getUser$().subscribe(user => {
+    console.log(user.id)
+    this.imageService.getImage(user.id).subscribe(response => {
+      const blob = new Blob([response], { type: 'image/jpeg' });
+      this.convertBlobToUrl(blob);
     });
-  } */
+  });
+} */
 
   async openModal(event) {
     let button = event.srcElement.childNodes[0].data;
@@ -84,12 +86,6 @@ export class ComptePage implements OnInit {
     modal.present();
 
     await modal.onWillDismiss();
-  }
-
-  takePicture() {
-    this.pictureService.takeAndUploadPicture().subscribe(picture => {
-      this.pictureUser = picture.url;
-    });
   }
 
   logOut() {

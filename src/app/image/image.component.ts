@@ -1,6 +1,9 @@
 import { Component, Input, ViewChild, OnInit } from '@angular/core';
 import { ImageService } from '../services/image.service';
 import { AuthService } from '../auth/auth.service';
+import { PictureService } from 'src/app/picture/picture.service';
+import { HttpClient,HttpHeaders } from "@angular/common/http";
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -9,12 +12,16 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./image.component.scss'],
 })
 export class ImageComponent {
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
   
   @Input() src: string;
   @ViewChild('fileInput') fileInput;
   private imageFile: File;
 
-  constructor(private imageService: ImageService, private authService: AuthService) { }
+  constructor(private imageService: ImageService, private authService: AuthService, private pictureService: PictureService, public http: HttpClient,) { }
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -52,4 +59,39 @@ export class ImageComponent {
         });
     });
   }
+
+
+  
+  /**
+    * Gestion de l'upload et l'affichage d'une image
+    *
+    * L'utilisateur ne peut ajouter qu'une seule photo
+    * L'image est stockée sur une API spécialement conçue
+    * 
+ */
+
+  uploadPicture() {
+    this.pictureService.takeAndUploadPicture().subscribe(picture => {
+      this.authService.getUser$().subscribe(user => {
+          const body = JSON.stringify({ ["picture"]: picture.url });
+
+          this.http.patch(`${environment.apiUrl}users/${user.id}`, body, this.httpOptions)
+            .subscribe(
+              (response) => {
+                console.log('Successful PATCH request: ', response);
+              },
+              (error) => {
+                console.error('Error with PATCH request: ', error);
+              }
+            );
+        });
+    });
+
+
+
+
+    console.log("ici")
+  }
+
+
 }
