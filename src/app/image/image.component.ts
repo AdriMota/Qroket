@@ -75,15 +75,15 @@ export class ImageComponent {
       this.authService.getUser$().subscribe(user => {
 
         const body = JSON.stringify({ ["picture"]: picture.url });
-          this.http.patch(`${environment.apiUrl}users/${user.id}`, body, this.httpOptions)
-            .subscribe(
-              (response) => {
-                console.log('Successful PATCH request: ', response);
-              },
-              (error) => {
-                console.error('Error with PATCH request: ', error);
-              }
-            );
+        this.http.patch(`${environment.apiUrl}users/${user.id}`, body, this.httpOptions)
+          .subscribe(
+            (response) => {
+              console.log('Successful PATCH request: ', response);
+            },
+            (error) => {
+              console.error('Error with PATCH request: ', error);
+            }
+          );
       });
     });
 

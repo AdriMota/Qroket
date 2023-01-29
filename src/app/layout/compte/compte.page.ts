@@ -42,6 +42,10 @@ export class ComptePage implements OnInit {
       this.location = user.location;
       this.pictureUser = user.picture;
 
+      console.log(user)
+
+      console.log(this.pictureUser)
+
       if(!this.pictureUser){
         this.pictureUser = "../../../assets/images/profile/Baltazar.png"
       }
