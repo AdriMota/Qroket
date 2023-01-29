@@ -1,14 +1,22 @@
 <ion-header *ngIf="!showForm">
   <ion-toolbar>
-    <ion-title>accueil</ion-title>
-    <ion-buttons slot="end">
+    <ion-title>Accueil</ion-title>
+    <ion-buttons [collapse]="true" slot="end">
       <ion-button (click)="logOut()">
         <ion-icon name="log-out"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Accueil</ion-title>
+      <ion-buttons (click)="logOut()" [collapse]="true" slot="end">
+        <ion-button name="log-out"> <ion-icon name="log-out"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
   <div *ngIf="!showForm">
     <div>
       <h1>Un animal perdu ou trouvé ?</h1>

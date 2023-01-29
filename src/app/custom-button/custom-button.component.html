@@ -1,9 +1,12 @@
-<ion-button *ngIf="!showIcon" (click)="onClick()">
-  <p>
+<ion-button color="secondary" expand="block"  *ngIf="!showIcon" (click)="onClick()">
+  <div id="div-button">
     {{paragraph}}
-  </p>
+    <ion-icon slot="end" name="arrow-forward"></ion-icon>
+  </div>
 </ion-button>
-<ion-button *ngIf="showIcon" (click)="onClick()">
-  {{ paragraph }}
-  <ion-icon name="arrow-forward"></ion-icon>
+<ion-button color="secondary" expand="block"  *ngIf="showIcon" (click)="onClick()">
+  <div id="div-button">
+    {{paragraph}}
+    <ion-icon slot="end" name="arrow-forward"></ion-icon>
+  </div>
 </ion-button>
