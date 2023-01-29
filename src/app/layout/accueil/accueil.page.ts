@@ -62,6 +62,8 @@ export class AccueilPage {
       let newImg = document.createElement("img");
       newImg.setAttribute("style", "border-radius: 10px; object-fit: cover;");
       newImg.setAttribute("src", this.picturesAnimal);
+      newImg.setAttribute("width", "150px");
+      newImg.setAttribute("height", "150px");
       // newImg.setAttribute("src", "../../../assets/images/animals/Dog.jpg");
       newDiv.appendChild(newImg);
 
@@ -79,6 +81,8 @@ export class AccueilPage {
       let newImg = document.createElement("img");
       newImg.setAttribute("src", this.picturesAnimal);
       newImg.setAttribute("style", "border-radius: 10px; object-fit: cover;");
+      newImg.setAttribute("width", "150px");
+      newImg.setAttribute("height", "150px");
       // newImg.setAttribute("src", "../../../assets/images/animals/Dog.jpg");
       newDiv.appendChild(newImg); 
 
