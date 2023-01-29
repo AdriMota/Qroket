@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <div *ngIf="yourAnnouncement && !showAnswerApi">
+  <div *ngIf="(yourAnnouncement && !showAnswerApi)">
     <!-- <img alt="Photo de l'animal" [src]="picturesAnimal"/> -->
     <img src="../../assets/images/animals/Dog.jpg"/>
     <h1>Changer les informations</h1>
@@ -36,9 +36,8 @@
 
   <div *ngIf="showAnswerApi">
     <h1>C'est enregistré</h1>
-    <p>Ton annonce a bien été enregistrée, merci. Tu devrais recevoir des nouvelles dans les prochains jours, alors
-      reste connecté !</p>
-    <app-custom-button expand="block" [paragraph]="'Accueil'" [showIcon]="false" (click)="cancel()"></app-custom-button>
+    <p>Tes changements ont bien été enregistrée, merci beaucoup !<br>Raffraîchis la page</p>
+    <app-custom-button expand="block" [paragraph]="'Retour à l\'accueil'" [showIcon]="false" (click)="cancel()"></app-custom-button>
   </div>
 
 

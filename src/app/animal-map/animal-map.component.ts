@@ -58,7 +58,7 @@ export class AnimalMapComponent implements OnInit {
 
   ngOnInit() {
     this.showAnswerApi = false;
-
+    console.log("ngOnInit", this.showAnswerApi)
     // Récupérer les informations de l'user connecté
     this.auth.getUser$().pipe(filter(user => user != null),).subscribe(user => {
       this.idUserAuth = user.id;
@@ -95,10 +95,8 @@ export class AnimalMapComponent implements OnInit {
     this.yourAnnouncement = false;
     return this.modalCtrl.dismiss(null, 'cancel');
   }
-
+  
   confirm() {
-    this.yourAnnouncement = false;
-
     const body = JSON.stringify({ ["name"]: this.newName, ["description"]: this.newDescription, ["fur"]: this.newFur });
     console.log(body);
     console.log(`${environment.apiUrl}animals/${this.idAnimal}`)
@@ -106,7 +104,8 @@ export class AnimalMapComponent implements OnInit {
       .subscribe(
         (response) => {
           this.showAnswerApi = true;
-          console.log('Successful PATCH request: ', response);
+          console.log("confirm", this.showAnswerApi)
+
         },
         (error) => {
           console.error('Error with PATCH request: ', error);
@@ -114,7 +113,7 @@ export class AnimalMapComponent implements OnInit {
       );
 
     // OBLIGATION DE REFRESH POUR VOIR LES CHANGEMENTS
-    return this.modalCtrl.dismiss(null, 'confirm');
+    //return this.modalCtrl.dismiss(null, 'confirm');
   }
 
   takePicture() {
