@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from "@angular/common/http";
-import { Buffer } from 'buffer';
+import { PictureService } from 'src/app/picture/picture.service';
+//import { Buffer } from 'buffer';
 
 
 @Component({
@@ -20,19 +21,20 @@ export class AnimalMapComponent implements OnInit {
   furAnimal: string;
   userAnimal: string;
   locationAnimal: string;
-  picturesAnimal: Buffer;
+  picturesAnimal: string;
+  //picturesAnimal: Buffer;  
 
   firstnameUser: string;
   lastnameUser: string;
   emailUser: string;
   phoneUser: number;
-  
+  pictureUser: string;
 
   constructor(
     private modalCtrl: ModalController,
     private navParams: NavParams,
-    // Inject the HTTP client
-    public http: HttpClient
+    public http: HttpClient,
+    private pictureService: PictureService
   ) { 
     this.idAnimal = this.navParams.get('idAnimal');
 
@@ -45,6 +47,7 @@ export class AnimalMapComponent implements OnInit {
         this.furAnimal = animal["fur"];
         this.userAnimal = animal["user"];
         this.locationAnimal = animal["location"];
+        this.picturesAnimal = animal["pictures"];
 
         // Make an HTTP request to retrieve the user.
         this.http.get(`${environment.apiUrl}users/${this.userAnimal}`).subscribe((user) => {
@@ -52,6 +55,9 @@ export class AnimalMapComponent implements OnInit {
           this.lastnameUser = user["lastname"];
           this.emailUser = user["email"];
           this.phoneUser = user["fuphoner"];
+          this.pictureUser = user["picture"];
+
+          //this.takePicture();
         });
     });
   }
@@ -66,6 +72,12 @@ export class AnimalMapComponent implements OnInit {
 
   confirm() {
     return this.modalCtrl.dismiss(null, 'confirm');
+  }
+
+  takePicture() {
+    this.pictureService.takeAndUploadPicture().subscribe(picture => {
+      this.picturesAnimal = picture.url;
+    });
   }
 
 }

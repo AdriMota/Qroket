@@ -6,6 +6,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { ModalController } from '@ionic/angular';
 import { InfosComponent } from 'src/app/infos/infos.component';
+import { PictureService } from 'src/app/picture/picture.service';
 
 
 @Component({
@@ -20,10 +21,17 @@ export class ComptePage implements OnInit {
   lastname: string;
   location: string;
   city: string;
+  pictureUser: string;
 
   //public isModalOpen: boolean = false;
 
-  constructor(private authService: AuthService, private imageService: ImageService, public http: HttpClient, private modalController: ModalController) { }
+  constructor(
+    private authService: AuthService, 
+    //private imageService: ImageService, 
+    public http: HttpClient, 
+    private modalController: ModalController,
+    private pictureService: PictureService
+    ) { }
 
   ngOnInit() {
     // Récupérer les informations de l'user connecté
@@ -32,6 +40,10 @@ export class ComptePage implements OnInit {
       this.firstname = user.firstname;
       this.lastname = user.lastname;
       this.location = user.location;
+      this.pictureUser = user.picture;
+      this.profileImage = "../../../assets/images/profile/Baltazar.png"
+
+      //this.takePicture();
 
       /* ---------------------------------------
           * IMAGE
@@ -55,8 +67,6 @@ export class ComptePage implements OnInit {
         this.convertBlobToUrl(blob);
       });
     });
-
-    //this.profileImage = "../../../assets/images/profile/Baltazar.png"
   } */
 
   async openModal(event) {
@@ -72,6 +82,12 @@ export class ComptePage implements OnInit {
     modal.present();
 
     await modal.onWillDismiss();
+  }
+
+  takePicture() {
+    this.pictureService.takeAndUploadPicture().subscribe(picture => {
+      this.pictureUser = picture.url;
+    });
   }
 
   /* ---------------------------------------

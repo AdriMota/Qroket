@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from "@angular/common/http";
 import { ModalController } from '@ionic/angular';
 import { AnimalMapComponent } from 'src/app/animal-map/animal-map.component';
+import { PictureService } from 'src/app/picture/picture.service';
 
 
 @Component({
@@ -20,14 +21,15 @@ export class AccueilPage {
   nameAnimal: string;
   idAnimal: string;
   typeAnimal: string;
+  picturesAnimal: string;
 
   constructor(
     private auth: AuthService,
     private router: Router,
     private sharedData: ShareDataServiceService,
-    // Inject the HTTP client
     public http: HttpClient,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private pictureService: PictureService
   ) { }
 
   ionViewWillEnter() {
@@ -42,8 +44,10 @@ export class AccueilPage {
         this.idAnimal = animals[key]._id;
         this.nameAnimal = animals[key].name;
         this.typeAnimal = animals[key].type;
+        this.picturesAnimal = animals[key].picture;
 
         this.showAnimals(this.idAnimal);
+        //this.takePicture();
       });
 
     });
@@ -57,6 +61,7 @@ export class AccueilPage {
       document.getElementById("div-find").appendChild(newDiv);
 
       let newImg = document.createElement("img");
+      // newImg.setAttribute("src", this.picturesAnimal);
       newImg.setAttribute("src", "../../../assets/images/animals/Dog.jpg");
       newDiv.appendChild(newImg);
 
@@ -70,6 +75,7 @@ export class AccueilPage {
       document.getElementById("div-lost").appendChild(newDiv);
 
       let newImg = document.createElement("img");
+      // newImg.setAttribute("src", this.picturesAnimal);
       newImg.setAttribute("src", "../../../assets/images/animals/Dog.jpg");
       newDiv.appendChild(newImg); 
 
@@ -77,8 +83,6 @@ export class AccueilPage {
       newP.innerHTML = this.nameAnimal;
       newDiv.appendChild(newP); 
     }
-
-    //console.log(this.idAnimal, this.nameAnimal, this.typeAnimal)
   }
 
   onAnimalsClick(idAnimal) {
@@ -96,6 +100,12 @@ export class AccueilPage {
     modal.present();
 
     await modal.onWillDismiss();
+  }
+
+  takePicture() {
+    this.pictureService.takeAndUploadPicture().subscribe(picture => {
+      this.picturesAnimal = picture.url;
+    });
   }
 
   logOut() {

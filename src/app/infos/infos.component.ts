@@ -75,6 +75,8 @@ export class InfosComponent {
         this.showIcon = true;
         break;
       case ' Localisation ':
+        this.typeButton = this.location;
+        this.inputType = 'text';
         // this.http.get(`${environment.apiUrl}locations/${this.locationId}`).subscribe((location) => {
         // let npa = location["npa"];
         // let city = location["city"];
@@ -145,8 +147,6 @@ export class InfosComponent {
   }
 
   confirm() {
-
-
     if (this.property === "location") {
       this.newData = this.newData.substring(0, this.newData.indexOf(","));
       this.location = this.newData;

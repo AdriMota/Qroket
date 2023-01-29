@@ -6,6 +6,8 @@ import { ShareDataServiceService } from 'src/app/services/share-data-service.ser
 import { ModalController } from '@ionic/angular';
 import { AnimalMapComponent } from 'src/app/animal-map/animal-map.component';
 import { filter } from 'rxjs';
+import { PictureService } from 'src/app/picture/picture.service';
+
 
 @Component({
   selector: 'app-annonces',
@@ -21,12 +23,14 @@ export class AnnoncesPage {
   idAnimal: string;
   typeAnimal: string;
   userId: string;
+  picturesAnimal: string;
 
   constructor(
     private auth: AuthService,
     public http: HttpClient,
     private sharedData: ShareDataServiceService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private pictureService: PictureService
   ) { }
 
   ionViewWillEnter() {
@@ -47,8 +51,10 @@ export class AnnoncesPage {
           this.idAnimal = animals[key]._id;
           this.nameAnimal = animals[key].name;
           this.typeAnimal = animals[key].type;
+          this.picturesAnimal = animals[key].picture;
 
           this.showAnimals(this.idAnimal);
+          //this.takePicture();
         }
       });
 
@@ -63,6 +69,7 @@ export class AnnoncesPage {
       document.getElementById("div-find").appendChild(newDiv);
 
       let newImg = document.createElement("img");
+      // newImg.setAttribute("src", this.picturesAnimal);
       newImg.setAttribute("src", "../../../assets/images/animals/Dog.jpg");
       newDiv.appendChild(newImg);
 
@@ -76,6 +83,7 @@ export class AnnoncesPage {
       document.getElementById("div-lost").appendChild(newDiv);
 
       let newImg = document.createElement("img");
+      // newImg.setAttribute("src", this.picturesAnimal);
       newImg.setAttribute("src", "../../../assets/images/animals/Dog.jpg");
       newDiv.appendChild(newImg); 
 
@@ -102,6 +110,12 @@ export class AnnoncesPage {
     modal.present();
 
     await modal.onWillDismiss();
+  }
+
+  takePicture() {
+    this.pictureService.takeAndUploadPicture().subscribe(picture => {
+      this.picturesAnimal = picture.url;
+    });
   }
 
   handleClick(data: any) {
