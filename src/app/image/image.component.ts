@@ -2,7 +2,7 @@ import { Component, Input, ViewChild, OnInit } from '@angular/core';
 import { ImageService } from '../services/image.service';
 import { AuthService } from '../auth/auth.service';
 import { PictureService } from 'src/app/picture/picture.service';
-import { HttpClient,HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 
 
@@ -16,7 +16,7 @@ export class ImageComponent {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  
+
   @Input() src: string;
   @ViewChild('fileInput') fileInput;
   private imageFile: File;
@@ -34,8 +34,8 @@ export class ImageComponent {
     input.accept = 'image/*';
     input.click();
     //input.onchange = (e) => {
-      this.imageFile = input.files[0];
-      this.readImage();
+    this.imageFile = input.files[0];
+    this.readImage();
     //}
   }
 
@@ -44,24 +44,23 @@ export class ImageComponent {
     reader.onload = (e) => {
       this.src = reader.result as string;
     }
-    
+
     reader.readAsDataURL(this.imageFile);
   }
 
   onUploadClick() {
     this.fileInput.nativeElement.click();
     this.authService.getUser$().subscribe(user => {
-        const formData = new FormData();
-        formData.append('picture', this.imageFile);
-        this.imageService.uploadImage(formData, user.id).subscribe({
-          next: response => console.log('Image uploaded successfully!'),
-          error: error => console.log('Error uploading image:', error)
-        });
+      const formData = new FormData();
+      formData.append('picture', this.imageFile);
+      this.imageService.uploadImage(formData, user.id).subscribe({
+        next: response => console.log('Image uploaded successfully!'),
+        error: error => console.log('Error uploading image:', error)
+      });
     });
   }
 
 
-  
   /**
     * Gestion de l'upload et l'affichage d'une image
     *
@@ -72,10 +71,13 @@ export class ImageComponent {
 
   uploadPicture() {
     this.pictureService.takeAndUploadPicture().subscribe(picture => {
-      this.authService.getUser$().subscribe(user => {
-          const body = JSON.stringify({ ["picture"]: picture.url });
 
-          this.http.patch(`${environment.apiUrl}users/${user.id}`, body, this.httpOptions)
+      this.authService.getUser$().subscribe(user => {
+        console.log(picture.url)
+        const body = JSON.stringify({ ["picture"]: picture.url });
+        console.log(body)
+        setTimeout(() => {
+          this.http.patch(`${environment.apiUrl}users/${user.id}/picture`, body, this.httpOptions)
             .subscribe(
               (response) => {
                 console.log('Successful PATCH request: ', response);
@@ -84,13 +86,11 @@ export class ImageComponent {
                 console.error('Error with PATCH request: ', error);
               }
             );
-        });
+
+        }, 10000);
+      });
     });
 
-
-
-
-    console.log("ici")
   }
 
 
