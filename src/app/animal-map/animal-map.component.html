@@ -5,8 +5,8 @@
         <ion-icon  size="large" name="close-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <!-- <img alt="Photo de l'animal" [src]="picturesAnimal"/> -->
-    <img src="../../assets/images/animals/Dog.jpg"/>
+    <img alt="Photo de l'animal" [src]="picturesAnimal"/>
+    <!-- <img src="../../assets/images/animals/Dog.jpg"/> -->
     <div class="ion-padding">
       <h1 style="font-weight: bolder;">Changer les informations</h1>
     </div>
@@ -55,8 +55,8 @@
         <ion-icon  size="large" name="close-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <!-- <img alt="Photo de l'animal" [src]="picturesAnimal"/> -->
-    <img src="../../assets/images/animals/Dog.jpg"/>
+    <img alt="Photo de l'animal" [src]="picturesAnimal"/>
+    <!-- <img src="../../assets/images/animals/Dog.jpg"/> -->
     <div class="InfoAnimal" class="ion-padding">
     <h1 style="font-weight: bolder;">{{ nameAnimal }}</h1>
     <p>{{ descriptionAnimal }}</p>
@@ -71,7 +71,8 @@
         <ion-row>
           <ion-col size="auto">
             <ion-avatar>
-              <img  src="../../assets/images/profile/Baltazar.png"/>
+              <img  [src]="pictureUser"/>
+              <!-- <img  src="../../assets/images/profile/Baltazar.png"/> -->
             </ion-avatar>
           </ion-col>
           <ion-col size="6">
