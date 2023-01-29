@@ -15,13 +15,15 @@
 
   <ion-item fill="solid">
     <ion-label position="stacked">Numéro de téléphone</ion-label>
-    <ion-input [clearOnEdit]="true" type="tel" [(ngModel)]="phone" name="phone" placeholder="004178 765 43 21"></ion-input>
+    <ion-input [clearOnEdit]="true" type="tel" [(ngModel)]="phone" name="phone"
+      placeholder="004178 765 43 21"></ion-input>
     <ion-note *ngIf="messageErrors?.formErrors.phone" [innerHTML]="messageErrors?.formErrors.phone"></ion-note>
   </ion-item>
 
   <ion-item fill="solid">
     <ion-label position="stacked">Adresse mail(*)</ion-label>
-    <ion-input [clearOnEdit]="true" type="email" [(ngModel)]="email" name="email" placeholder="exemple@email.com"></ion-input>
+    <ion-input [clearOnEdit]="true" type="email" [(ngModel)]="email" name="email"
+      placeholder="exemple@email.com"></ion-input>
     <ion-note *ngIf="messageErrors?.formErrors.email" [innerHTML]="messageErrors?.formErrors.email"></ion-note>
   </ion-item>
 
@@ -32,15 +34,15 @@
     <ion-note *ngIf="messageErrors?.formErrors.password" [innerHTML]="messageErrors?.formErrors.password"></ion-note>
   </ion-item>
 
-  <ion-list>
-    <ion-item>
-      <ion-label position="stacked">Localité(*)</ion-label>
-      <ion-input (click)="onSelect()" [(ngModel)]="postcode" (ngModelChange)="onNpaChange()" name="postcode" type="text" placeholder="1400 Yverdon-les-Bains">{{ selectedOption }}</ion-input>  
-        <ion-select *ngIf="cities?.length" interface="popover" name="location"  [(ngModel)]="selectedOption">
-        <ion-select-option *ngFor="let city of cities" [value]="city" #mySelect>{{ city }}</ion-select-option>
-      </ion-select>
-      <ion-note *ngIf="messageErrors?.formErrors.location" [innerHTML]="messageErrors?.formErrors.location"></ion-note>
-    </ion-item>
-  </ion-list>
+  <ion-item>
+    <ion-label position="stacked">Localité(*)</ion-label>
+    <input [(ngModel)]="cityUser" list="codes" type="text" placeholder="Yverdon-les-Bains"
+      (ngModelChange)="searchCity($event)" [value]="newCity" [ngModelOptions]="{standalone: true}" />
+    <datalist id="codes">
+      <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+    </datalist>
+    <ion-note *ngIf="messageErrors?.formErrors.location" [innerHTML]="messageErrors?.formErrors.location"></ion-note>
+  </ion-item>
+
   <ion-button fill="solid" (click)="createUser(user)">Créer un compte</ion-button>
 </form>

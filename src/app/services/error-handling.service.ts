@@ -9,7 +9,6 @@ export class ErrorHandlingService {
 
     handleError(error: any) {
         console.error(error);
-
     }
 
     validateForm(formData: any) {
@@ -66,5 +65,16 @@ export class ErrorHandlingService {
             return true;
         }
         return false;
+    }
+
+    validateDoubleKey(formData: any){
+        let isFormValid = true;
+        const formErrors = {};
+
+        isFormValid = false;
+        formErrors['email'] = 'Oops! Cet adresse mail est déjà utilisée !';
+
+        return { isFormValid, formErrors };
+
     }
 }

@@ -62,4 +62,8 @@ export class LoginPage {
     this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
   }
 
+  // resetForm() {
+  //   this.ngForm.resetForm();
+  // }
+
 }
