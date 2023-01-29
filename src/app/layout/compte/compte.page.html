@@ -1,21 +1,29 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>compte</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="ion-padding">
-  <!-- <app-image [src]="pictureUser"></app-image> -->
-  <app-image [src]="profileImage"></app-image>
 
-  <div id="name">
-    <p>{{ firstname }} {{ lastname }}</p>
-  </div>
-
-  <div id="location">
-    <img src="../../../assets/icon/location.png" />
-    <p>{{ location }}</p>
-  </div>
+  <ion-grid>
+    <ion-row class="align-self-center" style="display: flex; justify-content: center; height: 180px;">
+      <ion-col size="6" class="align-self-center" style="display: flex; justify-content: center;">
+        <app-image [src]="profileImage"></app-image>
+      </ion-col>
+    </ion-row>
+      <ion-row class="ion-justify-content-center " style="height: 40px;">
+        <ion-col size="auto">
+          <div class="title" >
+            <h1 class="ion-text-center">{{ firstname }} {{ lastname }}</h1>
+          </div> 
+        
+      </ion-col>
+      </ion-row>
+    <ion-row class="ion-justify-content-center" style="display: flex; align-items: center; height: 40px;" >
+      <ion-col size="auto"></ion-col>
+      <ion-col size="1">
+        <img  src="../../../assets/icon/location.png" />
+        </ion-col>
+        <ion-col size="auto">
+         <p >{{ location }}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <p class="bold">Informations de base</p>
   <app-custom-button expand="block" [paragraph]="'Adresse mail'" [showIcon]="true" (click)="openModal($event)"></app-custom-button>
@@ -24,6 +32,11 @@
   <app-custom-button expand="block" [paragraph]="'Localisation'" [showIcon]="true" (click)="openModal($event)"></app-custom-button>
   <app-custom-button expand="block" [paragraph]="'Supprimer le compte'" [showIcon]="true" (click)="openModal($event)"></app-custom-button>
 
-  <a (click)="logOut()"> Déconnexion </a>
-
+  <ion-grid>
+    <ion-row class="ion-justify-content-center " style="display: flex; align-items: center; height: 50px;">
+      <ion-col size="auto">
+        <a class="ion-text-center" (click)="logOut()"> Déconnexion </a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
