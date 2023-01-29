@@ -73,11 +73,9 @@ export class ImageComponent {
     this.pictureService.takeAndUploadPicture().subscribe(picture => {
 
       this.authService.getUser$().subscribe(user => {
-        console.log(picture.url)
+
         const body = JSON.stringify({ ["picture"]: picture.url });
-        console.log(body)
-        setTimeout(() => {
-          this.http.patch(`${environment.apiUrl}users/${user.id}/picture`, body, this.httpOptions)
+          this.http.patch(`${environment.apiUrl}users/${user.id}`, body, this.httpOptions)
             .subscribe(
               (response) => {
                 console.log('Successful PATCH request: ', response);
@@ -86,8 +84,6 @@ export class ImageComponent {
                 console.error('Error with PATCH request: ', error);
               }
             );
-
-        }, 10000);
       });
     });
 
