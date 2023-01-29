@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { PictureService } from 'src/app/picture/picture.service';
 import { AuthService } from '../auth/auth.service';
 import { filter } from 'rxjs';
@@ -14,6 +14,9 @@ import { filter } from 'rxjs';
   styleUrls: ['./animal-map.component.scss'],
 })
 export class AnimalMapComponent implements OnInit {
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   animal: any;
   idAnimal: string;
@@ -36,8 +39,11 @@ export class AnimalMapComponent implements OnInit {
 
   yourAnnouncement: boolean = false;
 
-  newData: any;
-  property: string;
+  newName: string;
+  newDescription: string;
+  newFur: string;
+
+  isInactive: boolean = true;
 
   constructor(
     private modalCtrl: ModalController,
@@ -75,7 +81,6 @@ export class AnimalMapComponent implements OnInit {
 
         if(this.userAnimal == this.idUserAuth) {
           this.yourAnnouncement = true;
-          console.log("Tu es le proprio de cette beauté", this.yourAnnouncement)
         }
 
         //this.takePicture();
@@ -90,6 +95,21 @@ export class AnimalMapComponent implements OnInit {
 
   confirm() {
     this.yourAnnouncement = false;
+
+    const body = JSON.stringify({ ["name"]: this.newName, ["description"]: this.newDescription, ["fur"]: this.newFur });
+    console.log(body);
+    console.log(`${environment.apiUrl}animals/${this.idAnimal}`)
+    this.http.patch(`${environment.apiUrl}animals/${this.idAnimal}`, body, this.httpOptions)
+      .subscribe(
+        (response) => {
+          console.log('Successful PATCH request: ', response);
+        },
+        (error) => {
+          console.error('Error with PATCH request: ', error);
+        }
+      );
+
+    // OBLIGATION DE DECO ET RECO POUR VOIR LES CHANGEMENTS
     return this.modalCtrl.dismiss(null, 'confirm');
   }
 
@@ -101,5 +121,12 @@ export class AnimalMapComponent implements OnInit {
 
   deleteAnnouncement() {
     console.log("Annonce supprimée")
+  }
+
+  updateInput() {
+    this.isInactive = false;
+    this.newName = this.nameAnimal;
+    this.newDescription = this.descriptionAnimal;
+    this.newFur = this.furAnimal;
   }
 }

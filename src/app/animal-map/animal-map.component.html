@@ -14,21 +14,21 @@
 
     <ion-item fill="solid">
       <ion-label position="stacked">Nom</ion-label>
-      <ion-input [(ngModel)]="nameAnimal" name="nameAnimal" placeholder="Nom ou nom descriptif"></ion-input>
+      <ion-input [(ngModel)]="nameAnimal" name="nameAnimal" placeholder="Nom ou nom descriptif" (ngModelChange)="updateInput()" ></ion-input>
     </ion-item>
 
     <ion-item fill="solid">
       <ion-label position="stacked">Description</ion-label>
       <ion-textarea [autoGrow]="true" [(ngModel)]="descriptionAnimal" name="descriptionAnimal"
-        placeholder="Petite description de l'animal"></ion-textarea>
+        placeholder="Petite description de l'animal" (ngModelChange)="updateInput()" ></ion-textarea>
     </ion-item>
 
     <ion-item fill="solid">
       <ion-label position="stacked">Pelage</ion-label>
-      <ion-input [(ngModel)]="furAnimal" name="furAnimal" placeholder="Description de son pelage"></ion-input>
+      <ion-input [(ngModel)]="furAnimal" name="furAnimal" placeholder="Description de son pelage" (ngModelChange)="updateInput()" ></ion-input>
     </ion-item>
 
-    <ion-button expand="block" color="primary"(click)="confirm()">Enregistrer les changements</ion-button>
+    <ion-button [disabled]="isInactive" expand="block" color="primary"(click)="confirm()">Enregistrer les changements</ion-button>
     <app-custom-button expand="block" [paragraph]="'Supprimer cette annonce'" [showIcon]="false" (click)="deleteAnnouncement()"></app-custom-button>
   </div>
   <div *ngIf="!yourAnnouncement">
