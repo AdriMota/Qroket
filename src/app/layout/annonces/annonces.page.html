@@ -6,8 +6,9 @@
 
 <ion-content>
   <div *ngIf="!showForm">
-    <app-custom-button [paragraph]="'Créer une annonce'" (handleClick)="handleClick($event)"
-      [showIcon]="true"></app-custom-button>
+    <app-custom-button expand="block" [paragraph]="'Créer une annonce'" [showIcon]="true" (click)="openFormAnnonceModal()"></app-custom-button>
+    <!-- <app-custom-button [paragraph]="'Créer une annonce'" (handleClick)="handleClick($event)"
+      [showIcon]="true"></app-custom-button> -->
   </div>
   <div>
     <div>

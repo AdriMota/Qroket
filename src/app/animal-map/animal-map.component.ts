@@ -38,6 +38,7 @@ export class AnimalMapComponent implements OnInit {
   idUserAuth: string;
 
   yourAnnouncement: boolean = false;
+  showAnswerApi: boolean = false;
 
   newName: string;
   newDescription: string;
@@ -56,6 +57,8 @@ export class AnimalMapComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.showAnswerApi = false;
+
     // Récupérer les informations de l'user connecté
     this.auth.getUser$().pipe(filter(user => user != null),).subscribe(user => {
       this.idUserAuth = user.id;
@@ -102,6 +105,7 @@ export class AnimalMapComponent implements OnInit {
     this.http.patch(`${environment.apiUrl}animals/${this.idAnimal}`, body, this.httpOptions)
       .subscribe(
         (response) => {
+          this.showAnswerApi = true;
           console.log('Successful PATCH request: ', response);
         },
         (error) => {
@@ -109,7 +113,7 @@ export class AnimalMapComponent implements OnInit {
         }
       );
 
-    // OBLIGATION DE DECO ET RECO POUR VOIR LES CHANGEMENTS
+    // OBLIGATION DE REFRESH POUR VOIR LES CHANGEMENTS
     return this.modalCtrl.dismiss(null, 'confirm');
   }
 

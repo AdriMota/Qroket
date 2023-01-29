@@ -21,8 +21,8 @@
     <form #FormAnnonces action="post">
 
       <ion-item fill="solid">
-        <ion-label position="stacked">Nom</ion-label>
-        <ion-input [clearOnEdit]="true" [(ngModel)]="name" name="name" placeholder="Nom ou nom descriptif" [ngModelOptions]="{standalone: true}"></ion-input>
+        <ion-label position="stacked">Nom(*)</ion-label>
+        <ion-input [clearOnEdit]="true" [(ngModel)]="name" name="name" placeholder="Nom ou nom descriptif" [ngModelOptions]="{standalone: true}" required="true"></ion-input>
         <ion-note *ngIf="messageErrors?.formErrors.name" [innerHTML]="messageErrors?.formErrors.name"></ion-note>
       </ion-item>
 
@@ -60,7 +60,7 @@
       </ion-item>
 
       <div>
-        <ion-label position="stacked">L'annonce concerne un animal ...(*)</ion-label>
+        <ion-label position="stacked">L'annonce concerne un animal(*) ...</ion-label>
         <ion-list>
           <ion-radio-group name="type" [(ngModel)]="type" value="lost" required="true">
             <ion-item>
@@ -92,6 +92,5 @@
     <p>Ton annonce a bien été enregistrée, merci. Tu devrais recevoir des nouvelles dans les prochains jours, alors
       reste connecté !</p>
     <app-custom-button expand="block" [paragraph]="'Accueil'" [showIcon]="false" (click)="cancel()"></app-custom-button>
-    <!--     <ion-button fill="solid" (click)="cancel()">Retour à l'accueil</ion-button> -->
   </div>
 </ion-content>

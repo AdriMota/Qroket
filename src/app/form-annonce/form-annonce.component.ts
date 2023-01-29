@@ -14,7 +14,6 @@ import { ErrorHandlingService } from '../services/error-handling.service';
 })
 export class FormAnnonceComponent implements OnInit {
 
-  showForm: boolean;
   showAnswerApi: boolean = false;
 
   name: string;
@@ -38,7 +37,6 @@ export class FormAnnonceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.showForm = true;
     this.showAnswerApi = false;
 
     this.authService.getUser$().subscribe(user => {
@@ -47,7 +45,6 @@ export class FormAnnonceComponent implements OnInit {
   }
 
   submitAnnonce() {
-
     const data = {
       name: this.name,
       age: this.age,
@@ -68,7 +65,6 @@ export class FormAnnonceComponent implements OnInit {
       })
     ).subscribe(
       (response) => {
-        this.showForm = false;
         this.showAnswerApi = true;
       }, (error) => {
         console.error('Error with PATCH request: ', error);

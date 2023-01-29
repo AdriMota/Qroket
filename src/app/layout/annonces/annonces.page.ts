@@ -7,6 +7,7 @@ import { ModalController } from '@ionic/angular';
 import { AnimalMapComponent } from 'src/app/animal-map/animal-map.component';
 import { filter } from 'rxjs';
 import { PictureService } from 'src/app/picture/picture.service';
+import { FormAnnonceComponent } from 'src/app/form-annonce/form-annonce.component';
 
 
 @Component({
@@ -110,6 +111,13 @@ export class AnnoncesPage {
     modal.present();
 
     await modal.onWillDismiss();
+  }
+
+  async openFormAnnonceModal() {
+    const modal = await this.modalController.create({
+      component: FormAnnonceComponent
+    });
+    return await modal.present();
   }
 
   takePicture() {
