@@ -1,4 +1,4 @@
-<input [(ngModel)]="cityUser" list="codes" type="text" placeholder={{placeholder}} (ngModelChange)="searchCity($event)" [value]="placeholder"/>
+<input [(ngModel)]="cityUser" list="codes" type="text" placeholder={{city}} (ngModelChange)="searchCity($event)" [value]="city"/>
 <datalist id="codes">
   <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
 </datalist>

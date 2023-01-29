@@ -11,7 +11,7 @@ import { Geolocation } from '@capacitor/geolocation';
 export class LocationComponent implements OnInit {
 
   @Output() valueChange = new EventEmitter<string>()
-  @Input() placeholder : string;
+  @Input() city : string;
 
   cityUser: string;
   cities: any[] = [];
@@ -38,13 +38,3 @@ export class LocationComponent implements OnInit {
       this.valueChange.emit(inputCity)
   } 
 }
-
-
-//- 01 Récupérer la localisation entrée par l'utilisateur
-//- 02 Vérifier si elle existe dans la BDD
-//- 03 OUI : lier l'id de cette localisation à l'utilisateur et enregistrer dans la BDD
-//- 04 NON : ajouter cette nouvelle localisation(avec MapBox). Lier l'id de cette localisation à l'utilisateur et enregistrer dans la BDD
-
-
-//inputCity est le text
-//cities est le tableau de recommandation
