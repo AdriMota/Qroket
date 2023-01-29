@@ -1,42 +1,75 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Créer une annonce
-    </ion-title>
-    <ion-buttons slot="end">
+    <ion-title>Créer une annonce</ion-title>
+    <ion-buttons slot="start">
       <ion-button (click)="cancel()">
-        <ion-icon slot="icon-only" name="close"></ion-icon>
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <!-- <form [formGroup]="annonceForm" (ngSubmit)="createAnnonce()">
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Titre</ion-label>
-            <ion-input formControlName="title"></ion-input>
-          </ion-item>
-          <ion-text color="danger" *ngIf="title.invalid && title.touched">
-            Le titre est requis.
-          </ion-text>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Description</ion-label>
-            <ion-textarea formControlName="description"></ion-textarea>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-button type="submit" [disabled]="annonceForm.invalid" expand="block">Créer</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form> -->
+  <div *ngIf="!showAnswerApi">
+    <h1>Quelques informations</h1>
+    <p>(*)Obligatoire</p>
+
+    <ion-item fill="solid">
+      <ion-label position="stacked">Nom(*)</ion-label>
+      <ion-input [clearOnEdit]="true" [(ngModel)]="name" name="name" placeholder="Nom ou nom descriptif"></ion-input>
+    </ion-item>
+
+    <ion-item fill="solid">
+      <ion-label position="stacked">Âge</ion-label>
+      <ion-input [clearOnEdit]="true" [(ngModel)]="age" name="age" placeholder="Âge approximatif"></ion-input>
+    </ion-item>
+
+    <ion-item fill="solid">
+      <ion-label position="stacked">Pelage</ion-label>
+      <ion-input [clearOnEdit]="true" [(ngModel)]="fur" name="fur" placeholder="Description de son pelage"></ion-input>
+    </ion-item>
+
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Localité(*)</ion-label>
+        <ion-input name="postcode" [(ngModel)]="location" type="text" placeholder="1400 Yverdon-les-Bains"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-item fill="solid">
+      <ion-label position="stacked">Description(*)</ion-label>
+      <ion-input [clearOnEdit]="true" [(ngModel)]="description" name="lastname"
+        placeholder="Petite description de l'animal"></ion-input>
+    </ion-item>
+
+    <form>
+      <input type="file">
+    </form>
+
+    <ion-item>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="date"></ion-datetime>
+    </ion-item>
+
+    <div>
+      <ion-radio-group name="type" [(ngModel)]="type">
+        <ion-label>Animal:</ion-label>
+        <ion-radio value="lost"></ion-radio>
+        <ion-label>Perdu</ion-label>
+        <ion-radio value="find"></ion-radio>
+        <ion-label>Trouvé</ion-label>
+      </ion-radio-group>
+    </div>
+    <div>
+      <app-custom-button expand="block" [paragraph]="'Créer une annonce'" [showIcon]="false" (click)="submitAnnonce()"></app-custom-button>
+
+      <!-- <ion-button fill="solid" (click)="submitAnnonce()">Créer l'annonce</ion-button> -->
+    </div>
+
+  </div>
+  <div *ngIf="showAnswerApi">
+    <h1>C'est enregistré</h1>
+    <p>Ton annonce a bien été enregistrée, merci. Tu devrais recevoir des nouvelles dans les prochains jours, alors
+      reste
+      connecté !</p>
+    <ion-button fill="solid" (click)="cancel()">Retour à l'accueil</ion-button>
+  </div>
 </ion-content>
