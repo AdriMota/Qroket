@@ -39,6 +39,7 @@ export class AnimalMapComponent implements OnInit {
 
   yourAnnouncement: boolean = false;
   showAnswerApi: boolean = false;
+  isDelete: boolean = false;
 
   newName: string;
   newDescription: string;
@@ -58,7 +59,6 @@ export class AnimalMapComponent implements OnInit {
 
   ngOnInit() {
     this.showAnswerApi = false;
-    console.log("ngOnInit", this.showAnswerApi)
     // Récupérer les informations de l'user connecté
     this.auth.getUser$().pipe(filter(user => user != null),).subscribe(user => {
       this.idUserAuth = user.id;
@@ -98,14 +98,11 @@ export class AnimalMapComponent implements OnInit {
   
   confirm() {
     const body = JSON.stringify({ ["name"]: this.newName, ["description"]: this.newDescription, ["fur"]: this.newFur });
-    console.log(body);
-    console.log(`${environment.apiUrl}animals/${this.idAnimal}`)
     this.http.patch(`${environment.apiUrl}animals/${this.idAnimal}`, body, this.httpOptions)
       .subscribe(
         (response) => {
           this.showAnswerApi = true;
-          console.log("confirm", this.showAnswerApi)
-
+          this.isDelete = false;
         },
         (error) => {
           console.error('Error with PATCH request: ', error);
@@ -117,7 +114,21 @@ export class AnimalMapComponent implements OnInit {
   }
 
   deleteAnnouncement() {
-    console.log("Annonce supprimée")
+    console.log("Annonce supprimée", this.idAnimal)
+    console.log(`${environment.apiUrl}animals/${this.idAnimal}`)
+
+    // Make an HTTP request to delete the animal.
+    this.http.delete(`${environment.apiUrl}animals/${this.idAnimal}`).subscribe(
+      res => {
+        this.showAnswerApi = true;
+        this.isDelete = true;
+      },
+      err => {
+        console.error('Erreur lors de la suppression de l\'animal :', err);
+      }
+    );
+
+    /* return this.modalCtrl.dismiss(null, 'cancel'); */
   }
 
   updateInput() {
