@@ -81,7 +81,7 @@ export class AnimalMapComponent implements OnInit {
         this.lastnameUser = user["lastname"];
         this.emailUser = user["email"];
         this.phoneUser = user["fuphoner"];
-        this.pictureUser = user["picture"];
+        this.pictureUser = user["pictures"];
 
         if(this.userAnimal == this.idUserAuth) {
           this.yourAnnouncement = true;

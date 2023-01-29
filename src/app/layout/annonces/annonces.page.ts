@@ -6,7 +6,6 @@ import { ShareDataServiceService } from 'src/app/services/share-data-service.ser
 import { ModalController } from '@ionic/angular';
 import { AnimalMapComponent } from 'src/app/animal-map/animal-map.component';
 import { filter } from 'rxjs';
-import { PictureService } from 'src/app/picture/picture.service';
 import { FormAnnonceComponent } from 'src/app/form-annonce/form-annonce.component';
 
 
@@ -30,8 +29,7 @@ export class AnnoncesPage {
     private auth: AuthService,
     public http: HttpClient,
     private sharedData: ShareDataServiceService,
-    private modalController: ModalController,
-    private pictureService: PictureService
+    private modalController: ModalController
   ) { }
 
   ionViewWillEnter() {
@@ -52,10 +50,9 @@ export class AnnoncesPage {
           this.idAnimal = animals[key]._id;
           this.nameAnimal = animals[key].name;
           this.typeAnimal = animals[key].type;
-          this.picturesAnimal = animals[key].picture;
+          this.picturesAnimal = animals[key].pictures;
 
           this.showAnimals(this.idAnimal);
-          //this.takePicture();
         }
       });
 
@@ -70,8 +67,8 @@ export class AnnoncesPage {
       document.getElementById("div-find").appendChild(newDiv);
 
       let newImg = document.createElement("img");
-      // newImg.setAttribute("src", this.picturesAnimal);
-      newImg.setAttribute("src", "../../../assets/images/animals/Dog.jpg");
+      newImg.setAttribute("src", this.picturesAnimal);
+      // newImg.setAttribute("src", "../../../assets/images/animals/Dog.jpg");
       newDiv.appendChild(newImg);
 
       let newP = document.createElement("p");
@@ -84,8 +81,8 @@ export class AnnoncesPage {
       document.getElementById("div-lost").appendChild(newDiv);
 
       let newImg = document.createElement("img");
-      // newImg.setAttribute("src", this.picturesAnimal);
-      newImg.setAttribute("src", "../../../assets/images/animals/Dog.jpg");
+      newImg.setAttribute("src", this.picturesAnimal);
+      // newImg.setAttribute("src", "../../../assets/images/animals/Dog.jpg");
       newDiv.appendChild(newImg); 
 
       let newP = document.createElement("p");
@@ -118,12 +115,6 @@ export class AnnoncesPage {
       component: FormAnnonceComponent
     });
     return await modal.present();
-  }
-
-  takePicture() {
-    this.pictureService.takeAndUploadPicture().subscribe(picture => {
-      this.picturesAnimal = picture.url;
-    });
   }
 
   handleClick(data: any) {
