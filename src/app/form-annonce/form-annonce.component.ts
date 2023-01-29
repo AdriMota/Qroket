@@ -6,6 +6,8 @@ import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { ErrorHandlingService } from '../services/error-handling.service';
+import { PictureService } from 'src/app/picture/picture.service';
+
 
 @Component({
   selector: 'app-form-annonce',
@@ -24,6 +26,7 @@ export class FormAnnonceComponent implements OnInit {
   type: string;
   location: string;
   user: string;
+  picture: string;
 
   animal: object = {};
 
@@ -33,7 +36,8 @@ export class FormAnnonceComponent implements OnInit {
     private modalController: ModalController,
     private authService: AuthService,
     private http: HttpClient,
-    public errorHandlingService: ErrorHandlingService
+    public errorHandlingService: ErrorHandlingService,
+    private pictureService: PictureService,
   ) { }
 
   ngOnInit() {
@@ -55,8 +59,11 @@ export class FormAnnonceComponent implements OnInit {
       // location: this.location,
       //S'OCCUPER DE LA LOCALISATION
       location: "63ca603e4b5e21bcfc611f25",
+      pictures: this.picture,
       user: this.user
     }
+
+    console.log(data)
 
     this.http.post(environment.apiUrl + 'animals', data).pipe(
       catchError((error: any) => {
@@ -72,7 +79,6 @@ export class FormAnnonceComponent implements OnInit {
     )
 
   }
-
   cancel() {
     return this.modalController.dismiss(null, 'cancel');
   }
@@ -85,4 +91,20 @@ export class FormAnnonceComponent implements OnInit {
       this.messageErrors = this.errorHandlingService.validateDate(data);
     }
   }
+
+
+ /**
+   * Gestion de l'upload et l'affichage d'une image
+   *
+   * L'utilisateur ne peut ajouter qu'une seule photo
+   * L'image est stockée sur une API spécialement conçue
+   * 
+*/
+  uploadPicture() {
+    this.pictureService.takeAndUploadPicture().subscribe(picture => {
+      this.picture = picture.url;
+    });
+    console.log(this.picture)
+  }
+
 }

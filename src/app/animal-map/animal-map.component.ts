@@ -73,6 +73,7 @@ export class AnimalMapComponent implements OnInit {
       this.userAnimal = animal["user"];
       this.locationAnimal = animal["location"];
       this.picturesAnimal = animal["pictures"];
+      console.log(this.picturesAnimal)
 
       // Make an HTTP request to retrieve the user.
       this.http.get(`${environment.apiUrl}users/${this.userAnimal}`).subscribe((user) => {
@@ -86,7 +87,6 @@ export class AnimalMapComponent implements OnInit {
           this.yourAnnouncement = true;
         }
 
-        //this.takePicture();
       });
     });
   }
@@ -114,12 +114,6 @@ export class AnimalMapComponent implements OnInit {
 
     // OBLIGATION DE REFRESH POUR VOIR LES CHANGEMENTS
     //return this.modalCtrl.dismiss(null, 'confirm');
-  }
-
-  takePicture() {
-    this.pictureService.takeAndUploadPicture().subscribe(picture => {
-      this.picturesAnimal = picture.url;
-    });
   }
 
   deleteAnnouncement() {

@@ -50,8 +50,11 @@
         </ion-item>
       </ion-list>
 
-      <ion-label position="stacked">Ajouter des images de l'animal</ion-label>
-        <input type="file">
+      <ion-item>
+        <ion-label position="stacked">Ajouter des images de l'animal</ion-label>
+        <ion-button (click)="uploadPicture()">Ajouter une image</ion-button>
+      </ion-item>
+      <img src={{picture}}/>
 
       <ion-item>
         <ion-label position="stacked">Quand a-t-il été trouvé/perdu ?(*)</ion-label>
@@ -64,12 +67,12 @@
         <ion-list>
           <ion-radio-group name="type" [(ngModel)]="type" value="lost" required="true">
             <ion-item>
-              <ion-label>Perdu</ion-label>
+              <ion-label>Trouvé</ion-label>
               <ion-radio slot="end" value="lost"></ion-radio>
             </ion-item>
 
             <ion-item>
-              <ion-label>Trouvé</ion-label>
+              <ion-label>Perdu</ion-label>
               <ion-radio slot="end" value="find"></ion-radio>
             </ion-item>
           </ion-radio-group>
