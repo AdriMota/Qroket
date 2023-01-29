@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { filter, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-infos',
@@ -32,6 +33,8 @@ export class InfosComponent {
   passwordIcon: string = 'eye-off';
   showIcon: boolean = false;
 
+  isDelete: boolean = false;
+
   disableButton: boolean = true;
   newData: any;
   property: string;
@@ -52,7 +55,8 @@ export class InfosComponent {
     // Inject the AuthService
     private auth: AuthService,
     // Inject the HTTP client
-    public http: HttpClient
+    public http: HttpClient,
+    private router: Router
   ) {
 
     this.getUser();
@@ -87,6 +91,11 @@ export class InfosComponent {
         // this.localisation = location["city"]
         // });
         console.log(this.typeButton)
+        break;
+      case ' Supprimer le compte ':
+        this.typeButton = this.password;
+        this.showIcon = true;
+        this.isDelete = true;
         break;
       default:
         this.typeButton = "Information non disponible";
@@ -133,10 +142,13 @@ export class InfosComponent {
         break;
       case ' Mot de passe ':
         this.property = "password"
-        this.newData = this.newLoca;
+        this.newData = this.typeButton;
         break;
       case ' Localisation ':
         this.property = "location"
+        this.newData = this.typeButton;
+        break;
+      case ' Supprimer le compte ':
         this.newData = this.typeButton;
         break;
     }
@@ -151,7 +163,6 @@ export class InfosComponent {
       this.newData = this.newData.substring(0, this.newData.indexOf(","));
       this.location = this.newData;
     }
-
 
     const body = JSON.stringify({ [this.property]: this.newData });
     // console.log(body)
@@ -168,6 +179,32 @@ export class InfosComponent {
     // DEMANDER DE SE RECONNECTER
 
     return this.modalController.dismiss(this.typeButton, 'confirm');
+  }
+
+
+  deleteAccount(){
+    this.http.delete(`https://qroket-api.onrender.com/users/${this.userId}`).subscribe(
+      res => {
+        console.log('Utilisateur supprimé !');
+        this.modalController.dismiss(this.typeButton, 'confirm');
+        this.router.navigate(['/login']);
+      },
+      err => {
+        console.error('Erreur lors de la suppression de l\'utilisateur :', err);
+      }
+    );
+  } 
+
+
+  newValue(value) {
+    //désactiver le bouton
+    this.disableButton = false ? true : false;
+
+    //récupérer les changements
+    this.property = "location"
+    this.newData = value;
+  }
+}
 
 
     //-------------------------------------------------------------------------------------------------------------------------------------
@@ -262,17 +299,3 @@ export class InfosComponent {
 
     //-------------------------------------------------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------------------
-
-  }
-
-
-
-  newValue(value) {
-    //désactiver le bouton
-    this.disableButton = false ? true : false;
-
-    //récupérer les changements
-    this.property = "location"
-    this.newData = value;
-  }
-}
