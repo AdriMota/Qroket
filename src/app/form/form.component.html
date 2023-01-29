@@ -1,48 +1,56 @@
 <form>
-  <p class="right-italic">(*) Obligatoire</p>
-
-  <ion-item fill="solid">
+  <p  class="right-italic ion-padding-start">(*) Obligatoire</p>
+  <ion-item-group class="ion-padding" >
+  <ion-item fill="solid" style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
     <ion-label position="stacked">Prénom(*)</ion-label>
-    <ion-input [clearOnEdit]="true" [(ngModel)]="firstname" name="firstname" placeholder="Prénom"></ion-input>
+    <ion-input mode="ios" style=" border-radius: 10px; border: 2px solid #d9d9d9;  --placeholder-color: #ddd; --placeholder-opacity: .8;--padding-bottom: 10px; --padding-end: 10px; --padding-start: 10px;--padding-top: 10px;" 
+     [clearOnEdit]="true" [(ngModel)]="firstname" name="firstname" placeholder="Prénom"></ion-input>
     <ion-note *ngIf="messageErrors?.formErrors.firstname" [innerHTML]="messageErrors?.formErrors.firstname"></ion-note>
   </ion-item>
 
-  <ion-item fill="solid">
+  <ion-item fill="solid" style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
     <ion-label position="stacked">Nom(*)</ion-label>
-    <ion-input [clearOnEdit]="true" [(ngModel)]="lastname" name="lastname" placeholder="Nom"></ion-input>
+    <ion-input mode="ios" style=" border-radius: 10px; border: 2px solid #d9d9d9;  --placeholder-color: #ddd; --placeholder-opacity: .8;--padding-bottom: 10px; --padding-end: 10px; --padding-start: 10px;--padding-top: 10px;" 
+     [clearOnEdit]="true" [(ngModel)]="lastname" name="lastname" placeholder="Nom"></ion-input>
     <ion-note *ngIf="messageErrors?.formErrors.lastname" [innerHTML]="messageErrors?.formErrors.lastname"></ion-note>
   </ion-item>
 
-  <ion-item fill="solid">
+  <ion-item fill="solid" style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
     <ion-label position="stacked">Numéro de téléphone</ion-label>
-    <ion-input [clearOnEdit]="true" type="tel" [(ngModel)]="phone" name="phone"
+    <ion-input mode="ios" style=" border-radius: 10px; border: 2px solid #d9d9d9;  --placeholder-color: #ddd; --placeholder-opacity: .8;--padding-bottom: 10px; --padding-end: 10px; --padding-start: 10px;--padding-top: 10px;" 
+     [clearOnEdit]="true" type="tel" [(ngModel)]="phone" name="phone"
       placeholder="004178 765 43 21"></ion-input>
     <ion-note *ngIf="messageErrors?.formErrors.phone" [innerHTML]="messageErrors?.formErrors.phone"></ion-note>
   </ion-item>
 
-  <ion-item fill="solid">
+  <ion-item fill="solid" style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
     <ion-label position="stacked">Adresse mail(*)</ion-label>
-    <ion-input [clearOnEdit]="true" type="email" [(ngModel)]="email" name="email"
+    <ion-input mode="ios" style=" border-radius: 10px; border: 2px solid #d9d9d9;  --placeholder-color: #ddd; --placeholder-opacity: .8;--padding-bottom: 10px; --padding-end: 10px; --padding-start: 10px;--padding-top: 10px;" 
+     [clearOnEdit]="true" type="email" [(ngModel)]="email" name="email"
       placeholder="exemple@email.com"></ion-input>
     <ion-note *ngIf="messageErrors?.formErrors.email" [innerHTML]="messageErrors?.formErrors.email"></ion-note>
   </ion-item>
 
-  <ion-item fill="solid">
+  <ion-item fill="solid" style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
     <ion-label position="stacked">Mot de passe(*)</ion-label>
-    <ion-input [type]="passwordType" [(ngModel)]="password" name="password" value="password"></ion-input>
-    <ion-icon [name]="passwordIcon" (click)="hideShowPassword()"></ion-icon>
+    <ion-input mode="ios" style=" border-radius: 10px; border: 2px solid #d9d9d9;  --placeholder-color: #ddd; --placeholder-opacity: .8;--padding-bottom: 10px; --padding-end: 10px; --padding-start: 10px;--padding-top: 10px;" 
+     [type]="passwordType" [(ngModel)]="password" name="password" value="password"></ion-input>
+    <ion-icon class="ion-padding-top" slot="end"
+     [name]="passwordIcon" (click)="hideShowPassword()"></ion-icon>
     <ion-note *ngIf="messageErrors?.formErrors.password" [innerHTML]="messageErrors?.formErrors.password"></ion-note>
   </ion-item>
 
-  <ion-item>
+  <ion-item style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
     <ion-label position="stacked">Localité(*)</ion-label>
-    <input [(ngModel)]="cityUser" list="codes" type="text" placeholder="Yverdon-les-Bains"
+    <input mode="ios" style=" border-radius: 10px; border: 2px solid #d9d9d9;  --placeholder-color: #ddd; --placeholder-opacity: .8;--padding-bottom: 10px; --padding-end: 10px; --padding-start: 10px;--padding-top: 10px;" 
+     [(ngModel)]="cityUser" list="codes" type="text" placeholder="Yverdon-les-Bains"
       (ngModelChange)="searchCity($event)" [value]="newCity" [ngModelOptions]="{standalone: true}" />
     <datalist id="codes">
       <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
     </datalist>
     <ion-note *ngIf="messageErrors?.formErrors.location" [innerHTML]="messageErrors?.formErrors.location"></ion-note>
   </ion-item>
+  </ion-item-group>
   
   <ion-button (click)="uploadPicture()">Ajouter une photo de profil</ion-button>
   <img src={{picture}}/>

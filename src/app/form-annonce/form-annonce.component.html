@@ -13,66 +13,70 @@
 
 <!----------------------------------------------------------------- Formulaire pour ajouter un nouvel utilisateur ---------------------------------------------------------------------->
 
-<ion-content class="ion-padding">
+<ion-content >
   <div *ngIf="!showAnswerApi">
-    <h1>Quelques informations</h1>
-    <p>(*)Obligatoire</p>
-
+    <div class="ion-padding">
+      <h1>Quelques informations</h1>
+      <p>(*)Obligatoire</p>
+    </div>
     <form #FormAnnonces action="post">
-
-      <ion-item fill="solid">
+      <ion-item-group class="ion-padding" >
+      <ion-item fill="solid" style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
         <ion-label position="stacked">Nom(*)</ion-label>
-        <ion-input [clearOnEdit]="true" [(ngModel)]="name" name="name" placeholder="Nom ou nom descriptif" [ngModelOptions]="{standalone: true}" required="true"></ion-input>
+        <ion-input mode="ios" style=" border-radius: 10px; border: 2px solid #d9d9d9;  --placeholder-color: #ddd; --placeholder-opacity: .8;--padding-bottom: 10px; --padding-end: 10px; --padding-start: 10px;--padding-top: 10px;" 
+         [clearOnEdit]="true" [(ngModel)]="name" name="name" placeholder="Nom ou nom descriptif" [ngModelOptions]="{standalone: true}" required="true"></ion-input>
         <ion-note *ngIf="messageErrors?.formErrors.name" [innerHTML]="messageErrors?.formErrors.name"></ion-note>
       </ion-item>
 
-      <ion-item fill="solid">
+      <ion-item fill="solid" style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
         <ion-label position="stacked">Âge</ion-label>
-        <ion-input [clearOnEdit]="true" [(ngModel)]="age" type="number" name="age" placeholder="Âge approximatif" [ngModelOptions]="{standalone: true}"></ion-input>
+        <ion-input mode="ios" style=" border-radius: 10px; border: 2px solid #d9d9d9;  --placeholder-color: #ddd; --placeholder-opacity: .8;--padding-bottom: 10px; --padding-end: 10px; --padding-start: 10px;--padding-top: 10px;" 
+        [clearOnEdit]="true" [(ngModel)]="age" type="number" name="age" placeholder="Âge approximatif" [ngModelOptions]="{standalone: true}"></ion-input>
       </ion-item>
 
-      <ion-item fill="solid">
+      <ion-item fill="solid" style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
         <ion-label position="stacked">Description(*)</ion-label>
-        <ion-textarea [clearOnEdit]="true" [(ngModel)]="description" [autoGrow]="true" name="description" placeholder="Petite description de l'animal" [ngModelOptions]="{standalone: true}" required="true"></ion-textarea>
+        <ion-textarea mode="ios" style=" border-radius: 10px; border: 2px solid #d9d9d9;  --placeholder-color: #ddd; --placeholder-opacity: .8;--padding-bottom: 10px; --padding-end: 10px; --padding-start: 10px;--padding-top: 10px;" 
+         [clearOnEdit]="true" [(ngModel)]="description" [autoGrow]="true" name="description" placeholder="Petite description de l'animal" [ngModelOptions]="{standalone: true}" required="true"></ion-textarea>
         <ion-note *ngIf="messageErrors?.formErrors.description" [innerHTML]="messageErrors?.formErrors.description"></ion-note>
       </ion-item>
 
-      <ion-item fill="solid">
+      <ion-item fill="solid" style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
         <ion-label position="stacked">Pelage(*)</ion-label>
-        <ion-input [clearOnEdit]="true" [(ngModel)]="fur" name="fur" placeholder="Description de son pelage" [ngModelOptions]="{standalone: true}" required="true"></ion-input>
+        <ion-input mode="ios" style=" border-radius: 10px; border: 2px solid #d9d9d9;  --placeholder-color: #ddd; --placeholder-opacity: .8;--padding-bottom: 10px; --padding-end: 10px; --padding-start: 10px;--padding-top: 10px;" 
+         [clearOnEdit]="true" [(ngModel)]="fur" name="fur" placeholder="Description de son pelage" [ngModelOptions]="{standalone: true}" required="true"></ion-input>
         <ion-note *ngIf="messageErrors?.formErrors.fur" [innerHTML]="messageErrors?.formErrors.fur"></ion-note>
       </ion-item>
 
-      <ion-item>
+      <ion-item style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
         <ion-label position="stacked">Localité(*)</ion-label>
         <div id="map-container">
           <div id="map" style="width: 100%; height: 100%"></div>
         </div>
-        <ion-input name="postcode" [(ngModel)]="location" type="text" placeholder="1400 Yverdon-les-Bains" [ngModelOptions]="{standalone: true}"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
         <ion-label position="stacked">Ajouter des images de l'animal</ion-label>
-        <ion-button (click)="uploadPicture()">Ajouter une image</ion-button>
+        <ion-button color="secondary" (click)="uploadPicture()">Ajouter une image</ion-button>
       </ion-item>
       <img src={{picture}}/>
 
-      <ion-item>
+      <ion-item style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
         <ion-label position="stacked">Quand a-t-il été trouvé/perdu ?(*)</ion-label>
         <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="date" [ngModelOptions]="{standalone: true}" required="true"></ion-datetime>
         <ion-note *ngIf="messageErrors?.formErrors.date" [innerHTML]="messageErrors?.formErrors.date"></ion-note>
       </ion-item>
-
-      <div>
+ </ion-item-group>
+      <div class="ion-padding">
         <ion-label position="stacked">L'annonce concerne un animal(*) ...</ion-label>
         <ion-list>
           <ion-radio-group name="type" [(ngModel)]="type" value="lost" required="true">
-            <ion-item>
+            <ion-item style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
               <ion-label>Perdu</ion-label>
               <ion-radio slot="end" value="lost"></ion-radio>
             </ion-item>
 
-            <ion-item>
+            <ion-item style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
               <ion-label>Trouvé</ion-label>
               <ion-radio slot="end" value="find"></ion-radio>
             </ion-item>
@@ -80,8 +84,9 @@
         </ion-list>
         <ion-note *ngIf="messageErrors?.formErrors.type" [innerHTML]="messageErrors?.formErrors.type"></ion-note>
       </div>
+   
 
-      <ion-button type="submit" expand="block" [disabled]="FormAnnonces['invalid']" (click)="submitAnnonce()">Ajouter l'annonce</ion-button>
+      <ion-button class="ion-padding" type="submit" expand="block" [disabled]="FormAnnonces['invalid']" (click)="submitAnnonce()">Ajouter l'annonce</ion-button>
   
       <!-- <div>
         <app-custom-button expand="block" [paragraph]="'Créer une annonce'" [showIcon]="false" (click)="submitAnnonce()"></app-custom-button>
@@ -91,7 +96,7 @@
 
 <!----------------------------------------------------------------- Message pour confirmer l'ajout de l'animal ---------------------------------------------------------------------->
 
-  <div *ngIf="showAnswerApi">
+  <div *ngIf="showAnswerApi" class="ion-padding">
     <h1>C'est enregistré</h1>
     <p>Ton annonce a bien été enregistrée, merci. Tu devrais recevoir des nouvelles dans les prochains jours, alors
       reste connecté !</p>
