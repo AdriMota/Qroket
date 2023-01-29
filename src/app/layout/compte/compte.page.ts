@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { ModalController } from '@ionic/angular';
 import { InfosComponent } from 'src/app/infos/infos.component';
 import { PictureService } from 'src/app/picture/picture.service';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -30,7 +31,8 @@ export class ComptePage implements OnInit {
     //private imageService: ImageService, 
     public http: HttpClient, 
     private modalController: ModalController,
-    private pictureService: PictureService
+    private pictureService: PictureService,
+    private router: Router,
     ) { }
 
   ngOnInit() {
@@ -88,6 +90,11 @@ export class ComptePage implements OnInit {
     this.pictureService.takeAndUploadPicture().subscribe(picture => {
       this.pictureUser = picture.url;
     });
+  }
+
+  logOut() {
+    this.authService.logOut();
+    this.router.navigateByUrl("/login");
   }
 
   /* ---------------------------------------

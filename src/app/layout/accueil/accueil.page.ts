@@ -122,11 +122,6 @@ export class AccueilPage {
     });
   }
 
-  logOut() {
-    this.auth.logOut();
-    this.router.navigateByUrl("/login");
-  }
-
   handleClick(data: any) {
     this.sharedData.addAnnonce();
   }
