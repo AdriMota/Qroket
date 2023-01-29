@@ -45,27 +45,6 @@ export class MapPage {
     this.addControls();
 
     this.addMarkers(lat, long);
-
-    // Récupérer la lat et la long lors d'un clic sur la map
-    this.map.on('click', function (e) {
-      const lat = e.latlng.lat;
-      const long = e.latlng.lng;
-
-      fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${environment.tokenLocation}&types=place,postcode`)
-        .then(response => response.json())
-        .then(data => {
-
-          let postcode = "";
-          let city = "";
-
-          data.features.forEach(function (feature) {
-            //console.log(feature)
-            if (feature.place_type.includes('postcode')) postcode = feature.text;
-            if (feature.place_type.includes('place')) city = feature.text;
-          });
-          //console.log(postcode, city);
-        });
-    });
   }
 
   /***************************************************

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from '../auth/auth.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -17,6 +17,9 @@ import * as Leaflet from 'leaflet';
   styleUrls: ['./form-annonce.component.scss'],
 })
 export class FormAnnonceComponent implements OnInit {
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   showAnswerApi: boolean = false;
 
@@ -32,6 +35,14 @@ export class FormAnnonceComponent implements OnInit {
 
   animal: object = {};
   map: Leaflet.Map;
+
+  postcode: number;
+  city: string;
+  lat: number;
+  long: number;
+
+  locationId: string;
+
 
   messageErrors: any = null;
 
@@ -57,16 +68,54 @@ export class FormAnnonceComponent implements OnInit {
     const lat = coordinates.coords.latitude;
     const long = coordinates.coords.longitude;
 
-    this.map = Leaflet.map('map', { zoomControl: false }).setView([lat, long], 17);
+    this.map = Leaflet.map('map', { zoomControl: true }).setView([lat, long], 15);
 
     Leaflet.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
     }).addTo(this.map);
 
-    this.addControls();
+    this.map.on('click', (e) => {
+      this.lat = e.latlng.lat;
+      this.long = e.latlng.lng;
+
+      fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${this.long},${this.lat}.json?access_token=${environment.tokenLocation}&types=place,postcode`)
+        .then(response => response.json())
+        .then(data => {
+          data.features.forEach((feature) => {
+            if (feature.place_type.includes('postcode')) this.postcode = feature.text;
+            if (feature.place_type.includes('place')) this.city = feature.text;
+          });
+        });
+      
+      setTimeout(() => {
+        const body = JSON.stringify(
+          { ["npa"]: this.postcode,
+            ["city"]: this.city,
+            ["location"]: { 
+              ["type"]: "Point", 
+              ["coordinates"]: [ this.lat, this.long]
+            }
+          }
+        );
+
+        this.http.post(`${environment.apiUrl}locations`, body, this.httpOptions)
+          .subscribe(
+            (response) => {
+              this.locationId = response["_id"]
+            },
+            (error) => {
+              console.error('Error with PATCH request: ', error);
+            }
+          );
+
+          //console.log("ON CLICK", this.postcode, this.city, this.lat, this.long);
+      }, 1000);
+    });
   }
 
   submitAnnonce() {
+    //console.log(this.locationId)
+
     const data = {
       name: this.name,
       age: this.age,
@@ -76,7 +125,7 @@ export class FormAnnonceComponent implements OnInit {
       type: this.type,
       // location: this.location,
       //S'OCCUPER DE LA LOCALISATION
-      location: "63ca603e4b5e21bcfc611f25",
+      location: this.locationId,
       pictures: this.picture,
       user: this.user
     }
@@ -124,24 +173,4 @@ export class FormAnnonceComponent implements OnInit {
     });
     console.log(this.picture)
   }
-
-  addControls() {
-    Leaflet.control.zoom({
-      position: 'topright'
-    }).addTo(this.map);
-
-    /* const locationIcon = Leaflet.icon({
-      iconUrl: '../assets/markers/location.png',
-      iconSize: [30, 30]
-    }) */
-
-    // L'ICONE NE S'AFFICHE PAS
-    // D'après nos recherches, il s'agit d'un
-    // bug de la nouvelle version de leaflet
-    Leaflet.control.locate({
-      position: 'topright',
-      // icon: locationIcon
-    }).addTo(this.map);
-  }
-
 }

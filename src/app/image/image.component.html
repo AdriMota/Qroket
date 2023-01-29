@@ -1,7 +1,7 @@
-<div style="text-align: center;">
-    <img style="width: 200px; height: auto" [src]="src" (click)="uploadPicture()">
+<div style="text-align: center; height: 180px; width: 180px;">
+    <img width="180px" height="180px" style="border-radius: 50%;   object-fit: cover;" [src]="src" (click)="uploadPicture()">
     <!-- Champ de sélection de fichiers caché -->
     <input type="file" #fileInput style="display: none" (change)="uploadPicture()" accept="image/*">
     <br />
     <!-- <ion-button (click)="uploadPicture()">Ajouter une image</ion-button> -->
-</div>  
+</div>

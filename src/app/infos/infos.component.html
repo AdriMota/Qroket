@@ -15,13 +15,15 @@
     <p>Es-tu vraiment sûr·e de vouloir supprimer définitivement ton compte ?
       Si oui, saisis ton mot de passe pour valider.
     </p><p>Saisissez votre <b>mot de passe</b> pour procéder à la manipulation</p>
-    <p>*Ceci est une manipulation irréversible.*</p>
+    <p>Ceci est une manipulation irréversible.</p>
   </div>
-  <ion-item>
+  <ion-item style="--padding-start: 0px; --border-style: none;  --padding-end: 0px;">
     <ion-label position="stacked">{{ buttonValue }}</ion-label>
-    <ion-input *ngIf="!showIcon && !onlyLoca" [(ngModel)]="typeButton" (ngModelChange)="updateInput()" [type]="inputType" placeholder="{{ typeButton }}"></ion-input>
-    <ion-input *ngIf="showIcon" [(ngModel)]="typeButton" (ngModelChange)="updateInput()" [type]="passwordType" placeholder="{{ typeButton }}"></ion-input>
-    <ion-icon *ngIf="showIcon" [name]="passwordIcon" (click)="hideShowPassword()"></ion-icon>
+    <ion-input style=" border-radius: 10px; border: 2px solid #d9d9d9;  --placeholder-color: #ddd; --placeholder-opacity: .8;--padding-bottom: 10px; --padding-end: 10px; --padding-start: 10px;--padding-top: 10px;" 
+     *ngIf="!showIcon && !onlyLoca" [(ngModel)]="typeButton" (ngModelChange)="updateInput()" [type]="inputType" placeholder="{{ typeButton }}"></ion-input>
+    <ion-input style=" border-radius: 10px; border: 2px solid #d9d9d9;  --placeholder-color: #ddd; --placeholder-opacity: .8;--padding-bottom: 10px; --padding-end: 10px; --padding-start: 10px;--padding-top: 10px;" 
+     *ngIf="showIcon" [(ngModel)]="typeButton" (ngModelChange)="updateInput()" [type]="passwordType" placeholder="{{ typeButton }}"></ion-input>
+    <ion-icon class="ion-padding-top" slot="end" *ngIf="showIcon" [name]="passwordIcon" (click)="hideShowPassword()"></ion-icon>
     <app-location *ngIf="onlyLoca" (valueChange)="newValue($event)" [city]="location"></app-location>
   </ion-item>
   <app-custom-button *ngIf="(!disableButton && !isDelete)" expand="block" [paragraph]="'Enregistrer'" [showIcon]="false"
